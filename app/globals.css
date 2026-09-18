@@ -1,0 +1,34 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  background: #0b0b0c;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: #0b0b0c;
+  scroll-behavior: auto;
+}
+
+body {
+  margin: 0;
+  background: #0b0b0c;
+  color: #ecebe7;
+  font-family: var(--font-sans), "Helvetica Neue", Arial, sans-serif;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+::selection {
+  background: #ff3b30;
+  color: #fff;
+}

@@ -23,18 +23,28 @@ export default function Footer() {
           </div>
         </div>
 
-        <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-white/45">
-          &copy; {new Date().getFullYear()} Beyond Native Tours. All rights reserved.
-        </p>
+        <div className="flex flex-wrap items-center justify-center gap-6 text-[10px] font-semibold uppercase tracking-[0.18em] text-white/60">
+          <a href="/#top" className="hover:text-white transition-colors">Home</a>
+          <a href="/#destinations" className="hover:text-white transition-colors">Destinations</a>
+          <a href="/#holiday" className="hover:text-white transition-colors">Expeditions</a>
+          <a href="/store" className="hover:text-white transition-colors text-white/90">Store</a>
+          <a href="/about" className="hover:text-white transition-colors">About</a>
+        </div>
 
-        <a
-          href="https://www.instagram.com"
-          target="_blank"
-          rel="noreferrer"
-          className="text-[10px] font-semibold uppercase tracking-[0.16em] text-white/55 transition-colors hover:text-ember"
-        >
-          @beyondnativetours
-        </a>
+        <div className="flex flex-col sm:flex-row items-center gap-3">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-white/45">
+            &copy; {new Date().getFullYear()} Beyond Native Tours. All rights reserved.
+          </p>
+          <span className="hidden sm:inline text-white/20">•</span>
+          <a
+            href="https://www.instagram.com"
+            target="_blank"
+            rel="noreferrer"
+            className="text-[10px] font-semibold uppercase tracking-[0.16em] text-white/55 transition-colors hover:text-ember"
+          >
+            @beyondnativetours
+          </a>
+        </div>
       </div>
     </footer>
   );

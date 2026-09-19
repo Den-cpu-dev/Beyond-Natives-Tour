@@ -22,6 +22,8 @@ export default function Header() {
   const [activeTab, setActiveTab] = useState<string>("home");
 
   useEffect(() => {
+    let ticking = false;
+
     const updateActiveFromRouteOrScroll = () => {
       setScrolled(window.scrollY > 40);
 
@@ -74,12 +76,22 @@ export default function Header() {
       }
     };
 
+    const handleScrollThrottled = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          updateActiveFromRouteOrScroll();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
     updateActiveFromRouteOrScroll();
 
-    window.addEventListener("scroll", updateActiveFromRouteOrScroll, { passive: true });
+    window.addEventListener("scroll", handleScrollThrottled, { passive: true });
     window.addEventListener("hashchange", updateActiveFromRouteOrScroll);
     return () => {
-      window.removeEventListener("scroll", updateActiveFromRouteOrScroll);
+      window.removeEventListener("scroll", handleScrollThrottled);
       window.removeEventListener("hashchange", updateActiveFromRouteOrScroll);
     };
   }, [pathname]);

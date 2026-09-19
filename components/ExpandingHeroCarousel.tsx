@@ -17,6 +17,9 @@ export default function ExpandingHeroCarousel({ destinations }: ExpandingHeroCar
   const [isPaused, setIsPaused] = useState(false);
   const dragStartX = useRef<number | null>(null);
   const dragStartY = useRef<number | null>(null);
+  const touchStartX = useRef<number | null>(null);
+  const touchStartY = useRef<number | null>(null);
+  const touchStartTime = useRef<number>(0);
   const hasDragged = useRef(false);
   const lastWheelTime = useRef(0);
 
@@ -72,16 +75,58 @@ export default function ExpandingHeroCarousel({ destinations }: ExpandingHeroCar
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [handleNext, handlePrev]);
 
-  // Mouse and Touch drag support for manual scrolling
+  // Native touch swipe handlers for mobile devices
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+    touchStartY.current = e.touches[0].clientY;
+    touchStartTime.current = Date.now();
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return;
+    const diffX = e.touches[0].clientX - touchStartX.current;
+    const diffY = touchStartY.current !== null ? Math.abs(e.touches[0].clientY - touchStartY.current) : 0;
+    if (Math.abs(diffX) > 10 && Math.abs(diffX) > diffY) {
+      hasDragged.current = true;
+    }
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return;
+    const endX = e.changedTouches[0].clientX;
+    const endY = e.changedTouches[0].clientY;
+    const diffX = touchStartX.current - endX;
+    const diffY = touchStartY.current !== null ? Math.abs(touchStartY.current - endY) : 0;
+    const duration = Date.now() - touchStartTime.current;
+
+    // Fast flick or clear horizontal swipe
+    const isFlick = duration < 380 && Math.abs(diffX) > 25;
+    const isSwipe = Math.abs(diffX) > 40;
+
+    if ((isFlick || isSwipe) && Math.abs(diffX) > diffY * 0.65) {
+      if (diffX > 0) {
+        handleNext();
+      } else {
+        handlePrev();
+      }
+    }
+    touchStartX.current = null;
+    touchStartY.current = null;
+    setTimeout(() => {
+      hasDragged.current = false;
+    }, 60);
+  };
+
+  // Mouse drag support for desktop
   const handlePointerDown = (e: React.PointerEvent) => {
-    if (e.button !== 0) return;
+    if (e.pointerType === "touch" || e.button !== 0) return;
     dragStartX.current = e.clientX;
     dragStartY.current = e.clientY;
     hasDragged.current = false;
   };
 
   const handlePointerMove = (e: React.PointerEvent) => {
-    if (dragStartX.current === null) return;
+    if (e.pointerType === "touch" || dragStartX.current === null) return;
     const diffX = e.clientX - dragStartX.current;
     const diffY = dragStartY.current !== null ? Math.abs(e.clientY - dragStartY.current) : 0;
     if (Math.abs(diffX) > 10 && Math.abs(diffX) > diffY) {
@@ -90,7 +135,7 @@ export default function ExpandingHeroCarousel({ destinations }: ExpandingHeroCar
   };
 
   const handlePointerUp = (e: React.PointerEvent) => {
-    if (dragStartX.current === null) return;
+    if (e.pointerType === "touch" || dragStartX.current === null) return;
     const diffX = dragStartX.current - e.clientX;
     const diffY = dragStartY.current !== null ? Math.abs(e.clientY - dragStartY.current) : 0;
     if (hasDragged.current && Math.abs(diffX) > 40 && Math.abs(diffX) > diffY) {
@@ -132,7 +177,6 @@ export default function ExpandingHeroCarousel({ destinations }: ExpandingHeroCar
     }
   };
 
-
   // Calculate progress percentage (0 to 100)
   const progressPercent = count > 1 ? (activeIndex / (count - 1)) * 100 : 0;
 
@@ -141,8 +185,13 @@ export default function ExpandingHeroCarousel({ destinations }: ExpandingHeroCar
       id="top"
       aria-label="Featured Travel Destinations"
       className="relative h-[100svh] min-h-[640px] w-full select-none overflow-hidden bg-ink cursor-grab active:cursor-grabbing"
+      style={{ touchAction: "pan-y" }}
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+      onTouchCancel={handleTouchEnd}
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
       onPointerUp={handlePointerUp}
@@ -154,11 +203,11 @@ export default function ExpandingHeroCarousel({ destinations }: ExpandingHeroCar
         <AnimatePresence mode="popLayout">
           <motion.div
             key={`bg-${current.id}`}
-            initial={{ opacity: 0.2, scale: 1.08 }}
+            initial={{ opacity: 0.2, scale: 1.05 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.98 }}
-            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-            className="absolute inset-0"
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="absolute inset-0 transform-gpu will-change-transform"
           >
             <Image
               src={current.heroImage}
@@ -293,7 +342,8 @@ export default function ExpandingHeroCarousel({ destinations }: ExpandingHeroCar
           <div
             data-carousel-cards
             onWheel={handleCardsWheel}
-            className="relative w-full lg:w-auto overflow-x-auto no-scrollbar pb-1 lg:pb-0"
+            className="relative w-full lg:w-auto overflow-x-auto no-scrollbar pb-1 lg:pb-0 touch-pan-x overscroll-x-contain"
+            style={{ WebkitOverflowScrolling: "touch" }}
           >
             <div className="flex items-center gap-2.5 sm:gap-4.5 min-w-max">
               <AnimatePresence initial={false} mode="popLayout">

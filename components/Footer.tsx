@@ -13,9 +13,14 @@ export default function Footer() {
               className="object-contain filter drop-shadow-[0_2px_8px_rgba(255,59,48,0.3)]"
             />
           </div>
-          <span className="font-anton text-[11px] sm:text-sm uppercase tracking-[0.2em] text-white/90">
-            Beyond Native <span className="font-light text-white/60">Tours</span>
-          </span>
+          <div className="relative mt-1 h-9 w-28 sm:h-11 sm:w-36">
+            <Image
+              src="/brand-name.png"
+              alt="Beyond Native Tours - Explore • Discover • Connect"
+              fill
+              className="object-contain"
+            />
+          </div>
         </div>
 
         <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-white/45">

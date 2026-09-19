@@ -49,9 +49,15 @@ export default function Header() {
               className="object-contain filter drop-shadow-[0_2px_8px_rgba(255,59,48,0.4)]"
             />
           </div>
-          <span className="mt-1 font-anton text-[10px] sm:text-xs uppercase tracking-[0.24em] text-white leading-tight">
-            Beyond Native <span className="font-light text-white/70">Tours</span>
-          </span>
+          <div className="relative mt-1.5 h-8 w-24 sm:h-10 sm:w-32 md:h-11 md:w-36">
+            <Image
+              src="/brand-name.png"
+              alt="Beyond Native Tours - Explore • Discover • Connect"
+              fill
+              priority
+              className="object-contain"
+            />
+          </div>
         </a>
 
         {/* Desktop Navigation Links */}

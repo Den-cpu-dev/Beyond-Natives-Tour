@@ -162,8 +162,8 @@ export const destinations: Destination[] = [
     subtitle: "White Sands & Ancestral Roots",
     description:
       "Pristine white sand coves at River No. 2, historic Freetown Krio heritage, and profound ancestral memory on Bunce Island.",
-    heroImage: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=85",
-    thumbnailImage: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=85",
+    heroImage: "/images/tours/sierra-leone.jpg",
+    thumbnailImage: "/images/tours/sierra-leone.jpg",
     tourCount: 3,
     rank: 6,
   },

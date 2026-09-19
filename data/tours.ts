@@ -80,7 +80,7 @@ export const countryList: CountryInfo[] = [
     description:
       "Breathtaking mountain-meets-ocean scenery, tranquil turquoise coves along River Number 2 Beach, and poignant diaspora heritage on historic Bunce Island.",
     capital: "Freetown",
-    image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85",
+    image: "/images/tours/sierra-leone.jpg",
     tourCount: 3,
   },
 ];
@@ -446,7 +446,7 @@ export const allTours: Tour[] = [
       "National Museum of Sierra Leone Krio artifacts",
       "Scenic drive along the Atlantic peninsula coastline",
     ],
-    image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85",
+    image: "/images/tours/sierra-leone.jpg",
     tags: ["Freetown", "Heritage", "Krio", "History"],
   },
   {

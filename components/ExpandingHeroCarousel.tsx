@@ -283,7 +283,7 @@ export default function ExpandingHeroCarousel({ destinations }: ExpandingHeroCar
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -12 }}
                 transition={{ duration: 0.5, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-                className="mt-2.5 sm:mt-5 max-w-lg text-xs sm:text-sm md:text-[15px] leading-relaxed text-white/75 line-clamp-3 sm:line-clamp-none"
+                className="mt-2.5 sm:mt-5 max-w-lg text-xs sm:text-sm md:text-[15px] leading-relaxed text-white/75 line-clamp-4 sm:line-clamp-none"
               >
                 {current.description}
               </motion.p>

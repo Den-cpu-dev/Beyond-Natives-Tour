@@ -5,13 +5,7 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-
-// =========================================================================
-// WHATSAPP CONFIGURATION:
-// Replace this placeholder with your exact WhatsApp business phone number
-// (Include country code, without '+' or spaces, e.g. "233241234567" for Ghana)
-// =========================================================================
-const WHATSAPP_NUMBER = "233000000000";
+import { WHATSAPP_NUMBER } from "@/data/whatsapp";
 
 interface Product {
   id: string;

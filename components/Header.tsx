@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { openTripBookingModal } from "@/components/BookTripModal";
 
 const navLinks = [
   { label: "Home", href: "/#top", id: "home" },
@@ -181,12 +182,13 @@ export default function Header() {
             </svg>
           </Link>
 
-          <Link
-            href="/#holiday"
-            className="rounded-full border border-white/30 bg-white/10 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.16em] text-white backdrop-blur-md transition-all duration-200 hover:bg-white hover:text-black hover:border-white"
+          <button
+            type="button"
+            onClick={() => openTripBookingModal()}
+            className="rounded-full border border-white/30 bg-white/10 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.16em] text-white backdrop-blur-md transition-all duration-200 hover:bg-white hover:text-black hover:border-white active:scale-95"
           >
             Book Trip
-          </Link>
+          </button>
         </div>
 
         {/* Mobile Menu Button */}
@@ -244,13 +246,16 @@ export default function Header() {
                 );
               })}
               <div className="pt-4 border-t border-white/15">
-                <Link
-                  href="/#holiday"
-                  onClick={() => setOpen(false)}
-                  className="block text-center rounded-full bg-ember py-3 text-xs font-bold uppercase tracking-[0.18em] text-white shadow-[0_0_20px_rgba(255,59,48,0.4)]"
+                <button
+                  type="button"
+                  onClick={() => {
+                    setOpen(false);
+                    openTripBookingModal();
+                  }}
+                  className="w-full block text-center rounded-full bg-ember py-3 text-xs font-bold uppercase tracking-[0.18em] text-white shadow-[0_0_20px_rgba(255,59,48,0.4)] hover:scale-[1.02] active:scale-95 transition-all"
                 >
                   Book Trip
-                </Link>
+                </button>
               </div>
             </div>
           </motion.nav>

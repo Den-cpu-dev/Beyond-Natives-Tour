@@ -28,10 +28,15 @@ export const metadata: Metadata = {
   },
 };
 
+import BookTripModal from "@/components/BookTripModal";
+
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${anton.variable} ${inter.variable}`}>
-      <body>{children}</body>
+      <body>
+        {children}
+        <BookTripModal />
+      </body>
     </html>
   );
 }

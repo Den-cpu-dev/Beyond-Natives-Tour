@@ -15,13 +15,16 @@ export default function ExpandingHeroCarousel({ destinations }: ExpandingHeroCar
   const [isExpanding, setIsExpanding] = useState(false);
   const [expandingTarget, setExpandingTarget] = useState<Destination | null>(null);
   const [isPaused, setIsPaused] = useState(false);
-  const touchStartX = useRef<number | null>(null);
+  const dragStartX = useRef<number | null>(null);
+  const dragStartY = useRef<number | null>(null);
+  const hasDragged = useRef(false);
+  const lastWheelTime = useRef(0);
 
   const count = destinations.length;
   const current = destinations[activeIndex];
 
-  // Upcoming queue of cards (next 4 destinations)
-  const queue = Array.from({ length: Math.min(4, count - 1) }, (_, i) => {
+  // Upcoming queue of cards (next 5 destinations for richer preview & scrolling)
+  const queue = Array.from({ length: Math.min(5, count - 1) }, (_, i) => {
     const idx = (activeIndex + 1 + i) % count;
     return {
       destination: destinations[idx],
@@ -69,25 +72,72 @@ export default function ExpandingHeroCarousel({ destinations }: ExpandingHeroCar
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [handleNext, handlePrev]);
 
-  // Touch swipe support
-  const handleTouchStart = (e: React.TouchEvent) => {
-    touchStartX.current = e.touches[0].clientX;
+  // Mouse and Touch drag support for manual scrolling
+  const handlePointerDown = (e: React.PointerEvent) => {
+    if (e.button !== 0) return;
+    dragStartX.current = e.clientX;
+    dragStartY.current = e.clientY;
+    hasDragged.current = false;
   };
 
-  const handleTouchEnd = (e: React.TouchEvent) => {
-    if (touchStartX.current === null) return;
-    const diff = touchStartX.current - e.changedTouches[0].clientX;
-    if (diff > 50) handleNext();
-    else if (diff < -50) handlePrev();
-    touchStartX.current = null;
+  const handlePointerMove = (e: React.PointerEvent) => {
+    if (dragStartX.current === null) return;
+    const diffX = e.clientX - dragStartX.current;
+    const diffY = dragStartY.current !== null ? Math.abs(e.clientY - dragStartY.current) : 0;
+    if (Math.abs(diffX) > 10 && Math.abs(diffX) > diffY) {
+      hasDragged.current = true;
+    }
   };
 
-  // Optional gentle auto-advance (pauses on hover)
+  const handlePointerUp = (e: React.PointerEvent) => {
+    if (dragStartX.current === null) return;
+    const diffX = dragStartX.current - e.clientX;
+    const diffY = dragStartY.current !== null ? Math.abs(e.clientY - dragStartY.current) : 0;
+    if (hasDragged.current && Math.abs(diffX) > 40 && Math.abs(diffX) > diffY) {
+      if (diffX > 0) {
+        handleNext();
+      } else {
+        handlePrev();
+      }
+    }
+    dragStartX.current = null;
+    dragStartY.current = null;
+    setTimeout(() => {
+      hasDragged.current = false;
+    }, 60);
+  };
+
+  // Wheel and trackpad horizontal scrolling
+  const handleWheel = (e: React.WheelEvent) => {
+    const now = Date.now();
+    if (now - lastWheelTime.current < 550) return;
+
+    if (Math.abs(e.deltaX) > 25 && Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
+      if (e.deltaX > 0) handleNext();
+      else handlePrev();
+      lastWheelTime.current = now;
+    }
+  };
+
+  // Dedicated wheel scrolling on the preview cards rail
+  const handleCardsWheel = (e: React.WheelEvent) => {
+    e.stopPropagation();
+    const now = Date.now();
+    if (now - lastWheelTime.current < 500) return;
+    const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+    if (Math.abs(delta) > 18) {
+      if (delta > 0) handleNext();
+      else handlePrev();
+      lastWheelTime.current = now;
+    }
+  };
+
+  // Slower auto-advance: 12 seconds per slide (pauses on hover or manual interaction)
   useEffect(() => {
     if (isPaused || isExpanding) return;
     const interval = setInterval(() => {
       goToSlide((activeIndex + 1) % count);
-    }, 6000);
+    }, 12000);
     return () => clearInterval(interval);
   }, [activeIndex, count, goToSlide, isPaused, isExpanding]);
 
@@ -98,11 +148,14 @@ export default function ExpandingHeroCarousel({ destinations }: ExpandingHeroCar
     <section
       id="top"
       aria-label="Featured Travel Destinations"
-      className="relative h-[100svh] min-h-[640px] w-full select-none overflow-hidden bg-ink"
+      className="relative h-[100svh] min-h-[640px] w-full select-none overflow-hidden bg-ink cursor-grab active:cursor-grabbing"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
-      onTouchStart={handleTouchStart}
-      onTouchEnd={handleTouchEnd}
+      onPointerDown={handlePointerDown}
+      onPointerMove={handlePointerMove}
+      onPointerUp={handlePointerUp}
+      onPointerCancel={handlePointerUp}
+      onWheel={handleWheel}
     >
       {/* ================= BACKGROUND LAYER ================= */}
       <div className="absolute inset-0 z-0">
@@ -262,7 +315,11 @@ export default function ExpandingHeroCarousel({ destinations }: ExpandingHeroCar
           </div>
 
           {/* RIGHT: Floating Preview Cards ("Upcoming Queue") */}
-          <div className="relative w-full lg:w-auto overflow-x-auto lg:overflow-visible no-scrollbar pb-1 lg:pb-0">
+          <div
+            data-carousel-cards
+            onWheel={handleCardsWheel}
+            className="relative w-full lg:w-auto overflow-x-auto no-scrollbar pb-1 lg:pb-0"
+          >
             <div className="flex items-center gap-2.5 sm:gap-4.5 min-w-max">
               <AnimatePresence initial={false} mode="popLayout">
                 {queue.map(({ destination, index, queuePosition }) => (
@@ -293,7 +350,10 @@ export default function ExpandingHeroCarousel({ destinations }: ExpandingHeroCar
                       transition: { duration: 0.2 },
                     }}
                     whileTap={{ scale: 0.98 }}
-                    onClick={() => goToSlide(index)}
+                    onClick={() => {
+                      if (hasDragged.current) return;
+                      goToSlide(index);
+                    }}
                     className="group relative h-[180px] w-[135px] sm:h-[290px] sm:w-[210px] md:h-[320px] md:w-[230px] shrink-0 overflow-hidden rounded-xl sm:rounded-3xl border border-white/20 bg-black/40 text-left shadow-2xl backdrop-blur-sm transition-shadow hover:border-white/50 hover:shadow-[0_15px_35px_rgba(0,0,0,0.7)]"
                     aria-label={`View ${destination.name}`}
                   >

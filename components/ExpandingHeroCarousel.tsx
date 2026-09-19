@@ -24,6 +24,17 @@ export default function ExpandingHeroCarousel({ destinations }: ExpandingHeroCar
   const hasDragged = useRef(false);
   const lastWheelTime = useRef(0);
 
+  // Dedicated refs to distinguish dragging/scrolling from deliberate card click
+  const cardPointerStart = useRef<{ x: number; y: number; time: number } | null>(null);
+  const isCardDragging = useRef<boolean>(false);
+  const isCardsScrolling = useRef<boolean>(false);
+  const cardsScrollTimeout = useRef<NodeJS.Timeout | null>(null);
+  const cardsScrollContainerRef = useRef<HTMLDivElement | null>(null);
+  const isMouseDownOnCards = useRef(false);
+  const cardsDragStartX = useRef(0);
+  const cardsDragStartScrollLeft = useRef(0);
+  const cardsDragDistance = useRef(0);
+
   const count = destinations.length;
   const current = destinations[activeIndex];
 
@@ -87,8 +98,9 @@ export default function ExpandingHeroCarousel({ destinations }: ExpandingHeroCar
     if (touchStartX.current === null) return;
     const diffX = e.touches[0].clientX - touchStartX.current;
     const diffY = touchStartY.current !== null ? Math.abs(e.touches[0].clientY - touchStartY.current) : 0;
-    if (Math.abs(diffX) > 10 && Math.abs(diffX) > diffY) {
+    if (Math.abs(diffX) > 6 || diffY > 6) {
       hasDragged.current = true;
+      isCardDragging.current = true;
     }
   };
 
@@ -100,11 +112,11 @@ export default function ExpandingHeroCarousel({ destinations }: ExpandingHeroCar
     const diffY = touchStartY.current !== null ? Math.abs(touchStartY.current - endY) : 0;
     const duration = Date.now() - touchStartTime.current;
 
-    // Fast flick or clear horizontal swipe
-    const isFlick = duration < 380 && Math.abs(diffX) > 25;
-    const isSwipe = Math.abs(diffX) > 40;
+    // Fast flick or clear horizontal swipe on the hero background
+    const isFlick = duration < 380 && Math.abs(diffX) > 30;
+    const isSwipe = Math.abs(diffX) > 45;
 
-    if ((isFlick || isSwipe) && Math.abs(diffX) > diffY * 0.65) {
+    if ((isFlick || isSwipe) && Math.abs(diffX) > diffY * 0.75) {
       if (diffX > 0) {
         handleNext();
       } else {
@@ -115,12 +127,21 @@ export default function ExpandingHeroCarousel({ destinations }: ExpandingHeroCar
     touchStartY.current = null;
     setTimeout(() => {
       hasDragged.current = false;
-    }, 60);
+      isCardDragging.current = false;
+    }, 150);
   };
 
   // Mouse drag support for desktop
   const handlePointerDown = (e: React.PointerEvent) => {
     if (e.pointerType === "touch" || e.button !== 0) return;
+    // Don't intercept if interacting within preview cards or buttons
+    if (
+      (e.target as HTMLElement).closest("[data-carousel-cards]") ||
+      (e.target as HTMLElement).closest("button") ||
+      (e.target as HTMLElement).closest("a")
+    ) {
+      return;
+    }
     dragStartX.current = e.clientX;
     dragStartY.current = e.clientY;
     hasDragged.current = false;
@@ -130,8 +151,9 @@ export default function ExpandingHeroCarousel({ destinations }: ExpandingHeroCar
     if (e.pointerType === "touch" || dragStartX.current === null) return;
     const diffX = e.clientX - dragStartX.current;
     const diffY = dragStartY.current !== null ? Math.abs(e.clientY - dragStartY.current) : 0;
-    if (Math.abs(diffX) > 10 && Math.abs(diffX) > diffY) {
+    if (Math.abs(diffX) > 8 || diffY > 8) {
       hasDragged.current = true;
+      isCardDragging.current = true;
     }
   };
 
@@ -139,7 +161,7 @@ export default function ExpandingHeroCarousel({ destinations }: ExpandingHeroCar
     if (e.pointerType === "touch" || dragStartX.current === null) return;
     const diffX = dragStartX.current - e.clientX;
     const diffY = dragStartY.current !== null ? Math.abs(e.clientY - dragStartY.current) : 0;
-    if (hasDragged.current && Math.abs(diffX) > 40 && Math.abs(diffX) > diffY) {
+    if (hasDragged.current && Math.abs(diffX) > 45 && Math.abs(diffX) > diffY) {
       if (diffX > 0) {
         handleNext();
       } else {
@@ -150,7 +172,8 @@ export default function ExpandingHeroCarousel({ destinations }: ExpandingHeroCar
     dragStartY.current = null;
     setTimeout(() => {
       hasDragged.current = false;
-    }, 60);
+      isCardDragging.current = false;
+    }, 150);
   };
 
   // Wheel and trackpad horizontal scrolling
@@ -178,6 +201,46 @@ export default function ExpandingHeroCarousel({ destinations }: ExpandingHeroCar
     }
   };
 
+  // Track scrolling inside the cards container so clicks don't accidentally fire
+  const handleCardsScroll = () => {
+    isCardsScrolling.current = true;
+    if (cardsScrollTimeout.current) clearTimeout(cardsScrollTimeout.current);
+    cardsScrollTimeout.current = setTimeout(() => {
+      isCardsScrolling.current = false;
+    }, 200);
+  };
+
+  // Drag-to-scroll on desktop for preview cards container
+  const handleCardsMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (e.button !== 0) return;
+    isMouseDownOnCards.current = true;
+    cardsDragDistance.current = 0;
+    cardsDragStartX.current = e.clientX;
+    if (cardsScrollContainerRef.current) {
+      cardsDragStartScrollLeft.current = cardsScrollContainerRef.current.scrollLeft;
+    }
+  };
+
+  const handleCardsMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!isMouseDownOnCards.current || !cardsScrollContainerRef.current) return;
+    const deltaX = e.clientX - cardsDragStartX.current;
+    cardsDragDistance.current = Math.abs(deltaX);
+    if (Math.abs(deltaX) > 4) {
+      isCardDragging.current = true;
+      hasDragged.current = true;
+    }
+    cardsScrollContainerRef.current.scrollLeft = cardsDragStartScrollLeft.current - deltaX;
+  };
+
+  const handleCardsMouseUp = () => {
+    isMouseDownOnCards.current = false;
+    setTimeout(() => {
+      isCardDragging.current = false;
+      hasDragged.current = false;
+      cardsDragDistance.current = 0;
+    }, 150);
+  };
+
   // Calculate progress percentage (0 to 100)
   const progressPercent = count > 1 ? (activeIndex / (count - 1)) * 100 : 0;
 
@@ -185,7 +248,7 @@ export default function ExpandingHeroCarousel({ destinations }: ExpandingHeroCar
     <section
       id="top"
       aria-label="Featured Travel Destinations"
-      className="relative h-[100svh] min-h-[640px] w-full select-none overflow-hidden bg-ink cursor-grab active:cursor-grabbing"
+      className="relative h-[100svh] min-h-[640px] w-full select-none overflow-hidden bg-ink"
       style={{ touchAction: "pan-y" }}
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
@@ -349,9 +412,15 @@ export default function ExpandingHeroCarousel({ destinations }: ExpandingHeroCar
 
           {/* RIGHT: Floating Preview Cards ("Upcoming Queue") */}
           <div
+            ref={cardsScrollContainerRef}
             data-carousel-cards
             onWheel={handleCardsWheel}
-            className="relative w-full lg:w-auto overflow-x-auto no-scrollbar pb-1 lg:pb-0 touch-pan-x overscroll-x-contain"
+            onScroll={handleCardsScroll}
+            onMouseDown={handleCardsMouseDown}
+            onMouseMove={handleCardsMouseMove}
+            onMouseUp={handleCardsMouseUp}
+            onMouseLeave={handleCardsMouseUp}
+            className="relative w-full lg:w-auto overflow-x-auto no-scrollbar pb-1 lg:pb-0 touch-pan-x overscroll-x-contain cursor-grab active:cursor-grabbing select-none"
             style={{ WebkitOverflowScrolling: "touch" }}
           >
             <div className="flex items-center gap-2.5 sm:gap-4.5 min-w-max">
@@ -384,11 +453,60 @@ export default function ExpandingHeroCarousel({ destinations }: ExpandingHeroCar
                       transition: { duration: 0.2 },
                     }}
                     whileTap={{ scale: 0.98 }}
-                    onClick={() => {
-                      if (hasDragged.current) return;
+                    onPointerDown={(e) => {
+                      cardPointerStart.current = {
+                        x: e.clientX,
+                        y: e.clientY,
+                        time: Date.now(),
+                      };
+                    }}
+                    onPointerMove={(e) => {
+                      if (!cardPointerStart.current) return;
+                      const dx = Math.abs(e.clientX - cardPointerStart.current.x);
+                      const dy = Math.abs(e.clientY - cardPointerStart.current.y);
+                      if (dx > 5 || dy > 5) {
+                        isCardDragging.current = true;
+                        hasDragged.current = true;
+                      }
+                    }}
+                    onPointerUp={(e) => {
+                      if (!cardPointerStart.current) return;
+                      const dx = Math.abs(e.clientX - cardPointerStart.current.x);
+                      const dy = Math.abs(e.clientY - cardPointerStart.current.y);
+                      const elapsed = Date.now() - cardPointerStart.current.time;
+                      if (
+                        dx > 5 ||
+                        dy > 5 ||
+                        elapsed > 350 ||
+                        isCardsScrolling.current ||
+                        isCardDragging.current ||
+                        hasDragged.current ||
+                        cardsDragDistance.current > 4
+                      ) {
+                        isCardDragging.current = true;
+                        hasDragged.current = true;
+                        setTimeout(() => {
+                          isCardDragging.current = false;
+                          hasDragged.current = false;
+                        }, 150);
+                      }
+                      cardPointerStart.current = null;
+                    }}
+                    onClick={(e) => {
+                      // Strict tap guard: ignore if dragging, scrolling, or pointer moved even slightly
+                      if (
+                        isCardDragging.current ||
+                        hasDragged.current ||
+                        isCardsScrolling.current ||
+                        cardsDragDistance.current > 4
+                      ) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        return;
+                      }
                       goToSlide(index);
                     }}
-                    className="group relative h-[180px] w-[135px] sm:h-[290px] sm:w-[210px] md:h-[320px] md:w-[230px] shrink-0 overflow-hidden rounded-xl sm:rounded-3xl border border-white/20 bg-black/40 text-left shadow-2xl backdrop-blur-sm transition-shadow hover:border-white/50 hover:shadow-[0_15px_35px_rgba(0,0,0,0.7)]"
+                    className="group relative h-[180px] w-[135px] sm:h-[290px] sm:w-[210px] md:h-[320px] md:w-[230px] shrink-0 overflow-hidden rounded-xl sm:rounded-3xl border border-white/20 bg-black/40 text-left shadow-2xl backdrop-blur-sm transition-shadow hover:border-white/50 hover:shadow-[0_15px_35px_rgba(0,0,0,0.7)] cursor-pointer"
                     aria-label={`View ${destination.name}`}
                   >
                     {/* Card Image */}

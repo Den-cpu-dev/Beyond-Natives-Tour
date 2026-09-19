@@ -10,6 +10,7 @@ export interface Destination {
   heroImage: string;
   thumbnailImage: string;
   rank?: number;
+  tourCount?: number;
 }
 
 const photo = (id: string, options = "auto=format&fit=crop&w=2200&q=90") =>
@@ -89,79 +90,83 @@ export const heroDestinations: Destination[] = [
 
 export const destinations: Destination[] = [
   {
-    id: "marrakech",
-    name: "Marrakech Medina",
-    region: "Haouz",
-    country: "Morocco",
+    id: "ghana",
+    name: "Ghana",
+    region: "Living Heritage",
+    country: "West Africa",
+    subtitle: "Living Heritage & Coastal Forts",
     description:
-      "Follow the first call to prayer through rose-walled lanes and hidden riads. Marrakech is a vivid starting point for journeys that move at their own pace.",
-    heroImage: photo("photo-1548013146-72479768bada"),
-    thumbnailImage: thumb("photo-1548013146-72479768bada"),
-  },
-  {
-    id: "atlas",
-    name: "High Atlas",
-    region: "Al Haouz",
-    country: "Morocco",
-    description:
-      "The road rises through terraced valleys, walnut trees, and Berber villages. Here, every bend opens toward another quiet summit.",
-    heroImage: photo("photo-1489749798305-4fea3ae63d43"),
-    thumbnailImage: thumb("photo-1489749798305-4fea3ae63d43"),
-  },
-  {
-    id: "merzouga",
-    name: "Merzouga Dunes",
-    region: "Sahara Desert",
-    country: "Morocco",
-    description:
-      "Walk out with the sun and watch the Erg Chebbi dunes redraw themselves. Nights are for mint tea, constellations, and the stillness of the desert.",
-    heroImage: photo("photo-1547234935-80c7145ec969"),
-    thumbnailImage: thumb("photo-1547234935-80c7145ec969"),
+      "From Cape Coast Castle to the vibrant energy of Accra and savanna wildlife of Mole, experience Ghana's warm, welcoming heritage.",
+    heroImage: "/images/tours/cape-coast.jpg",
+    thumbnailImage: "/images/tours/cape-coast.jpg",
+    tourCount: 5,
     rank: 1,
   },
   {
-    id: "chefchaouen",
-    name: "Chefchaouen",
-    region: "Rif Mountains",
-    country: "Morocco",
+    id: "togo",
+    name: "Togo",
+    region: "Spirit & Heritage",
+    country: "West Africa",
+    subtitle: "Spirit & Heritage of Lomé",
     description:
-      "Blue paths climb beneath the Rif Mountains, full of paint-worn doors and warm bread. It is a place for leaving the map folded in your pocket.",
-    heroImage: photo("photo-1553242086-5c1f8c7c9543"),
-    thumbnailImage: thumb("photo-1553242086-5c1f8c7c9543"),
+      "A slender coastal gem of profound spirituality, Lake Togo pirogue boat crossings, and renowned Kpalimé mountain artisans.",
+    heroImage: "/images/tours/togo.jpg",
+    thumbnailImage: "/images/tours/togo.jpg",
+    tourCount: 3,
     rank: 2,
   },
   {
-    id: "dades",
-    name: "Dades Valley",
-    region: "Drâa-Tafilalet",
-    country: "Morocco",
+    id: "benin",
+    name: "Benin",
+    region: "Dahomey Kingdoms",
+    country: "West Africa",
+    subtitle: "Kingdoms & Sacred Traditions",
     description:
-      "A river threads between red rock walls and palm groves. Slow down for kasbahs, road-side figs, and a landscape shaped by time.",
-    heroImage: photo("photo-1539650116574-75c0c6d73f6e"),
-    thumbnailImage: thumb("photo-1539650116574-75c0c6d73f6e"),
+      "Behold the monumental Cotonou Amazon warrior, glide through Ganvié stilt city, and discover the ancestral sanctuaries of Ouidah.",
+    heroImage: "/images/tours/benin.jpg",
+    thumbnailImage: "/images/tours/benin.jpg",
+    tourCount: 4,
     rank: 3,
   },
   {
-    id: "essaouira",
-    name: "Essaouira Coast",
+    id: "liberia",
+    name: "Liberia",
     region: "Atlantic Coast",
-    country: "Morocco",
+    country: "West Africa",
+    subtitle: "Atlantic Coast & Rainforests",
     description:
-      "Trade desert dust for salt air on the Atlantic. Essaouira brings whitewashed ramparts, wind-shaped beaches, and a bright blue horizon.",
-    heroImage: photo("photo-1597212618440-806262de4f6b"),
-    thumbnailImage: thumb("photo-1597212618440-806262de4f6b"),
+      "Historic Monrovia heritage, raw Atlantic surf breaks in Robertsport, and lush inland rainforest waterfalls at Kpatawee.",
+    heroImage: "https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=1600&q=85",
+    thumbnailImage: "https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=800&q=85",
+    tourCount: 3,
     rank: 4,
   },
   {
-    id: "ait-ben-haddou",
-    name: "Aït Ben Haddou",
-    region: "Ounila Valley",
-    country: "Morocco",
+    id: "ivory-coast",
+    name: "Ivory Coast",
+    region: "Lagoon & Modernity",
+    country: "West Africa",
+    subtitle: "Modernity & Lagoon Culture",
     description:
-      "At dusk, the earthen towers of this old ksar glow the color of fire. Cross the river and step into a story written in mudbrick and light.",
-    heroImage: photo("photo-1530789253388-582c481c54b0"),
-    thumbnailImage: thumb("photo-1530789253388-582c481c54b0"),
+      "Gleaming Abidjan skyline, serene UNESCO colonial Grand-Bassam beach avenues, and the colossal Yamoussoukro Basilica.",
+    heroImage: "https://images.unsplash.com/photo-1578922746465-3a80a228f223?auto=format&fit=crop&w=1600&q=85",
+    thumbnailImage: "https://images.unsplash.com/photo-1578922746465-3a80a228f223?auto=format&fit=crop&w=800&q=85",
+    tourCount: 3,
+    rank: 5,
+  },
+  {
+    id: "sierra-leone",
+    name: "Sierra Leone",
+    region: "White Sands",
+    country: "West Africa",
+    subtitle: "White Sands & Ancestral Roots",
+    description:
+      "Pristine white sand coves at River No. 2, historic Freetown Krio heritage, and profound ancestral memory on Bunce Island.",
+    heroImage: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=85",
+    thumbnailImage: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=85",
+    tourCount: 3,
+    rank: 6,
   },
 ];
 
-export const rankedDestinations = destinations.filter((destination) => destination.rank);
+export const rankedDestinations = destinations;

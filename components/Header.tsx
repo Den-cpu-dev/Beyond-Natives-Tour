@@ -10,7 +10,7 @@ import { openTripBookingModal } from "@/components/BookTripModal";
 const navLinks = [
   { label: "Home", href: "/#top", id: "home" },
   { label: "Destinations", href: "/#destinations", id: "destinations" },
-  { label: "Expeditions", href: "/#holiday", id: "expeditions" },
+  { label: "Tours", href: "/tours", id: "tours" },
   { label: "Store", href: "/store", id: "store" },
   { label: "About", href: "/about", id: "about" },
   { label: "Contact", href: "/#footer", id: "contact" },
@@ -31,13 +31,17 @@ export default function Header() {
       const path = (pathname || (typeof window !== "undefined" ? window.location.pathname : "")).replace(/\/$/, "") || "/";
       const hash = typeof window !== "undefined" ? window.location.hash : "";
 
-      // 1. If on /about or /store, route always takes priority
+      // 1. If on /about, /store, or /tours, route always takes priority
       if (path === "/about" || path.startsWith("/about/")) {
         setActiveTab("about");
         return;
       }
       if (path === "/store" || path.startsWith("/store/")) {
         setActiveTab("store");
+        return;
+      }
+      if (path === "/tours" || path.startsWith("/tours/")) {
+        setActiveTab("tours");
         return;
       }
 
@@ -104,6 +108,9 @@ export default function Header() {
     }
     if (path === "/store" || path.startsWith("/store/")) {
       return link.id === "store";
+    }
+    if (path === "/tours" || path.startsWith("/tours/")) {
+      return link.id === "tours";
     }
     return activeTab === link.id;
   };

@@ -60,7 +60,7 @@ export const countryList: CountryInfo[] = [
     description:
       "A land of untold history, untouched coastal beaches at Robertsport, verdant primary rainforests, and historic settlements brimming with authentic stories.",
     capital: "Monrovia",
-    image: "https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=1200&q=85",
+    image: "/images/tours/liberia.jpg",
     tourCount: 3,
   },
   {
@@ -332,7 +332,7 @@ export const allTours: Tour[] = [
       "Panoramic views from historic Ducor Palace Hill",
       "Vibrant Waterside open-air market walk",
     ],
-    image: "https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=1200&q=85",
+    image: "/images/tours/liberia.jpg",
     tags: ["Monrovia", "History", "City Tour", "Heritage"],
   },
   {

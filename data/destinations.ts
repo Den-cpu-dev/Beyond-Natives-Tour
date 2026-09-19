@@ -136,8 +136,8 @@ export const destinations: Destination[] = [
     subtitle: "Atlantic Coast & Rainforests",
     description:
       "Historic Monrovia heritage, raw Atlantic surf breaks in Robertsport, and lush inland rainforest waterfalls at Kpatawee.",
-    heroImage: "https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=1600&q=85",
-    thumbnailImage: "https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=800&q=85",
+    heroImage: "/images/tours/liberia.jpg",
+    thumbnailImage: "/images/tours/liberia.jpg",
     tourCount: 3,
     rank: 4,
   },

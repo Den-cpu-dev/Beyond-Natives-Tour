@@ -58,7 +58,7 @@ export default function Hero({ destinations, destination, nextDestination, cross
         </div>
 
         <div className="absolute right-4 top-1/2 hidden -translate-y-1/2 items-end gap-3 sm:flex lg:right-14">
-          <div className="flex flex-col items-end gap-1.5 text-right font-display text-sm leading-none text-white/45">
+          <div className="flex flex-col items-end gap-1.5 text-right font-anton text-sm leading-none text-white/45">
             {[3, 4, 5, 6, 7].map((number, index) => {
               const active = index === factIndex;
               return (
@@ -73,7 +73,7 @@ export default function Hero({ destinations, destination, nextDestination, cross
 
         <div className="max-w-5xl">
           <p className="mb-4 text-[10px] font-semibold uppercase tracking-[0.28em] text-ember">Beyond Native Tours presents</p>
-          <h1 className="max-w-4xl font-display text-[clamp(4rem,12vw,10.5rem)] uppercase leading-[0.76] tracking-[-0.07em] text-white">
+          <h1 className="max-w-4xl font-anton text-[clamp(4rem,12vw,10.5rem)] uppercase leading-[0.76] tracking-tight text-white">
             Visit<br />Morocco
           </h1>
           <div className="mt-6 max-w-xl border-l border-ember pl-4 sm:mt-8">

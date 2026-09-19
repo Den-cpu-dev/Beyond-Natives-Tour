@@ -231,7 +231,7 @@ export default function AboutPage() {
                           href={item.href}
                           target="_blank"
                           rel="noreferrer"
-                          className="font-anton text-sm sm:text-base text-white hover:text-ember transition-colors break-words block"
+                          className="font-sans font-medium text-xs sm:text-sm text-white hover:text-ember transition-colors break-words block underline decoration-white/25 underline-offset-4"
                         >
                           {item.value} &rarr;
                         </a>

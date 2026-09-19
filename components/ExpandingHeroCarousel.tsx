@@ -399,7 +399,7 @@ export default function ExpandingHeroCarousel({ destinations }: ExpandingHeroCar
 
                     {/* Card Content (Title in bold condensed uppercase) */}
                     <div className="absolute inset-x-0 bottom-0 p-3.5 sm:p-5">
-                      <p className="font-anton text-[10px] sm:text-[11px] uppercase tracking-[0.18em] text-ember mb-0.5 sm:mb-1">
+                      <p className="font-sans text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.2em] text-ember mb-0.5 sm:mb-1">
                         {destination.country}
                       </p>
                       <h3 className="font-anton text-xs sm:text-[15px] md:text-base uppercase leading-[0.95] tracking-tight text-white drop-shadow-sm">

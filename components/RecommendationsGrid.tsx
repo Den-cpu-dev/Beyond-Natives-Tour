@@ -7,7 +7,7 @@ export default function RecommendationsGrid({ destinations }: { destinations: De
       <div className="mx-auto max-w-[1600px]">
         <div className="mx-auto max-w-3xl text-center">
           <p className="text-[9px] sm:text-[10px] font-semibold uppercase tracking-[0.22em] text-ember">Confusion? These recommendations</p>
-          <h2 className="mt-2.5 sm:mt-3 font-display text-3xl uppercase leading-[0.88] tracking-[-0.04em] text-mist sm:text-7xl lg:text-8xl">
+          <h2 className="mt-2.5 sm:mt-3 font-anton text-3xl uppercase leading-[0.88] tracking-tight text-mist sm:text-7xl lg:text-8xl">
             Destination<br />recommendations
           </h2>
         </div>
@@ -23,11 +23,11 @@ export default function RecommendationsGrid({ destinations }: { destinations: De
                   sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 25vw"
                   className="object-cover transition duration-700 group-hover:scale-105"
                 />
-                <span className="absolute bottom-0 left-0 translate-y-1/2 bg-ember px-1.5 py-0.5 sm:px-3 sm:py-1.5 text-[7px] sm:text-xs font-bold uppercase tracking-[0.06em] text-white shadow-lg">
+                <span className="absolute bottom-0 left-0 translate-y-1/2 bg-ember px-2 py-0.5 sm:px-3 sm:py-1 font-anton text-[8px] sm:text-[11px] uppercase tracking-wider text-white shadow-lg">
                   {destination.rank}{destination.rank === 1 ? "st" : destination.rank === 2 ? "nd" : destination.rank === 3 ? "rd" : "th"} place
                 </span>
               </div>
-              <p className="mt-2.5 sm:mt-5 border-t border-white/20 pt-1.5 sm:pt-3 text-[10px] sm:text-sm font-bold uppercase tracking-[0.06em] text-mist leading-tight">
+              <p className="mt-2.5 sm:mt-5 border-t border-white/20 pt-1.5 sm:pt-3 font-anton text-xs sm:text-base uppercase tracking-tight text-white leading-tight">
                 {destination.name}
               </p>
             </article>

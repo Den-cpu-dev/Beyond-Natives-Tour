@@ -10,9 +10,9 @@ const config: Config = {
         mist: "#ecebe7",
       },
       fontFamily: {
-        anton: ["var(--font-anton)", "Impact", "sans-serif"],
-        display: ["var(--font-anton)", "Impact", "sans-serif"],
-        sans: ["var(--font-sans)", "Helvetica Neue", "Arial", "sans-serif"],
+        anton: ["var(--font-anton)", "Impact", "Arial Black", "sans-serif"],
+        display: ["var(--font-anton)", "Impact", "Arial Black", "sans-serif"],
+        sans: ["var(--font-sans)", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Helvetica Neue", "Arial", "sans-serif"],
       },
     },
   },

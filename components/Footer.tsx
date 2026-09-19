@@ -4,16 +4,16 @@ export default function Footer() {
   return (
     <footer id="footer" className="border-t border-white/15 bg-ink px-5 py-8 sm:px-10 lg:px-16">
       <div className="mx-auto flex max-w-[1600px] flex-col sm:flex-row items-center justify-between gap-4">
-        <div className="flex items-center gap-3">
-          <div className="relative h-8 w-8 overflow-hidden rounded-full border border-white/20 bg-black">
+        <div className="flex flex-col items-center sm:items-start gap-1">
+          <div className="relative h-10 w-10 sm:h-12 sm:w-12">
             <Image
-              src="/logo.jpg"
+              src="/logo.png"
               alt="Beyond Native Tours"
               fill
-              className="object-cover"
+              className="object-contain filter drop-shadow-[0_2px_8px_rgba(255,59,48,0.3)]"
             />
           </div>
-          <span className="text-xs font-bold uppercase tracking-[0.18em] text-white/90">
+          <span className="font-anton text-[10px] sm:text-xs uppercase tracking-[0.2em] text-white/90">
             Beyond Native <span className="font-light text-white/60">Tours</span>
           </span>
         </div>

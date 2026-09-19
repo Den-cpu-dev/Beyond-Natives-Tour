@@ -37,18 +37,19 @@ export default function Header() {
         {/* Brand Logo */}
         <a
           href="#top"
-          className="group flex items-center gap-3 text-xs sm:text-sm font-bold uppercase tracking-[0.2em] text-white"
+          className="group flex flex-col items-center text-center transition-transform duration-300 hover:scale-105"
+          aria-label="Beyond Native Tours Home"
         >
-          <div className="relative h-9 w-9 overflow-hidden rounded-full border border-white/30 bg-black shadow-[0_0_12px_rgba(255,59,48,0.35)] transition-transform duration-300 group-hover:scale-105 group-hover:border-ember">
+          <div className="relative h-9 w-9 sm:h-11 sm:w-11">
             <Image
-              src="/logo.jpg"
+              src="/logo.png"
               alt="Beyond Native Tours Logo"
               fill
               priority
-              className="object-cover"
+              className="object-contain filter drop-shadow-[0_2px_8px_rgba(255,59,48,0.4)]"
             />
           </div>
-          <span className="flex items-center gap-1.5">
+          <span className="mt-1 font-anton text-[9px] sm:text-[11px] uppercase tracking-[0.22em] text-white leading-tight">
             Beyond Native <span className="font-light text-white/70">Tours</span>
           </span>
         </a>

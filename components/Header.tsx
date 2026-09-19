@@ -7,65 +7,92 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const navLinks = [
-  { label: "Home", href: "/#top" },
-  { label: "Destinations", href: "/#destinations" },
-  { label: "Expeditions", href: "/#holiday" },
-  { label: "Store", href: "/store" },
-  { label: "About", href: "/about" },
-  { label: "Contact", href: "/#footer" },
+  { label: "Home", href: "/#top", id: "home" },
+  { label: "Destinations", href: "/#destinations", id: "destinations" },
+  { label: "Expeditions", href: "/#holiday", id: "expeditions" },
+  { label: "Store", href: "/store", id: "store" },
+  { label: "About", href: "/about", id: "about" },
+  { label: "Contact", href: "/#footer", id: "contact" },
 ];
 
 export default function Header() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
-  const [activeSection, setActiveSection] = useState<string>("home");
+  const [activeTab, setActiveTab] = useState<string>("home");
 
   useEffect(() => {
-    const handleScroll = () => {
+    const updateActiveFromRouteOrScroll = () => {
       setScrolled(window.scrollY > 40);
 
-      // Only track section scroll on homepage
-      const isHome = pathname === "/" || pathname === "";
-      if (isHome) {
-        const scrollPos = window.scrollY + 200;
-        const destinationsEl = document.getElementById("destinations");
-        const holidayEl = document.getElementById("holiday");
-        const footerEl = document.getElementById("footer");
+      const path = (pathname || (typeof window !== "undefined" ? window.location.pathname : "")).replace(/\/$/, "") || "/";
+      const hash = typeof window !== "undefined" ? window.location.hash : "";
 
-        if (footerEl && scrollPos >= footerEl.offsetTop) {
-          setActiveSection("contact");
-        } else if (holidayEl && scrollPos >= holidayEl.offsetTop) {
-          setActiveSection("expeditions");
-        } else if (destinationsEl && scrollPos >= destinationsEl.offsetTop) {
-          setActiveSection("destinations");
+      // 1. If on /about or /store, route always takes priority
+      if (path === "/about" || path.startsWith("/about/")) {
+        setActiveTab("about");
+        return;
+      }
+      if (path === "/store" || path.startsWith("/store/")) {
+        setActiveTab("store");
+        return;
+      }
+
+      // 2. On homepage
+      if (path === "/" || path === "") {
+        if (hash === "#destinations") {
+          setActiveTab("destinations");
+          return;
+        }
+        if (hash === "#holiday") {
+          setActiveTab("expeditions");
+          return;
+        }
+        if (hash === "#footer") {
+          setActiveTab("contact");
+          return;
+        }
+        if (hash === "#top") {
+          setActiveTab("home");
+          return;
+        }
+
+        const footerEl = document.getElementById("footer");
+        const holidayEl = document.getElementById("holiday");
+        const destinationsEl = document.getElementById("destinations");
+
+        const vh = window.innerHeight;
+        if (footerEl && footerEl.getBoundingClientRect().top <= vh * 0.85) {
+          setActiveTab("contact");
+        } else if (holidayEl && holidayEl.getBoundingClientRect().top <= vh * 0.5 && holidayEl.getBoundingClientRect().bottom >= vh * 0.2) {
+          setActiveTab("expeditions");
+        } else if (destinationsEl && destinationsEl.getBoundingClientRect().top <= vh * 0.5 && destinationsEl.getBoundingClientRect().bottom >= vh * 0.2) {
+          setActiveTab("destinations");
         } else {
-          setActiveSection("home");
+          setActiveTab("home");
         }
       }
     };
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
+    updateActiveFromRouteOrScroll();
+
+    window.addEventListener("scroll", updateActiveFromRouteOrScroll, { passive: true });
+    window.addEventListener("hashchange", updateActiveFromRouteOrScroll);
+    return () => {
+      window.removeEventListener("scroll", updateActiveFromRouteOrScroll);
+      window.removeEventListener("hashchange", updateActiveFromRouteOrScroll);
+    };
   }, [pathname]);
 
-  const isLinkActive = (link: { label: string; href: string }) => {
-    const cleanPath = (pathname || "").replace(/\/$/, "") || "/";
-
-    if (link.href === "/about") {
-      return cleanPath === "/about" || cleanPath.startsWith("/about/");
+  const isLinkActive = (link: { label: string; href: string; id: string }) => {
+    const path = (pathname || "").replace(/\/$/, "") || "/";
+    if (path === "/about" || path.startsWith("/about/")) {
+      return link.id === "about";
     }
-    if (link.href === "/store") {
-      return cleanPath === "/store" || cleanPath.startsWith("/store/");
+    if (path === "/store" || path.startsWith("/store/")) {
+      return link.id === "store";
     }
-    if (cleanPath === "/" || cleanPath === "") {
-      if (link.label === "Destinations") return activeSection === "destinations";
-      if (link.label === "Expeditions") return activeSection === "expeditions";
-      if (link.label === "Contact") return activeSection === "contact";
-      if (link.label === "Home") return activeSection === "home";
-    }
-    return false;
+    return activeTab === link.id;
   };
 
   return (
@@ -81,6 +108,7 @@ export default function Header() {
         {/* Brand Logo */}
         <Link
           href="/"
+          onClick={() => setActiveTab("home")}
           className="group flex flex-col items-center text-center transition-transform duration-300 hover:scale-105"
           aria-label="Beyond Native Tours Home"
         >
@@ -115,6 +143,7 @@ export default function Header() {
               <Link
                 key={link.label}
                 href={link.href}
+                onClick={() => setActiveTab(link.id)}
                 className={`relative py-1 transition-colors duration-200 ${
                   active ? "text-white font-bold" : "text-white/70 hover:text-white"
                 }`}
@@ -185,7 +214,10 @@ export default function Header() {
                   <Link
                     key={link.label}
                     href={link.href}
-                    onClick={() => setOpen(false)}
+                    onClick={() => {
+                      setActiveTab(link.id);
+                      setOpen(false);
+                    }}
                     className={`flex items-center justify-between rounded-xl px-3.5 py-2.5 text-xs font-semibold uppercase tracking-[0.18em] transition-all ${
                       active
                         ? "bg-white/10 text-ember font-bold"

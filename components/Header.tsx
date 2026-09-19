@@ -2,6 +2,8 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const navLinks = [
@@ -10,20 +12,61 @@ const navLinks = [
   { label: "Expeditions", href: "/#holiday" },
   { label: "Store", href: "/store" },
   { label: "About", href: "/about" },
-  { label: "Contact", href: "#footer" },
+  { label: "Contact", href: "/#footer" },
 ];
 
 export default function Header() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
+  const [activeSection, setActiveSection] = useState<string>("home");
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 40);
+
+      // Only track section scroll on homepage
+      const isHome = pathname === "/" || pathname === "";
+      if (isHome) {
+        const scrollPos = window.scrollY + 200;
+        const destinationsEl = document.getElementById("destinations");
+        const holidayEl = document.getElementById("holiday");
+        const footerEl = document.getElementById("footer");
+
+        if (footerEl && scrollPos >= footerEl.offsetTop) {
+          setActiveSection("contact");
+        } else if (holidayEl && scrollPos >= holidayEl.offsetTop) {
+          setActiveSection("expeditions");
+        } else if (destinationsEl && scrollPos >= destinationsEl.offsetTop) {
+          setActiveSection("destinations");
+        } else {
+          setActiveSection("home");
+        }
+      }
     };
+
     window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [pathname]);
+
+  const isLinkActive = (link: { label: string; href: string }) => {
+    const cleanPath = (pathname || "").replace(/\/$/, "") || "/";
+
+    if (link.href === "/about") {
+      return cleanPath === "/about" || cleanPath.startsWith("/about/");
+    }
+    if (link.href === "/store") {
+      return cleanPath === "/store" || cleanPath.startsWith("/store/");
+    }
+    if (cleanPath === "/" || cleanPath === "") {
+      if (link.label === "Destinations") return activeSection === "destinations";
+      if (link.label === "Expeditions") return activeSection === "expeditions";
+      if (link.label === "Contact") return activeSection === "contact";
+      if (link.label === "Home") return activeSection === "home";
+    }
+    return false;
+  };
 
   return (
     <header
@@ -36,7 +79,7 @@ export default function Header() {
       <div className="mx-auto flex max-w-[1600px] items-center justify-between px-5 sm:px-10 lg:px-16">
         
         {/* Brand Logo */}
-        <a
+        <Link
           href="/"
           className="group flex flex-col items-center text-center transition-transform duration-300 hover:scale-105"
           aria-label="Beyond Native Tours Home"
@@ -59,45 +102,50 @@ export default function Header() {
               className="object-contain"
             />
           </div>
-        </a>
+        </Link>
 
         {/* Desktop Navigation Links */}
         <nav
           className="hidden items-center gap-8 lg:gap-10 text-[11px] font-semibold uppercase tracking-[0.18em] md:flex"
           aria-label="Primary"
         >
-          {navLinks.map((link, idx) => (
-            <a
-              key={link.label}
-              href={link.href}
-              className="relative py-1 text-white/70 transition-colors duration-200 hover:text-white"
-            >
-              {link.label}
-              {idx === 0 && (
-                <span className="absolute -bottom-1.5 left-0 h-[2px] w-full bg-ember shadow-[0_0_8px_rgba(255,59,48,0.8)]" />
-              )}
-            </a>
-          ))}
+          {navLinks.map((link) => {
+            const active = isLinkActive(link);
+            return (
+              <Link
+                key={link.label}
+                href={link.href}
+                className={`relative py-1 transition-colors duration-200 ${
+                  active ? "text-white font-bold" : "text-white/70 hover:text-white"
+                }`}
+              >
+                {link.label}
+                {active && (
+                  <span className="absolute -bottom-1.5 left-0 h-[2px] w-full bg-ember shadow-[0_0_8px_rgba(255,59,48,0.8)]" />
+                )}
+              </Link>
+            );
+          })}
         </nav>
 
         {/* Right Action Icons (Search & CTA) */}
         <div className="hidden sm:flex items-center gap-4">
-          <a
-            href="#destinations"
+          <Link
+            href="/#destinations"
             aria-label="Search destinations"
             className="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-black/30 text-white/80 backdrop-blur-sm transition-all duration-200 hover:border-white hover:text-white hover:bg-white/10"
           >
             <svg className="h-3.5 w-3.5 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z" />
             </svg>
-          </a>
+          </Link>
 
-          <a
-            href="#holiday"
+          <Link
+            href="/#holiday"
             className="rounded-full border border-white/30 bg-white/10 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.16em] text-white backdrop-blur-md transition-all duration-200 hover:bg-white hover:text-black hover:border-white"
           >
             Book Trip
-          </a>
+          </Link>
         </div>
 
         {/* Mobile Menu Button */}
@@ -130,25 +178,35 @@ export default function Header() {
             className="mx-4 mt-3 rounded-2xl border border-white/15 bg-black/95 p-6 backdrop-blur-2xl md:hidden shadow-2xl"
             aria-label="Mobile"
           >
-            <div className="space-y-4">
-              {navLinks.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  onClick={() => setOpen(false)}
-                  className="block text-sm font-semibold uppercase tracking-[0.18em] text-white/90 hover:text-ember transition-colors"
-                >
-                  {link.label}
-                </a>
-              ))}
+            <div className="space-y-2">
+              {navLinks.map((link) => {
+                const active = isLinkActive(link);
+                return (
+                  <Link
+                    key={link.label}
+                    href={link.href}
+                    onClick={() => setOpen(false)}
+                    className={`flex items-center justify-between rounded-xl px-3.5 py-2.5 text-xs font-semibold uppercase tracking-[0.18em] transition-all ${
+                      active
+                        ? "bg-white/10 text-ember font-bold"
+                        : "text-white/80 hover:bg-white/5 hover:text-white"
+                    }`}
+                  >
+                    <span>{link.label}</span>
+                    {active && (
+                      <span className="h-1.5 w-1.5 rounded-full bg-ember shadow-[0_0_8px_rgba(255,59,48,0.9)]" />
+                    )}
+                  </Link>
+                );
+              })}
               <div className="pt-4 border-t border-white/15">
-                <a
-                  href="#holiday"
+                <Link
+                  href="/#holiday"
                   onClick={() => setOpen(false)}
                   className="block text-center rounded-full bg-ember py-3 text-xs font-bold uppercase tracking-[0.18em] text-white shadow-[0_0_20px_rgba(255,59,48,0.4)]"
                 >
                   Book Trip
-                </a>
+                </Link>
               </div>
             </div>
           </motion.nav>

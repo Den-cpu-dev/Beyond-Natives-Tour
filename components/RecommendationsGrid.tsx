@@ -12,22 +12,24 @@ export default function RecommendationsGrid({ destinations }: { destinations: De
           </h2>
         </div>
 
-        <div className="mt-12 grid gap-x-4 gap-y-12 sm:mt-20 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-8 grid grid-cols-2 gap-x-3 gap-y-8 sm:mt-16 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-12 lg:grid-cols-4">
           {destinations.map((destination) => (
             <article key={destination.id} className="group">
-              <div className="relative aspect-[4/5] overflow-hidden rounded-xl sm:rounded-none bg-white/10">
+              <div className="relative aspect-[3/4] sm:aspect-[4/5] overflow-hidden rounded-lg sm:rounded-none bg-white/10">
                 <Image
                   src={destination.thumbnailImage}
                   alt={`${destination.name}, ${destination.country}`}
                   fill
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 25vw"
                   className="object-cover transition duration-700 group-hover:scale-105"
                 />
-                <span className="absolute -bottom-0 left-0 translate-y-1/2 bg-ember px-3 py-1.5 text-[10px] sm:text-xs font-bold uppercase tracking-[0.06em] text-white shadow-lg">
+                <span className="absolute bottom-0 left-0 translate-y-1/2 bg-ember px-2 py-0.5 sm:px-3 sm:py-1.5 text-[8px] sm:text-xs font-bold uppercase tracking-[0.06em] text-white shadow-lg">
                   {destination.rank}{destination.rank === 1 ? "st" : destination.rank === 2 ? "nd" : destination.rank === 3 ? "rd" : "th"} place
                 </span>
               </div>
-              <p className="mt-5 border-t border-white/20 pt-3 text-xs sm:text-sm font-bold uppercase tracking-[0.08em] text-mist">{destination.name}</p>
+              <p className="mt-3.5 sm:mt-5 border-t border-white/20 pt-2 sm:pt-3 text-[11px] sm:text-sm font-bold uppercase tracking-[0.06em] text-mist leading-tight">
+                {destination.name}
+              </p>
             </article>
           ))}
         </div>

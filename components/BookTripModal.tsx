@@ -7,6 +7,8 @@ import { getTripBookingWhatsAppUrl, type TripBookingDetails } from "@/data/whats
 const availableTours = [
   "Accra City Tour & Cultural Discovery",
   "Cape Coast Castle and Heritage Tour",
+  "Togo Cultural Odyssey (Lomé & Beyond)",
+  "Benin Kingdom & Dahomey Heritage Tour",
   "2 Days 3 Nights Northern Adventure Tour (Mole & Larabanga)",
   "Batik Making and Traditional Cooking Class",
   "Kwame Nkrumah Memorial Park & Cultural Sanctuaries",

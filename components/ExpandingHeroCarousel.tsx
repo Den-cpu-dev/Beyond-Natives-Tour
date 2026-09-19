@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { Destination } from "@/data/destinations";
+import { openTripBookingModal } from "@/components/BookTripModal";
 
 interface ExpandingHeroCarouselProps {
   destinations: Destination[];
@@ -323,17 +324,25 @@ export default function ExpandingHeroCarousel({ destinations }: ExpandingHeroCar
                 transition={{ duration: 0.5, delay: 0.16, ease: [0.16, 1, 0.3, 1] }}
                 className="mt-4 sm:mt-7"
               >
-                <a
-                  href="#destinations"
-                  className="group inline-flex items-center gap-2.5 sm:gap-3 rounded-full border border-white/30 bg-black/40 px-4 py-2 sm:px-6 sm:py-3 font-anton text-xs sm:text-sm uppercase tracking-[0.16em] text-white backdrop-blur-md transition-all duration-300 hover:border-ember hover:bg-white hover:text-black hover:shadow-[0_0_25px_rgba(255,59,48,0.35)]"
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (current.id === "beyond-native-tours") {
+                      const el = document.getElementById("holiday") || document.getElementById("destinations");
+                      el?.scrollIntoView({ behavior: "smooth" });
+                    } else {
+                      openTripBookingModal(current.name);
+                    }
+                  }}
+                  className="group inline-flex items-center gap-2.5 sm:gap-3 rounded-full border border-white/30 bg-black/40 px-4 py-2 sm:px-6 sm:py-3 font-anton text-xs sm:text-sm uppercase tracking-[0.16em] text-white backdrop-blur-md transition-all duration-300 hover:border-ember hover:bg-white hover:text-black hover:shadow-[0_0_25px_rgba(255,59,48,0.35)] cursor-pointer"
                 >
                   <span className="flex h-5 w-5 sm:h-6 sm:w-6 items-center justify-center rounded-full bg-white text-black transition-transform duration-300 group-hover:scale-110 group-hover:bg-ember group-hover:text-white">
                     <svg className="h-2 w-2 sm:h-2.5 sm:w-2.5 translate-x-0.5 fill-current" viewBox="0 0 24 24">
                       <path d="M8 5v14l11-7z" />
                     </svg>
                   </span>
-                  {current.id === "beyond-native-tours" ? "Explore Expeditions" : "Discover Location"}
-                </a>
+                  {current.id === "beyond-native-tours" ? "Explore Expeditions" : "Book This Expedition"}
+                </button>
               </motion.div>
             </AnimatePresence>
           </div>

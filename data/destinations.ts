@@ -18,7 +18,7 @@ const photo = (id: string, options = "auto=format&fit=crop&w=2200&q=90") =>
 const thumb = (id: string, options = "auto=format&fit=crop&w=800&q=85") =>
   `https://images.unsplash.com/${id}?${options}`;
 
-// Flagship carousel destinations featuring Beyond Native Tours and Ghana experiences
+// Flagship carousel destinations: 5 featured journeys
 export const heroDestinations: Destination[] = [
   {
     id: "beyond-native-tours",
@@ -60,43 +60,30 @@ export const heroDestinations: Destination[] = [
     thumbnailImage: "/images/tours/cape-coast.jpg",
   },
   {
-    id: "kwame-nkrumah-park",
-    name: "Kwame Nkrumah Memorial Park",
-    titleLine1: "KWAME NKRUMAH",
-    titleLine2: "MEMORIAL PARK",
-    region: "Kwame Nkrumah Memorial Park",
-    country: "Ghana",
-    subtitle: "Ghana - Kwame Nkrumah Memorial Park",
+    id: "togo-cultural-odyssey",
+    name: "Togo Cultural Odyssey",
+    titleLine1: "TOGO",
+    titleLine2: "CULTURAL ODYSSEY",
+    region: "Lomé & Plateaux",
+    country: "Togo",
+    subtitle: "Togo - Lomé & Cultural Heritage Expedition",
     description:
-      "Honoring Ghana’s founding father and pan-African visionary, this serene sanctuary features the iconic marble sword mausoleum, reflective water pools, manicured royal gardens, and fascinating independence archives.",
-    heroImage: "/images/tours/kwame-nkrumah.jpg",
-    thumbnailImage: "/images/tours/kwame-nkrumah.jpg",
+      "Cross into the living soul of Togo. Stand before Lomé’s towering Monument of Independence, wander the vibrant Grand Marché, discover sacred artisanal traditions in Togoville, and experience the warmth of Togolese hospitality.",
+    heroImage: "/images/tours/togo.jpg",
+    thumbnailImage: "/images/tours/togo.jpg",
   },
   {
-    id: "batik-cooking-class",
-    name: "Batik Making and Traditional Cooking Class",
-    titleLine1: "BATIK MAKING &",
-    titleLine2: "COOKING CLASS",
-    region: "Batik Making & Cooking Class",
-    country: "Ghana",
-    subtitle: "Ghana - Batik Making & Traditional Cooking Class",
+    id: "benin-heritage-expedition",
+    name: "Benin Kingdom & Heritage Expedition",
+    titleLine1: "BENIN",
+    titleLine2: "HERITAGE EXPEDITION",
+    region: "Cotonou & Ouidah",
+    country: "Benin",
+    subtitle: "Benin - Cotonou & Dahomey Heritage Expedition",
     description:
-      "Experience Ghanaian artistry with hands-on batik stamping with authentic Adinkra symbols and rich natural dyes, followed by an intimate culinary workshop learning to prepare authentic Ghanaian jollof, plantains, and local spices.",
-    heroImage: "/images/tours/batik-cooking.jpg",
-    thumbnailImage: "/images/tours/batik-cooking.jpg",
-  },
-  {
-    id: "northern-adventure-tour",
-    name: "2 Days 3 Nights Northern Adventure Tour",
-    titleLine1: "2 DAYS 3 NIGHTS",
-    titleLine2: "NORTHERN ADVENTURE",
-    region: "Northern Adventure Tour",
-    country: "Ghana",
-    subtitle: "Ghana - 2 Days 3 Nights Northern Adventure Tour",
-    description:
-      "Venture north to the untouched savanna of Mole National Park. Encounter herds of wild African elephants on walking safaris, marvel at the ancient 15th-century Larabanga mud mosque, and stargaze beneath tranquil savanna skies.",
-    heroImage: "/images/tours/northen-1.jpg",
-    thumbnailImage: "/images/tours/northen-1.jpg",
+      "Journey into the heart of Dahomey royalty and ancestral resilience. Behold the colossal bronze Amazon Statue in Cotonou, navigate the floating stilt city of Ganvié, and walk the historic sacred pathways of Ouidah.",
+    heroImage: "/images/tours/benin.jpg",
+    thumbnailImage: "/images/tours/benin.jpg",
   },
 ];
 

@@ -18,6 +18,14 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Beyond Native Tours",
   description: "Slow journeys and unforgettable adventures with Beyond Native Tours.",
+  icons: {
+    icon: [
+      { url: "/logo.jpg" },
+      { url: "/favicon.ico" },
+    ],
+    shortcut: "/logo.jpg",
+    apple: "/logo.jpg",
+  },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

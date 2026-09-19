@@ -1,6 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 const navLinks = [
@@ -36,10 +37,20 @@ export default function Header() {
         {/* Brand Logo */}
         <a
           href="#top"
-          className="group flex items-center gap-2.5 text-xs sm:text-sm font-bold uppercase tracking-[0.24em] text-white"
+          className="group flex items-center gap-3 text-xs sm:text-sm font-bold uppercase tracking-[0.2em] text-white"
         >
-          <span className="h-2 w-2 rounded-full bg-ember shadow-[0_0_10px_rgba(255,59,48,0.9)] transition-transform duration-300 group-hover:scale-125" />
-          <span>Beyond Native <span className="font-light text-white/70">Tours</span></span>
+          <div className="relative h-9 w-9 overflow-hidden rounded-full border border-white/30 bg-black shadow-[0_0_12px_rgba(255,59,48,0.35)] transition-transform duration-300 group-hover:scale-105 group-hover:border-ember">
+            <Image
+              src="/logo.jpg"
+              alt="Beyond Native Tours Logo"
+              fill
+              priority
+              className="object-cover"
+            />
+          </div>
+          <span className="flex items-center gap-1.5">
+            Beyond Native <span className="font-light text-white/70">Tours</span>
+          </span>
         </a>
 
         {/* Desktop Navigation Links */}

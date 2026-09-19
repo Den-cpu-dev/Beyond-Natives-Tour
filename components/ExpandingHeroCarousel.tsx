@@ -231,33 +231,16 @@ export default function ExpandingHeroCarousel({ destinations }: ExpandingHeroCar
       </AnimatePresence>
 
       {/* ================= HERO CONTENT & CONTROLS CONTAINER ================= */}
-      <div className="relative z-20 mx-auto flex h-full max-w-[1600px] flex-col justify-between px-4 pb-4 pt-20 sm:px-10 sm:pb-10 sm:pt-28 lg:px-16">
+      <div className="relative z-20 mx-auto flex h-full max-w-[1600px] flex-col justify-between px-4 pb-4 pt-28 sm:px-10 sm:pb-10 sm:pt-36 lg:px-16">
         
         {/* Top spacer (Header sits fixed above) */}
-        <div className="hidden sm:block" />
+        <div className="h-6 sm:h-10" />
 
         {/* Middle Section: Left Content + Right Card Carousel */}
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 sm:gap-12 mt-auto mb-3 sm:mb-8">
           
           {/* LEFT: Text & Discovery CTA */}
           <div className="max-w-xl lg:max-w-2xl xl:max-w-3xl">
-            {/* Location Tag */}
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={`tag-${current.id}`}
-                initial={{ opacity: 0, y: 14 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-                className="mb-2 sm:mb-4 flex items-center gap-2.5 sm:gap-3"
-              >
-                <span className="h-[2px] w-5 sm:w-8 bg-ember shadow-[0_0_8px_rgba(255,59,48,0.8)]" />
-                <span className="font-anton text-[11px] sm:text-sm uppercase tracking-[0.2em] text-white/90">
-                  {current.subtitle || `${current.region} - ${current.country}`}
-                </span>
-              </motion.div>
-            </AnimatePresence>
-
             {/* Bold Display Heading */}
             <AnimatePresence mode="wait">
               <motion.h1

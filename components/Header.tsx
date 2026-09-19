@@ -5,10 +5,10 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 
 const navLinks = [
-  { label: "Home", href: "#top" },
-  { label: "Destinations", href: "#destinations" },
-  { label: "Expeditions", href: "#holiday" },
-  { label: "About", href: "#footer" },
+  { label: "Home", href: "/#top" },
+  { label: "Destinations", href: "/#destinations" },
+  { label: "Expeditions", href: "/#holiday" },
+  { label: "About", href: "/about" },
   { label: "Contact", href: "#footer" },
 ];
 
@@ -36,7 +36,7 @@ export default function Header() {
         
         {/* Brand Logo */}
         <a
-          href="#top"
+          href="/"
           className="group flex flex-col items-center text-center transition-transform duration-300 hover:scale-105"
           aria-label="Beyond Native Tours Home"
         >

@@ -132,14 +132,6 @@ export default function ExpandingHeroCarousel({ destinations }: ExpandingHeroCar
     }
   };
 
-  // Slower auto-advance: 12 seconds per slide (pauses on hover or manual interaction)
-  useEffect(() => {
-    if (isPaused || isExpanding) return;
-    const interval = setInterval(() => {
-      goToSlide((activeIndex + 1) % count);
-    }, 12000);
-    return () => clearInterval(interval);
-  }, [activeIndex, count, goToSlide, isPaused, isExpanding]);
 
   // Calculate progress percentage (0 to 100)
   const progressPercent = count > 1 ? (activeIndex / (count - 1)) * 100 : 0;

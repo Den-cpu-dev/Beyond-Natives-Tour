@@ -149,8 +149,8 @@ export const destinations: Destination[] = [
     subtitle: "Modernity & Lagoon Culture",
     description:
       "Gleaming Abidjan skyline, serene UNESCO colonial Grand-Bassam beach avenues, and the colossal Yamoussoukro Basilica.",
-    heroImage: "https://images.unsplash.com/photo-1578922746465-3a80a228f223?auto=format&fit=crop&w=1600&q=85",
-    thumbnailImage: "https://images.unsplash.com/photo-1578922746465-3a80a228f223?auto=format&fit=crop&w=800&q=85",
+    heroImage: "/images/tours/ivory-coast.jpg",
+    thumbnailImage: "/images/tours/ivory-coast.jpg",
     tourCount: 3,
     rank: 5,
   },

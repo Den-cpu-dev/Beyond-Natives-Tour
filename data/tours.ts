@@ -70,7 +70,7 @@ export const countryList: CountryInfo[] = [
     description:
       "Experience the glittering skyline of Abidjan, the peaceful seaside colonial UNESCO architecture of Grand-Bassam, and the towering grandeur of the Yamoussoukro Basilica.",
     capital: "Yamoussoukro / Abidjan",
-    image: "https://images.unsplash.com/photo-1578922746465-3a80a228f223?auto=format&fit=crop&w=1200&q=85",
+    image: "/images/tours/ivory-coast.jpg",
     tourCount: 3,
   },
   {
@@ -389,7 +389,7 @@ export const allTours: Tour[] = [
       "Treichville vibrant open market and African textiles",
       "Ébrié Lagoon boat cruise and waterfront sunset",
     ],
-    image: "https://images.unsplash.com/photo-1578922746465-3a80a228f223?auto=format&fit=crop&w=1200&q=85",
+    image: "/images/tours/ivory-coast.jpg",
     tags: ["Abidjan", "Architecture", "Lagoon", "City Tour"],
   },
   {

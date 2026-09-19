@@ -12,19 +12,21 @@ export default function Footer() {
           className="group flex flex-col items-center text-center transition-transform hover:scale-105"
           aria-label="Beyond Native Tours Home"
         >
-          <div className="relative h-13 w-13 sm:h-16 sm:w-16">
+          <div className="relative h-12 w-12 sm:h-16 sm:w-16 shrink-0">
             <Image
               src="/logo.png"
               alt="Beyond Native Tours Logo"
               fill
+              sizes="(max-width: 640px) 48px, 64px"
               className="object-contain filter drop-shadow-[0_2px_8px_rgba(255,59,48,0.3)]"
             />
           </div>
-          <div className="relative mt-1.5 h-8 w-24 sm:h-10 sm:w-32 md:h-11 md:w-36">
+          <div className="relative mt-1 h-7 w-24 sm:mt-1.5 sm:h-10 sm:w-32 md:h-11 md:w-36 shrink-0">
             <Image
               src="/brand-name.png"
               alt="Beyond Native Tours - Explore • Discover • Connect"
               fill
+              sizes="(max-width: 640px) 96px, 144px"
               className="object-contain"
             />
           </div>

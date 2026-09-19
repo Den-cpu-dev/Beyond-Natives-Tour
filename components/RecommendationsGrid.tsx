@@ -7,8 +7,9 @@ export default function RecommendationsGrid({ destinations }: { destinations: De
       <div className="mx-auto max-w-[1600px]">
         <div className="mx-auto max-w-3xl text-center">
           <p className="text-[9px] sm:text-[10px] font-semibold uppercase tracking-[0.22em] text-ember">Confusion? These recommendations</p>
-          <h2 className="mt-2.5 sm:mt-3 font-anton text-3xl uppercase leading-[0.88] tracking-tight text-mist sm:text-7xl lg:text-8xl">
-            Destination<br />recommendations
+          <h2 className="mt-2.5 sm:mt-4 font-anton text-3xl uppercase leading-[0.98] tracking-normal text-mist sm:text-7xl lg:text-8xl space-y-1 sm:space-y-2">
+            <span className="block">Destination</span>
+            <span className="block">recommendations</span>
           </h2>
         </div>
 
@@ -27,7 +28,7 @@ export default function RecommendationsGrid({ destinations }: { destinations: De
                   {destination.rank}{destination.rank === 1 ? "st" : destination.rank === 2 ? "nd" : destination.rank === 3 ? "rd" : "th"} place
                 </span>
               </div>
-              <p className="mt-2.5 sm:mt-5 border-t border-white/20 pt-1.5 sm:pt-3 font-anton text-xs sm:text-base uppercase tracking-tight text-white leading-tight">
+              <p className="mt-2.5 sm:mt-5 border-t border-white/20 pt-2 sm:pt-3.5 font-anton text-xs sm:text-base uppercase tracking-normal text-white leading-snug">
                 {destination.name}
               </p>
             </article>

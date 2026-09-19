@@ -4,7 +4,6 @@ import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { Destination } from "@/data/destinations";
-import { openTripBookingModal } from "@/components/BookTripModal";
 
 interface ExpandingHeroCarouselProps {
   destinations: Destination[];
@@ -344,9 +343,26 @@ export default function ExpandingHeroCarousel({ destinations }: ExpandingHeroCar
         {/* Middle Section: Left Content + Right Card Carousel */}
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 sm:gap-12 mt-auto mb-3 sm:mb-8">
           
-          {/* LEFT: Text & Discovery CTA */}
-          <div className="max-w-xl lg:max-w-2xl xl:max-w-3xl">
-            {/* Bold Display Heading */}
+          {/* LEFT: Text & Narrative Content */}
+          <div className="max-w-xl lg:max-w-2xl xl:max-w-3xl pb-1 sm:pb-3">
+            {/* Country / Region Eyebrow with decorative line for clear vertical hierarchy */}
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={`eyebrow-${current.id}`}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+                className="flex items-center gap-3 mb-3 sm:mb-5"
+              >
+                <span className="h-[2px] w-6 sm:w-8 bg-ember shadow-[0_0_8px_rgba(255,59,48,0.8)]" />
+                <span className="font-sans text-[11px] sm:text-xs font-semibold uppercase tracking-[0.24em] text-white/75">
+                  {current.country} • {current.region}
+                </span>
+              </motion.div>
+            </AnimatePresence>
+
+            {/* Bold Display Heading with generous line height and spacing */}
             <AnimatePresence mode="wait">
               <motion.h1
                 key={`title-${current.id}`}
@@ -354,7 +370,7 @@ export default function ExpandingHeroCarousel({ destinations }: ExpandingHeroCar
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.55, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
-                className="font-anton text-[clamp(1.85rem,4.8vw,4.8rem)] uppercase leading-[0.9] sm:leading-[0.88] tracking-tight text-white drop-shadow-md break-words"
+                className="font-anton text-[clamp(2.2rem,5.4vw,5.5rem)] uppercase leading-[1.02] sm:leading-[0.98] tracking-[0.015em] text-white drop-shadow-md break-words space-y-1.5 sm:space-y-3"
               >
                 <span className="block">{current.titleLine1 || current.name}</span>
                 {current.titleLine2 && (
@@ -363,7 +379,7 @@ export default function ExpandingHeroCarousel({ destinations }: ExpandingHeroCar
               </motion.h1>
             </AnimatePresence>
 
-            {/* Narrative Description */}
+            {/* Narrative Description with generous breathing room and relaxed line spacing */}
             <AnimatePresence mode="wait">
               <motion.p
                 key={`desc-${current.id}`}
@@ -371,42 +387,10 @@ export default function ExpandingHeroCarousel({ destinations }: ExpandingHeroCar
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -12 }}
                 transition={{ duration: 0.5, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-                className="mt-2.5 sm:mt-5 max-w-lg text-xs sm:text-sm md:text-[15px] leading-relaxed text-white/75 line-clamp-4 sm:line-clamp-none"
+                className="mt-4 sm:mt-7 max-w-xl text-xs sm:text-sm md:text-[15px] leading-[1.8] sm:leading-[1.85] text-white/80 tracking-wide line-clamp-4 sm:line-clamp-none"
               >
                 {current.description}
               </motion.p>
-            </AnimatePresence>
-
-            {/* CTA Button */}
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={`cta-${current.id}`}
-                initial={{ opacity: 0, y: 14 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.5, delay: 0.16, ease: [0.16, 1, 0.3, 1] }}
-                className="mt-4 sm:mt-7"
-              >
-                <button
-                  type="button"
-                  onClick={() => {
-                    if (current.id === "beyond-native-tours") {
-                      const el = document.getElementById("holiday") || document.getElementById("destinations");
-                      el?.scrollIntoView({ behavior: "smooth" });
-                    } else {
-                      openTripBookingModal(current.name);
-                    }
-                  }}
-                  className="group inline-flex items-center gap-2.5 sm:gap-3 rounded-full border border-white/30 bg-black/40 px-4 py-2 sm:px-6 sm:py-3 font-anton text-xs sm:text-sm uppercase tracking-[0.16em] text-white backdrop-blur-md transition-all duration-300 hover:border-ember hover:bg-white hover:text-black hover:shadow-[0_0_25px_rgba(255,59,48,0.35)] cursor-pointer"
-                >
-                  <span className="flex h-5 w-5 sm:h-6 sm:w-6 items-center justify-center rounded-full bg-white text-black transition-transform duration-300 group-hover:scale-110 group-hover:bg-ember group-hover:text-white">
-                    <svg className="h-2 w-2 sm:h-2.5 sm:w-2.5 translate-x-0.5 fill-current" viewBox="0 0 24 24">
-                      <path d="M8 5v14l11-7z" />
-                    </svg>
-                  </span>
-                  {current.id === "beyond-native-tours" ? "Explore Expeditions" : "Book This Expedition"}
-                </button>
-              </motion.div>
             </AnimatePresence>
           </div>
 
@@ -524,12 +508,12 @@ export default function ExpandingHeroCarousel({ destinations }: ExpandingHeroCar
                     {/* Glowing highlight ring on hover */}
                     <div className="absolute inset-0 rounded-2xl sm:rounded-3xl border border-white/0 transition-colors duration-300 group-hover:border-white/40" />
 
-                    {/* Card Content (Title in bold condensed uppercase) */}
+                    {/* Card Content (Title in bold condensed uppercase with generous breathing room) */}
                     <div className="absolute inset-x-0 bottom-0 p-3.5 sm:p-5">
-                      <p className="font-sans text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.2em] text-ember mb-0.5 sm:mb-1">
+                      <p className="font-sans text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.22em] text-ember mb-1.5 sm:mb-2">
                         {destination.country}
                       </p>
-                      <h3 className="font-anton text-xs sm:text-[15px] md:text-base uppercase leading-[0.95] tracking-tight text-white drop-shadow-sm">
+                      <h3 className="font-anton text-xs sm:text-[15px] md:text-base uppercase leading-[1.12] sm:leading-[1.08] tracking-normal text-white drop-shadow-sm space-y-0.5 sm:space-y-1">
                         <span className="block">{destination.titleLine1 || destination.name}</span>
                         {destination.titleLine2 && (
                           <span className="block text-white/85">{destination.titleLine2}</span>

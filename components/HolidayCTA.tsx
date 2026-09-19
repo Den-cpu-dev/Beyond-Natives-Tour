@@ -36,8 +36,9 @@ export default function HolidayCTA({ onPlay }: { onPlay: (src: string, title: st
           <p className="text-[10px] font-semibold uppercase tracking-[0.23em] text-ember">
             Immersive Cultural Tourism • Small Groups
           </p>
-          <h2 className="mt-4 font-anton text-[clamp(2.4rem,7.5vw,8.5rem)] uppercase leading-[0.88] tracking-tight text-white">
-            Travel and enjoy<br />your holiday
+          <h2 className="mt-4 font-anton text-[clamp(2.4rem,7.5vw,8.5rem)] uppercase leading-[0.98] tracking-normal text-white space-y-1 sm:space-y-2">
+            <span className="block">Travel and enjoy</span>
+            <span className="block">your holiday</span>
           </h2>
           
           <div className="mt-6 flex flex-wrap items-center gap-3.5 sm:gap-5">

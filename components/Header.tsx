@@ -141,7 +141,7 @@ export default function Header() {
               fill
               priority
               sizes="(max-width: 640px) 48px, 64px"
-              className={`object-contain filter ${isLightHeader ? "drop-shadow-[0_2px_8px_rgba(41,47,22,0.25)]" : "drop-shadow-[0_2px_8px_rgba(255,59,48,0.4)]"}`}
+              className={`object-contain filter ${isLightHeader ? "drop-shadow-[0_2px_8px_rgba(41,47,22,0.25)]" : "drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]"}`}
             />
           </div>
           <div className="relative mt-1 h-7 w-24 sm:mt-1.5 sm:h-10 sm:w-32 md:h-11 md:w-36 shrink-0">

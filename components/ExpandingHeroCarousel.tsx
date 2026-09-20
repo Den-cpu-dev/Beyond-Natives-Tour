@@ -247,7 +247,7 @@ export default function ExpandingHeroCarousel({ destinations }: ExpandingHeroCar
     <section
       id="top"
       aria-label="Featured Travel Destinations"
-      className="relative h-[100svh] min-h-[640px] w-full select-none overflow-hidden bg-white"
+      className="relative h-[100svh] min-h-[640px] w-full select-none overflow-hidden bg-ink"
       style={{ touchAction: "pan-y" }}
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
@@ -283,9 +283,10 @@ export default function ExpandingHeroCarousel({ destinations }: ExpandingHeroCar
           </motion.div>
         </AnimatePresence>
 
-        {/* Ambient Light Gradients for contrast & typography readability */}
-        <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/80 to-white/25" />
-        <div className="absolute inset-0 bg-gradient-to-t from-white/95 via-transparent to-white/70" />
+        {/* Ambient Dark Gradients for contrast & typography readability */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/45 to-black/30" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-black/40" />
+        <div className="absolute inset-0 bg-radial-vignette opacity-40 pointer-events-none" />
       </div>
 
       {/* ================= EXPANDING CARD OVERLAY (Signature "Cards Opening") ================= */}
@@ -327,8 +328,8 @@ export default function ExpandingHeroCarousel({ destinations }: ExpandingHeroCar
               sizes="100vw"
               className="object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/80 to-white/25" />
-            <div className="absolute inset-0 bg-gradient-to-t from-white/95 via-transparent to-white/70" />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/45 to-black/30" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-black/40" />
           </motion.div>
         )}
       </AnimatePresence>
@@ -354,8 +355,8 @@ export default function ExpandingHeroCarousel({ destinations }: ExpandingHeroCar
                 transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
                 className="flex items-center gap-3 mb-3 sm:mb-5"
               >
-                <span className="h-[2px] w-6 sm:w-8 bg-[#3e5b34]" />
-                <span className="font-sans text-[11px] sm:text-xs font-bold uppercase tracking-[0.24em] text-[#3e5b34]">
+                <span className="h-[2px] w-6 sm:w-8 bg-ember shadow-[0_0_8px_rgba(255,59,48,0.8)]" />
+                <span className="font-sans text-[11px] sm:text-xs font-semibold uppercase tracking-[0.24em] text-white/75">
                   {current.country} • {current.region}
                 </span>
               </motion.div>
@@ -369,11 +370,11 @@ export default function ExpandingHeroCarousel({ destinations }: ExpandingHeroCar
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.55, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
-                className="font-anton text-[clamp(2.2rem,5.4vw,5.5rem)] uppercase leading-[1.02] sm:leading-[0.98] tracking-[0.015em] text-[#292f16] break-words space-y-1.5 sm:space-y-3"
+                className="font-anton text-[clamp(2.2rem,5.4vw,5.5rem)] uppercase leading-[1.02] sm:leading-[0.98] tracking-[0.015em] text-white drop-shadow-md break-words space-y-1.5 sm:space-y-3"
               >
                 <span className="block">{current.titleLine1 || current.name}</span>
                 {current.titleLine2 && (
-                  <span className="block text-[#3e5b34]">{current.titleLine2}</span>
+                  <span className="block text-white/90">{current.titleLine2}</span>
                 )}
               </motion.h1>
             </AnimatePresence>
@@ -386,7 +387,7 @@ export default function ExpandingHeroCarousel({ destinations }: ExpandingHeroCar
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -12 }}
                 transition={{ duration: 0.5, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-                className="mt-4 sm:mt-7 max-w-xl text-xs sm:text-sm md:text-[15px] leading-[1.8] sm:leading-[1.85] text-[#292f16]/85 tracking-wide line-clamp-4 sm:line-clamp-none"
+                className="mt-4 sm:mt-7 max-w-xl text-xs sm:text-sm md:text-[15px] leading-[1.8] sm:leading-[1.85] text-white/80 tracking-wide line-clamp-4 sm:line-clamp-none"
               >
                 {current.description}
               </motion.p>
@@ -489,7 +490,7 @@ export default function ExpandingHeroCarousel({ destinations }: ExpandingHeroCar
                       }
                       goToSlide(index);
                     }}
-                    className="group relative h-[180px] w-[135px] sm:h-[290px] sm:w-[210px] md:h-[320px] md:w-[230px] shrink-0 overflow-hidden rounded-xl sm:rounded-3xl border border-[#292f16]/15 bg-white/80 text-left shadow-xl backdrop-blur-md transition-all hover:border-[#3e5b34]/50 hover:shadow-2xl cursor-pointer"
+                    className="group relative h-[180px] w-[135px] sm:h-[290px] sm:w-[210px] md:h-[320px] md:w-[230px] shrink-0 overflow-hidden rounded-xl sm:rounded-3xl border border-white/20 bg-black/40 text-left shadow-2xl backdrop-blur-sm transition-shadow hover:border-white/50 hover:shadow-[0_15px_35px_rgba(0,0,0,0.7)] cursor-pointer"
                     aria-label={`View ${destination.name}`}
                   >
                     {/* Card Image */}
@@ -509,7 +510,7 @@ export default function ExpandingHeroCarousel({ destinations }: ExpandingHeroCar
 
                     {/* Card Content (Title in bold condensed uppercase with generous breathing room) */}
                     <div className="absolute inset-x-0 bottom-0 p-3.5 sm:p-5">
-                      <p className="font-sans text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.22em] text-[#ffbe17] mb-1.5 sm:mb-2">
+                      <p className="font-sans text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.22em] text-ember mb-1.5 sm:mb-2">
                         {destination.country}
                       </p>
                       <h3 className="font-anton text-xs sm:text-[15px] md:text-base uppercase leading-[1.12] sm:leading-[1.08] tracking-normal text-white drop-shadow-sm space-y-0.5 sm:space-y-1">
@@ -521,7 +522,7 @@ export default function ExpandingHeroCarousel({ destinations }: ExpandingHeroCar
                     </div>
 
                     {/* Position indicator badge (e.g. 02, 03) */}
-                    <div className="absolute right-3 top-3 sm:right-4 sm:top-4 flex h-6 w-6 sm:h-7 sm:w-7 items-center justify-center rounded-full bg-white/90 border border-[#292f16]/15 font-anton text-[10px] sm:text-xs text-[#292f16] shadow-sm backdrop-blur-md">
+                    <div className="absolute right-3 top-3 sm:right-4 sm:top-4 flex h-6 w-6 sm:h-7 sm:w-7 items-center justify-center rounded-full bg-black/40 border border-white/20 font-anton text-[10px] sm:text-xs text-white/90 backdrop-blur-md">
                       {String(index + 1).padStart(2, "0")}
                     </div>
                   </motion.button>
@@ -533,12 +534,12 @@ export default function ExpandingHeroCarousel({ destinations }: ExpandingHeroCar
         </div>
 
         {/* BOTTOM: Slider Scrubber & Arrow Controls */}
-        <div className="flex items-center justify-between gap-4 pt-2 sm:pt-4 border-t border-[#292f16]/15">
+        <div className="flex items-center justify-between gap-4 pt-2 sm:pt-4 border-t border-white/15">
           
           {/* Slider Progress Bar */}
           <div className="flex items-center gap-3 sm:gap-4 flex-1 max-w-xl">
             {/* Current Index Number */}
-            <span className="font-anton text-sm sm:text-base text-[#292f16] tracking-widest min-w-[2ch]">
+            <span className="font-anton text-sm sm:text-base text-white tracking-widest min-w-[2ch]">
               {String(activeIndex + 1).padStart(2, "0")}
             </span>
 
@@ -559,25 +560,25 @@ export default function ExpandingHeroCarousel({ destinations }: ExpandingHeroCar
               aria-valuemax={count}
             >
               {/* Background Track */}
-              <div className="h-[2px] w-full rounded-full bg-[#292f16]/20 transition-colors group-hover:bg-[#292f16]/30" />
+              <div className="h-[2px] w-full rounded-full bg-white/25 transition-colors group-hover:bg-white/35" />
 
               {/* Active Filled Progress Bar */}
               <motion.div
-                className="absolute left-0 h-[2px] rounded-full bg-[#3e5b34]"
+                className="absolute left-0 h-[2px] rounded-full bg-white shadow-[0_0_8px_rgba(255,255,255,0.7)]"
                 animate={{ width: `${progressPercent}%` }}
                 transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
               />
 
               {/* Scrubber Dot */}
               <motion.div
-                className="absolute h-3 w-3 sm:h-3.5 sm:w-3.5 -translate-x-1/2 rounded-full border-2 border-white bg-[#3e5b34] shadow-[0_0_12px_rgba(62,91,52,0.6)]"
+                className="absolute h-3 w-3 sm:h-3.5 sm:w-3.5 -translate-x-1/2 rounded-full border-2 border-white bg-ember shadow-[0_0_12px_rgba(255,59,48,0.9)]"
                 animate={{ left: `${progressPercent}%` }}
                 transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
               />
             </div>
 
             {/* Total Count Number */}
-            <span className="font-anton text-sm sm:text-base text-[#292f16]/50 tracking-widest min-w-[2ch]">
+            <span className="font-anton text-sm sm:text-base text-white/50 tracking-widest min-w-[2ch]">
               {String(count).padStart(2, "0")}
             </span>
           </div>
@@ -589,7 +590,7 @@ export default function ExpandingHeroCarousel({ destinations }: ExpandingHeroCar
               onClick={handlePrev}
               disabled={isExpanding}
               aria-label="Previous destination"
-              className="flex h-9 w-9 sm:h-11 sm:w-11 items-center justify-center rounded-full border border-[#292f16]/20 bg-white/80 text-[#292f16] shadow-sm backdrop-blur-md transition-all duration-200 hover:border-[#3e5b34] hover:bg-[#3e5b34] hover:text-white active:scale-95 disabled:opacity-50"
+              className="flex h-9 w-9 sm:h-11 sm:w-11 items-center justify-center rounded-full border border-white/25 bg-black/35 text-white backdrop-blur-md transition-all duration-200 hover:border-white hover:bg-white hover:text-black active:scale-95 disabled:opacity-50"
             >
               <svg className="h-3.5 w-3.5 sm:h-4 sm:w-4 -translate-x-0.5 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
@@ -601,7 +602,7 @@ export default function ExpandingHeroCarousel({ destinations }: ExpandingHeroCar
               onClick={handleNext}
               disabled={isExpanding}
               aria-label="Next destination"
-              className="flex h-9 w-9 sm:h-11 sm:w-11 items-center justify-center rounded-full border border-[#292f16]/20 bg-white/80 text-[#292f16] shadow-sm backdrop-blur-md transition-all duration-200 hover:border-[#3e5b34] hover:bg-[#3e5b34] hover:text-white active:scale-95 disabled:opacity-50"
+              className="flex h-9 w-9 sm:h-11 sm:w-11 items-center justify-center rounded-full border border-white/25 bg-black/35 text-white backdrop-blur-md transition-all duration-200 hover:border-white hover:bg-white hover:text-black active:scale-95 disabled:opacity-50"
             >
               <svg className="h-3.5 w-3.5 sm:h-4 sm:w-4 translate-x-0.5 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />

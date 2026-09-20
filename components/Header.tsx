@@ -115,14 +115,14 @@ export default function Header() {
     return activeTab === link.id;
   };
 
-  const isLightHeader = (pathname !== "/" && pathname !== "") || scrolled;
+  const isLightHeader = true;
 
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        isLightHeader
+        scrolled
           ? "bg-white/95 backdrop-blur-xl py-3 shadow-md border-b border-[#292f16]/10 text-[#292f16]"
-          : "bg-gradient-to-b from-black/80 via-black/40 to-transparent py-5 sm:py-6 text-white"
+          : "bg-gradient-to-b from-white/90 via-white/60 to-transparent py-4 sm:py-5 text-[#292f16]"
       }`}
     >
       <div className="mx-auto flex max-w-[1600px] items-center justify-between px-5 sm:px-10 lg:px-16">
@@ -141,12 +141,12 @@ export default function Header() {
               fill
               priority
               sizes="(max-width: 640px) 48px, 64px"
-              className={`object-contain filter ${isLightHeader ? "drop-shadow-[0_2px_8px_rgba(41,47,22,0.25)]" : "drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]"}`}
+              className="object-contain filter drop-shadow-[0_2px_8px_rgba(41,47,22,0.2)]"
             />
           </div>
           <div className="relative mt-1 h-7 w-24 sm:mt-1.5 sm:h-10 sm:w-32 md:h-11 md:w-36 shrink-0">
             <Image
-              src={isLightHeader ? "/brand-name.png" : "/brand-name-light.png"}
+              src="/brand-name.png"
               alt="Beyond Native Tours - Explore • Discover • Connect"
               fill
               priority

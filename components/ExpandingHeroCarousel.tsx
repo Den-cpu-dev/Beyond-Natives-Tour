@@ -279,6 +279,7 @@ export default function ExpandingHeroCarousel({ destinations }: ExpandingHeroCar
               priority
               sizes="100vw"
               className="object-cover"
+              unoptimized
             />
           </motion.div>
         </AnimatePresence>
@@ -327,6 +328,7 @@ export default function ExpandingHeroCarousel({ destinations }: ExpandingHeroCar
               priority
               sizes="100vw"
               className="object-cover"
+              unoptimized
             />
             <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/45 to-black/30" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-black/40" />
@@ -502,6 +504,7 @@ export default function ExpandingHeroCarousel({ destinations }: ExpandingHeroCar
                       fill
                       sizes="(max-width: 640px) 150px, 230px"
                       className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                      unoptimized
                     />
 
                     {/* Dark gradient for text readability */}

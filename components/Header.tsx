@@ -136,17 +136,17 @@ export default function Header() {
         >
           <div className="relative h-12 w-12 sm:h-16 sm:w-16 shrink-0">
             <Image
-              src={isLightHeader ? "/logo-dynamic.png" : "/logo.png"}
+              src="/logo.png"
               alt="Beyond Native Tours Logo"
               fill
               priority
               sizes="(max-width: 640px) 48px, 64px"
-              className={`object-contain filter ${isLightHeader ? "drop-shadow-[0_2px_8px_rgba(41,47,22,0.15)]" : "drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]"}`}
+              className={`object-contain filter ${isLightHeader ? "drop-shadow-[0_2px_8px_rgba(41,47,22,0.25)]" : "drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]"}`}
             />
           </div>
           <div className="relative mt-1 h-7 w-24 sm:mt-1.5 sm:h-10 sm:w-32 md:h-11 md:w-36 shrink-0">
             <Image
-              src={isLightHeader ? "/brand-name-dynamic.png" : "/brand-name-light.png"}
+              src={isLightHeader ? "/brand-name.png" : "/brand-name-light.png"}
               alt="Beyond Native Tours - Explore • Discover • Connect"
               fill
               priority

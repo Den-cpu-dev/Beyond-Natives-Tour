@@ -10,11 +10,11 @@ export default function RecommendationsGrid({ destinations }: { destinations: De
         {/* Section Header */}
         <div className="mx-auto max-w-3xl text-center mb-12 sm:mb-20">
           <div className="inline-flex items-center gap-2.5 mb-3 sm:mb-4">
-            <span className="h-[2px] w-6 sm:w-8 bg-[#3e5b34]" />
-            <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-[0.24em] text-[#3e5b34]">
+            <span className="h-[2px] w-6 sm:w-8 bg-[#ffbe17]" />
+            <p className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.24em] text-[#ca8a04]">
               Discover West Africa
             </p>
-            <span className="h-[2px] w-6 sm:w-8 bg-[#3e5b34]" />
+            <span className="h-[2px] w-6 sm:w-8 bg-[#ffbe17]" />
           </div>
 
           <h2 className="font-anton text-4xl sm:text-7xl lg:text-8xl uppercase leading-[0.98] tracking-normal text-[#292f16]">
@@ -32,7 +32,7 @@ export default function RecommendationsGrid({ destinations }: { destinations: De
             <Link
               key={destination.id}
               href={`/tours?country=${destination.id}`}
-              className="group relative flex flex-col justify-end overflow-hidden rounded-2xl sm:rounded-3xl border border-[#292f16]/15 bg-black/40 shadow-xl transition-all duration-300 hover:border-[#3e5b34] hover:shadow-[0_15px_35px_rgba(62,91,52,0.25)] hover:-translate-y-1.5 min-h-[380px] sm:min-h-[440px]"
+              className="group relative flex flex-col justify-end overflow-hidden rounded-2xl sm:rounded-3xl border border-[#292f16]/15 bg-black/40 shadow-xl transition-all duration-300 hover:border-[#3e5b34] hover:shadow-[0_15px_35px_rgba(62,91,52,0.25)] hover:-translate-y-1.5 min-h-[390px] sm:min-h-[450px]"
               aria-label={`Explore tour sites in ${destination.name}`}
             >
               {/* Country Background Image */}
@@ -67,13 +67,16 @@ export default function RecommendationsGrid({ destinations }: { destinations: De
                   {destination.subtitle || destination.region}
                 </p>
 
-                <h3 className="font-anton text-2xl sm:text-4xl uppercase tracking-normal text-white leading-tight mb-2 sm:mb-2.5">
+                <h3 className="font-anton text-2xl sm:text-4xl uppercase tracking-normal text-white leading-tight mb-3">
                   {destination.name}
                 </h3>
 
-                <p className="text-xs sm:text-[13px] leading-relaxed text-white/85 line-clamp-2 mb-4">
-                  {destination.description}
-                </p>
+                {/* Glassmorphic Description Card matching the Hero style */}
+                <div className="rounded-xl sm:rounded-2xl bg-black/50 p-3 sm:p-3.5 backdrop-blur-md border border-white/20 shadow-[0_8px_25px_rgba(0,0,0,0.45)] mb-4">
+                  <p className="text-xs sm:text-sm leading-relaxed sm:leading-[1.65] text-white font-normal tracking-wide drop-shadow-[0_1px_2px_rgba(0,0,0,0.9)] line-clamp-2 sm:line-clamp-3">
+                    {destination.description}
+                  </p>
+                </div>
 
                 <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#ffbe17] transition-all duration-300 group-hover:text-white group-hover:translate-x-1">
                   <span>View {destination.name} Tours</span>

@@ -33,7 +33,7 @@ export default function HolidayCTA({ onPlay }: { onPlay: (src: string, title: st
       <div className="absolute inset-0 -z-10 bg-gradient-to-r from-black/90 via-black/65 to-black/40" />
       <div className="mx-auto max-w-[1600px]">
         <div className="max-w-4xl">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.23em] text-ember">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.23em] text-[#ffbe17]">
             Immersive Cultural Tourism • Small Groups
           </p>
           <h2 className="mt-4 font-anton text-[clamp(2.4rem,7.5vw,8.5rem)] uppercase leading-[0.98] tracking-normal text-white space-y-1 sm:space-y-2">
@@ -45,7 +45,7 @@ export default function HolidayCTA({ onPlay }: { onPlay: (src: string, title: st
             <button
               type="button"
               onClick={() => openTripBookingModal()}
-              className="inline-flex items-center justify-center rounded-full bg-ember px-7 py-3 font-anton text-xs sm:text-sm uppercase tracking-[0.16em] text-white shadow-[0_0_25px_rgba(255,59,48,0.45)] transition-all hover:bg-[#e0342a] hover:scale-105 active:scale-95 cursor-pointer"
+              className="inline-flex items-center justify-center rounded-full bg-[#3e5b34] px-7 py-3 font-anton text-xs sm:text-sm uppercase tracking-[0.16em] text-white shadow-[0_0_25px_rgba(62,91,52,0.45)] transition-all hover:bg-[#292f16] hover:scale-105 active:scale-95 cursor-pointer"
             >
               <span>Book Trip</span>
             </button>

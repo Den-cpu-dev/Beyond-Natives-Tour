@@ -106,14 +106,14 @@ export default function BookTripModal() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.94, y: 20 }}
             transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-            className="relative z-10 w-full max-w-xl max-h-[92vh] overflow-y-auto rounded-2xl sm:rounded-3xl border border-white/20 bg-ink p-5 sm:p-8 shadow-2xl text-white my-auto"
+            className="relative z-10 w-full max-w-xl max-h-[92vh] overflow-y-auto rounded-2xl sm:rounded-3xl border border-[#292f16]/15 bg-white p-5 sm:p-8 shadow-2xl text-[#292f16] my-auto"
             style={{ WebkitOverflowScrolling: "touch" }}
           >
             {/* Close Button */}
             <button
               type="button"
               onClick={() => setIsOpen(false)}
-              className="absolute top-4 right-4 h-8 w-8 rounded-full border border-white/20 bg-white/5 grid place-items-center text-white/70 hover:text-white hover:bg-white/10 transition-colors"
+              className="absolute top-4 right-4 h-8 w-8 rounded-full border border-[#292f16]/15 bg-[#f7f9f6] grid place-items-center text-[#292f16]/70 hover:text-[#292f16] hover:bg-[#292f16]/10 transition-colors"
               aria-label="Close booking modal"
             >
               &times;
@@ -121,34 +121,34 @@ export default function BookTripModal() {
 
             {/* Header Badge */}
             <div className="flex items-center gap-2 mb-2">
-              <span className="h-2 w-2 rounded-full bg-ember shadow-[0_0_8px_rgba(255,59,48,0.8)] animate-pulse" />
-              <span className="font-anton text-[10px] uppercase tracking-[0.2em] text-ember">
+              <span className="h-2 w-2 rounded-full bg-[#3e5b34] shadow-[0_0_8px_rgba(62,91,52,0.8)] animate-pulse" />
+              <span className="font-anton text-[10px] uppercase tracking-[0.2em] text-[#3e5b34]">
                 Direct Expedition Booking
               </span>
             </div>
 
-            <h2 className="font-anton text-2xl sm:text-3xl uppercase tracking-tight text-white leading-tight">
+            <h2 className="font-anton text-2xl sm:text-3xl uppercase tracking-tight text-[#292f16] leading-tight">
               Reserve Your Expedition
             </h2>
-            <p className="mt-1 text-xs sm:text-sm text-white/70 leading-relaxed">
+            <p className="mt-1 text-xs sm:text-sm text-[#292f16]/75 leading-relaxed">
               Fill out your trip details below. When you submit, your full itinerary inquiry will open directly in our curator&apos;s WhatsApp DM.
             </p>
 
             {sentSuccess ? (
-              <div className="mt-6 rounded-2xl border border-[#25D366]/40 bg-[#25D366]/10 p-5 text-center">
-                <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-[#25D366] text-black">
+              <div className="mt-6 rounded-2xl border border-[#3e5b34]/30 bg-[#3e5b34]/10 p-5 text-center">
+                <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-[#3e5b34] text-white">
                   <svg className="h-6 w-6 fill-current" viewBox="0 0 24 24">
                     <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
                   </svg>
                 </div>
-                <h3 className="font-anton text-lg uppercase text-white">WhatsApp Chat Opened!</h3>
-                <p className="mt-1 text-xs text-white/80 leading-relaxed">
+                <h3 className="font-anton text-lg uppercase text-[#292f16]">WhatsApp Chat Opened!</h3>
+                <p className="mt-1 text-xs text-[#292f16]/80 leading-relaxed">
                   Your booking details have been prepared for WhatsApp. Send the message in your chat to finalize your dates and questions with our host!
                 </p>
                 <button
                   type="button"
                   onClick={() => setIsOpen(false)}
-                  className="mt-4 rounded-full border border-white/30 bg-white/10 px-6 py-2 text-xs font-anton uppercase tracking-wider text-white hover:bg-white hover:text-black transition-colors"
+                  className="mt-4 rounded-full bg-[#3e5b34] px-6 py-2 text-xs font-anton uppercase tracking-wider text-white hover:bg-[#292f16] transition-colors"
                 >
                   Done
                 </button>
@@ -156,7 +156,7 @@ export default function BookTripModal() {
             ) : (
               <form onSubmit={handleSubmit} className="mt-5 space-y-4 text-left">
                 {errorMsg && (
-                  <div className="rounded-xl border border-ember/40 bg-ember/15 px-3.5 py-2 text-xs text-ember font-medium">
+                  <div className="rounded-xl border border-red-500/40 bg-red-50 px-3.5 py-2 text-xs text-red-600 font-medium">
                     {errorMsg}
                   </div>
                 )}
@@ -164,8 +164,8 @@ export default function BookTripModal() {
                 {/* 1. Name & Contact */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
-                    <label className="block text-[11px] font-sans font-semibold uppercase tracking-wider text-white/70 mb-1.5">
-                      Your Full Name <span className="text-ember">*</span>
+                    <label className="block text-[11px] font-sans font-semibold uppercase tracking-wider text-[#292f16]/80 mb-1.5">
+                      Your Full Name <span className="text-[#3e5b34]">*</span>
                     </label>
                     <input
                       type="text"
@@ -173,13 +173,13 @@ export default function BookTripModal() {
                       placeholder="e.g. Sarah Jenkins"
                       value={fullName}
                       onChange={(e) => setFullName(e.target.value)}
-                      className="w-full rounded-xl border border-white/20 bg-white/5 px-3.5 py-2.5 text-xs text-white placeholder-white/40 focus:border-ember focus:outline-none transition-colors font-sans"
+                      className="w-full rounded-xl border border-[#292f16]/20 bg-[#f7f9f6] px-3.5 py-2.5 text-xs text-[#292f16] placeholder-[#292f16]/40 focus:border-[#3e5b34] focus:outline-none transition-colors font-sans"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-[11px] font-sans font-semibold uppercase tracking-wider text-white/70 mb-1.5">
-                      WhatsApp Phone or Email <span className="text-ember">*</span>
+                    <label className="block text-[11px] font-sans font-semibold uppercase tracking-wider text-[#292f16]/80 mb-1.5">
+                      WhatsApp Phone or Email <span className="text-[#3e5b34]">*</span>
                     </label>
                     <input
                       type="text"
@@ -187,23 +187,23 @@ export default function BookTripModal() {
                       placeholder="+1 (555) 000-0000 or email"
                       value={emailOrPhone}
                       onChange={(e) => setEmailOrPhone(e.target.value)}
-                      className="w-full rounded-xl border border-white/20 bg-white/5 px-3.5 py-2.5 text-xs text-white placeholder-white/40 focus:border-ember focus:outline-none transition-colors font-sans"
+                      className="w-full rounded-xl border border-[#292f16]/20 bg-[#f7f9f6] px-3.5 py-2.5 text-xs text-[#292f16] placeholder-[#292f16]/40 focus:border-[#3e5b34] focus:outline-none transition-colors font-sans"
                     />
                   </div>
                 </div>
 
                 {/* 2. Select Expedition */}
                 <div>
-                  <label className="block text-[11px] font-sans font-semibold uppercase tracking-wider text-white/70 mb-1.5">
+                  <label className="block text-[11px] font-sans font-semibold uppercase tracking-wider text-[#292f16]/80 mb-1.5">
                     Select Expedition / Tour
                   </label>
                   <select
                     value={tourName}
                     onChange={(e) => setTourName(e.target.value)}
-                    className="w-full rounded-xl border border-white/20 bg-neutral-900 px-3.5 py-2.5 text-xs text-white focus:border-ember focus:outline-none transition-colors font-sans"
+                    className="w-full rounded-xl border border-[#292f16]/20 bg-[#f7f9f6] px-3.5 py-2.5 text-xs text-[#292f16] focus:border-[#3e5b34] focus:outline-none transition-colors font-sans"
                   >
                     {availableTours.map((tour) => (
-                      <option key={tour} value={tour} className="bg-neutral-900 text-white py-1">
+                      <option key={tour} value={tour} className="bg-white text-[#292f16] py-1">
                         {tour}
                       </option>
                     ))}
@@ -213,7 +213,7 @@ export default function BookTripModal() {
                 {/* 3. Dates & Duration */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
-                    <label className="block text-[11px] font-sans font-semibold uppercase tracking-wider text-white/70 mb-1.5">
+                    <label className="block text-[11px] font-sans font-semibold uppercase tracking-wider text-[#292f16]/80 mb-1.5">
                       Estimated Travel Dates / Month
                     </label>
                     <input
@@ -221,21 +221,21 @@ export default function BookTripModal() {
                       placeholder="e.g. November 2026, or flexible"
                       value={travelDate}
                       onChange={(e) => setTravelDate(e.target.value)}
-                      className="w-full rounded-xl border border-white/20 bg-white/5 px-3.5 py-2.5 text-xs text-white placeholder-white/40 focus:border-ember focus:outline-none transition-colors font-sans"
+                      className="w-full rounded-xl border border-[#292f16]/20 bg-[#f7f9f6] px-3.5 py-2.5 text-xs text-[#292f16] placeholder-[#292f16]/40 focus:border-[#3e5b34] focus:outline-none transition-colors font-sans"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-[11px] font-sans font-semibold uppercase tracking-wider text-white/70 mb-1.5">
+                    <label className="block text-[11px] font-sans font-semibold uppercase tracking-wider text-[#292f16]/80 mb-1.5">
                       Duration
                     </label>
                     <select
                       value={duration}
                       onChange={(e) => setDuration(e.target.value)}
-                      className="w-full rounded-xl border border-white/20 bg-neutral-900 px-3.5 py-2.5 text-xs text-white focus:border-ember focus:outline-none transition-colors font-sans"
+                      className="w-full rounded-xl border border-[#292f16]/20 bg-[#f7f9f6] px-3.5 py-2.5 text-xs text-[#292f16] focus:border-[#3e5b34] focus:outline-none transition-colors font-sans"
                     >
                       {durationOptions.map((dur) => (
-                        <option key={dur} value={dur} className="bg-neutral-900 text-white">
+                        <option key={dur} value={dur} className="bg-white text-[#292f16]">
                           {dur}
                         </option>
                       ))}
@@ -245,7 +245,7 @@ export default function BookTripModal() {
 
                 {/* 4. Group Size */}
                 <div>
-                  <label className="block text-[11px] font-sans font-semibold uppercase tracking-wider text-white/70 mb-1.5">
+                  <label className="block text-[11px] font-sans font-semibold uppercase tracking-wider text-[#292f16]/80 mb-1.5">
                     Group Size
                   </label>
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
@@ -256,8 +256,8 @@ export default function BookTripModal() {
                         onClick={() => setGroupSize(size)}
                         className={`rounded-xl px-2.5 py-2 text-[11px] font-sans font-medium uppercase tracking-wider text-center transition-all ${
                           groupSize === size
-                            ? "border border-white bg-white text-black font-bold shadow-md"
-                            : "border border-white/15 bg-white/5 text-white/70 hover:border-white/35 hover:text-white"
+                            ? "border border-[#3e5b34] bg-[#3e5b34] text-white font-bold shadow-md"
+                            : "border border-[#292f16]/15 bg-[#f7f9f6] text-[#292f16]/80 hover:border-[#3e5b34] hover:text-[#3e5b34]"
                         }`}
                       >
                         {size}
@@ -268,7 +268,7 @@ export default function BookTripModal() {
 
                 {/* 5. Custom Notes */}
                 <div>
-                  <label className="block text-[11px] font-sans font-semibold uppercase tracking-wider text-white/70 mb-1.5">
+                  <label className="block text-[11px] font-sans font-semibold uppercase tracking-wider text-[#292f16]/80 mb-1.5">
                     Special Requests or Questions (Optional)
                   </label>
                   <textarea
@@ -276,7 +276,7 @@ export default function BookTripModal() {
                     placeholder="e.g. Dietary preferences, flight arrival details, celebration, etc."
                     value={notes}
                     onChange={(e) => setNotes(e.target.value)}
-                    className="w-full rounded-xl border border-white/20 bg-white/5 px-3.5 py-2 text-xs text-white placeholder-white/40 focus:border-ember focus:outline-none resize-none transition-colors font-sans"
+                    className="w-full rounded-xl border border-[#292f16]/20 bg-[#f7f9f6] px-3.5 py-2 text-xs text-[#292f16] placeholder-[#292f16]/40 focus:border-[#3e5b34] focus:outline-none resize-none transition-colors font-sans"
                   />
                 </div>
 
@@ -284,11 +284,11 @@ export default function BookTripModal() {
                 <div className="pt-2">
                   <button
                     type="submit"
-                    className="w-full inline-flex items-center justify-center rounded-full bg-ember py-3.5 px-6 font-anton text-xs sm:text-sm uppercase tracking-[0.16em] text-white shadow-[0_0_20px_rgba(255,59,48,0.4)] transition-all hover:bg-[#e0342a] hover:scale-[1.01] active:scale-95 cursor-pointer"
+                    className="w-full inline-flex items-center justify-center rounded-full bg-[#3e5b34] py-3.5 px-6 font-anton text-xs sm:text-sm uppercase tracking-[0.16em] text-white shadow-[0_0_20px_rgba(62,91,52,0.35)] transition-all hover:bg-[#292f16] hover:scale-[1.01] active:scale-95 cursor-pointer"
                   >
                     <span>Book Trip</span>
                   </button>
-                  <p className="mt-2 text-center text-[10px] text-white/50">
+                  <p className="mt-2 text-center text-[10px] text-[#292f16]/60">
                     Connects directly to our curator&apos;s WhatsApp DM with your details pre-formatted
                   </p>
                 </div>

@@ -16,7 +16,7 @@ export default function Home() {
 
   return (
     <SmoothScroll>
-      <main className="overflow-x-clip bg-ink">
+      <main className="overflow-x-clip bg-white">
         <Header />
         <ExpandingHeroCarousel destinations={heroDestinations} />
         <RecommendationsGrid destinations={rankedDestinations} />

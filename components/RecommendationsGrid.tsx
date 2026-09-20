@@ -4,24 +4,24 @@ import type { Destination } from "@/data/destinations";
 
 export default function RecommendationsGrid({ destinations }: { destinations: Destination[] }) {
   return (
-    <section id="destinations" className="bg-ink px-4 py-16 sm:px-8 sm:py-28 lg:px-14 lg:py-36 border-t border-white/10">
+    <section id="destinations" className="bg-white px-4 py-16 sm:px-8 sm:py-28 lg:px-14 lg:py-36 border-t border-[#292f16]/10">
       <div className="mx-auto max-w-[1600px]">
         
         {/* Section Header */}
         <div className="mx-auto max-w-3xl text-center mb-12 sm:mb-20">
           <div className="inline-flex items-center gap-2.5 mb-3 sm:mb-4">
-            <span className="h-[2px] w-6 sm:w-8 bg-ember shadow-[0_0_8px_rgba(255,59,48,0.8)]" />
-            <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-[0.24em] text-ember">
+            <span className="h-[2px] w-6 sm:w-8 bg-[#3e5b34]" />
+            <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-[0.24em] text-[#3e5b34]">
               Discover West Africa
             </p>
-            <span className="h-[2px] w-6 sm:w-8 bg-ember shadow-[0_0_8px_rgba(255,59,48,0.8)]" />
+            <span className="h-[2px] w-6 sm:w-8 bg-[#3e5b34]" />
           </div>
 
-          <h2 className="font-anton text-4xl sm:text-7xl lg:text-8xl uppercase leading-[0.98] tracking-normal text-white drop-shadow-md">
+          <h2 className="font-anton text-4xl sm:text-7xl lg:text-8xl uppercase leading-[0.98] tracking-normal text-[#292f16]">
             Destinations
           </h2>
           
-          <p className="mt-4 sm:mt-6 text-xs sm:text-base leading-relaxed text-white/70 max-w-xl mx-auto">
+          <p className="mt-4 sm:mt-6 text-xs sm:text-base leading-relaxed text-[#292f16]/80 max-w-xl mx-auto">
             Choose a country to explore its authentic tour sites, cultural heritage, and curated expeditions with Beyond Native Tours.
           </p>
         </div>
@@ -32,7 +32,7 @@ export default function RecommendationsGrid({ destinations }: { destinations: De
             <Link
               key={destination.id}
               href={`/tours?country=${destination.id}`}
-              className="group relative flex flex-col justify-end overflow-hidden rounded-2xl sm:rounded-3xl border border-white/15 bg-black/40 shadow-xl transition-all duration-300 hover:border-ember hover:shadow-[0_15px_35px_rgba(255,59,48,0.25)] hover:-translate-y-1.5 min-h-[380px] sm:min-h-[440px]"
+              className="group relative flex flex-col justify-end overflow-hidden rounded-2xl sm:rounded-3xl border border-[#292f16]/15 bg-black/40 shadow-xl transition-all duration-300 hover:border-[#3e5b34] hover:shadow-[0_15px_35px_rgba(62,91,52,0.25)] hover:-translate-y-1.5 min-h-[380px] sm:min-h-[440px]"
               aria-label={`Explore tour sites in ${destination.name}`}
             >
               {/* Country Background Image */}
@@ -50,7 +50,7 @@ export default function RecommendationsGrid({ destinations }: { destinations: De
 
               {/* Top Pill Badge: Tour count */}
               <div className="absolute top-4 left-4 sm:top-5 sm:left-5 z-10 flex items-center gap-2 rounded-full border border-white/20 bg-black/60 px-3 py-1 backdrop-blur-md">
-                <span className="h-1.5 w-1.5 rounded-full bg-ember animate-pulse" />
+                <span className="h-1.5 w-1.5 rounded-full bg-[#ffbe17] animate-pulse" />
                 <span className="font-anton text-[10px] sm:text-xs uppercase tracking-wider text-white">
                   {destination.tourCount || 3} Tours
                 </span>
@@ -63,7 +63,7 @@ export default function RecommendationsGrid({ destinations }: { destinations: De
 
               {/* Bottom Card Content */}
               <div className="relative z-10 p-5 sm:p-7">
-                <p className="font-sans text-[11px] sm:text-xs font-semibold uppercase tracking-[0.2em] text-ember mb-1 sm:mb-1.5">
+                <p className="font-sans text-[11px] sm:text-xs font-semibold uppercase tracking-[0.2em] text-[#ffbe17] mb-1 sm:mb-1.5">
                   {destination.subtitle || destination.region}
                 </p>
 
@@ -71,11 +71,11 @@ export default function RecommendationsGrid({ destinations }: { destinations: De
                   {destination.name}
                 </h3>
 
-                <p className="text-xs sm:text-[13px] leading-relaxed text-white/75 line-clamp-2 mb-4">
+                <p className="text-xs sm:text-[13px] leading-relaxed text-white/85 line-clamp-2 mb-4">
                   {destination.description}
                 </p>
 
-                <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-ember transition-all duration-300 group-hover:translate-x-1">
+                <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#ffbe17] transition-all duration-300 group-hover:text-white group-hover:translate-x-1">
                   <span>View {destination.name} Tours</span>
                   <svg className="w-3.5 h-3.5 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
@@ -88,8 +88,8 @@ export default function RecommendationsGrid({ destinations }: { destinations: De
 
         {/* Bottom Accent Line */}
         <div className="mt-16 sm:mt-24 space-y-2" aria-hidden="true">
-          <div className="h-px bg-white/20" />
-          <div className="h-px bg-white/10" />
+          <div className="h-px bg-[#292f16]/15" />
+          <div className="h-px bg-[#292f16]/10" />
         </div>
 
       </div>

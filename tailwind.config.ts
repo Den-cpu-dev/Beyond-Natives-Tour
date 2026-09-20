@@ -8,6 +8,10 @@ const config: Config = {
         ember: "#ff3b30",
         ink: "#0b0b0c",
         mist: "#ecebe7",
+        greygreen: "#3e5b34",
+        olive: "#292f16",
+        footerorange: "#ffbe17",
+        sand: "#f7f9f6",
       },
       fontFamily: {
         anton: ["var(--font-anton)", "Impact", "Arial Black", "sans-serif"],

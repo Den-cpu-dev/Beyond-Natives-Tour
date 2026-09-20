@@ -5,10 +5,11 @@ import { useEffect, useState } from "react";
 import { getTripBookingWhatsAppUrl, type TripBookingDetails } from "@/data/whatsapp";
 
 const availableTours = [
-  "Ancestral Naming Ceremony",
-  "Cape Coast and Elmina Slave Dungeons Tours",
-  "Ghanaian Cooking class and Twi lesson",
-  "Kakum Rainforest and Canopy walkway",
+  "Ancestral Naming Ceremony (Cape Coast)",
+  "Cape Coast and Elmina Slave Dungeons Tours (Central Region)",
+  "Ghanaian Cooking Class (Cape Coast)",
+  "Traditional Drumming and Twi Lesson (Accra)",
+  "Kakum Rainforest and Canopy walkway (Cape Coast)",
   "Accra City Tour & Cultural Discovery",
   "2 Days 3 Nights Northern Adventure Tour (Mole & Larabanga)",
   "Kwame Nkrumah Memorial Park & Cultural Sanctuaries",

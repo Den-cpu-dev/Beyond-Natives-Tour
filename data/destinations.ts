@@ -99,7 +99,7 @@ export const destinations: Destination[] = [
       "From Cape Coast Castle to the vibrant energy of Accra and savanna wildlife of Mole, experience Ghana's warm, welcoming heritage.",
     heroImage: "/images/tours/cape-coast.jpg",
     thumbnailImage: "/images/tours/cape-coast.jpg",
-    tourCount: 7,
+    tourCount: 8,
     rank: 1,
   },
   {

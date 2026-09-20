@@ -379,18 +379,20 @@ export default function ExpandingHeroCarousel({ destinations }: ExpandingHeroCar
               </motion.h1>
             </AnimatePresence>
 
-            {/* Narrative Description with generous breathing room and relaxed line spacing */}
+            {/* Narrative Description with enhanced glassmorphic contrast and pop-up readability */}
             <AnimatePresence mode="wait">
-              <motion.p
+              <motion.div
                 key={`desc-${current.id}`}
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -12 }}
                 transition={{ duration: 0.5, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-                className="mt-4 sm:mt-7 max-w-xl text-xs sm:text-sm md:text-[15px] leading-[1.8] sm:leading-[1.85] text-white/80 tracking-wide line-clamp-4 sm:line-clamp-none"
+                className="mt-4 sm:mt-6 max-w-xl rounded-2xl bg-black/45 p-4 sm:p-5 backdrop-blur-md border border-white/20 shadow-[0_10px_35px_rgba(0,0,0,0.5)]"
               >
-                {current.description}
-              </motion.p>
+                <p className="text-sm sm:text-base md:text-[16px] leading-[1.75] sm:leading-[1.8] text-white font-normal tracking-wide drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)] line-clamp-4 sm:line-clamp-none">
+                  {current.description}
+                </p>
+              </motion.div>
             </AnimatePresence>
           </div>
 

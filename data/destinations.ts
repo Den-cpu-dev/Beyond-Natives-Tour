@@ -57,8 +57,8 @@ export const heroDestinations: Destination[] = [
     subtitle: "Ghana - Cape Coast Castle & Heritage Tour",
     description:
       "Step into living history on Ghana’s Atlantic coastline. Walk the imposing ramparts of Cape Coast Castle, journey through the Door of No Return, and explore vibrant coastal fishing harbors rich with enduring heritage.",
-    heroImage: "/images/tours/cape-coast.jpg",
-    thumbnailImage: "/images/tours/cape-coast.jpg",
+    heroImage: "/images/tours/castle.jpg",
+    thumbnailImage: "/images/tours/castle.jpg",
   },
   {
     id: "togo-cultural-odyssey",
@@ -97,8 +97,8 @@ export const destinations: Destination[] = [
     subtitle: "Living Heritage & Coastal Forts",
     description:
       "From Cape Coast Castle to the vibrant energy of Accra and savanna wildlife of Mole, experience Ghana's warm, welcoming heritage.",
-    heroImage: "/images/tours/cape-coast.jpg",
-    thumbnailImage: "/images/tours/cape-coast.jpg",
+    heroImage: "/images/tours/castle.jpg",
+    thumbnailImage: "/images/tours/castle.jpg",
     tourCount: 8,
     rank: 1,
   },

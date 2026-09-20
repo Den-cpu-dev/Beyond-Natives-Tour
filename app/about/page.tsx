@@ -131,11 +131,33 @@ export default function AboutPage() {
               </span>
             </div>
 
-            <h1 className="font-anton text-4xl sm:text-6xl md:text-7xl lg:text-8xl uppercase tracking-tight text-[#292f16] max-w-4xl leading-[0.92]">
-              Beyond Native <span className="text-[#3e5b34]">Travel</span>
+            {/* Dynamic Blended Logo Mark */}
+            <div className="relative mb-6 group">
+              <div className="absolute -inset-2 rounded-full bg-gradient-to-tr from-[#3e5b34]/30 via-[#ffbe17]/40 to-[#292f16]/30 blur-xl transition-all duration-700 group-hover:scale-110" />
+              <div className="relative h-20 w-20 sm:h-24 sm:w-24 rounded-3xl p-3 bg-white/95 backdrop-blur-md border border-[#3e5b34]/20 shadow-xl flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
+                <div className="relative h-full w-full">
+                  <Image
+                    src="/logo-dynamic.png"
+                    alt="Beyond Native Tours Dynamic Logo"
+                    fill
+                    priority
+                    sizes="(max-width: 640px) 80px, 96px"
+                    className="object-contain"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <h1 className="font-anton text-4xl sm:text-6xl md:text-7xl lg:text-8xl uppercase tracking-tight max-w-4xl leading-[0.92]">
+              <span className="bg-gradient-to-r from-[#292f16] via-[#3e5b34] to-[#ca8a04] bg-clip-text text-transparent">
+                Beyond Native
+              </span>{" "}
+              <span className="bg-gradient-to-r from-[#3e5b34] via-[#ca8a04] to-[#ffbe17] bg-clip-text text-transparent">
+                Travel
+              </span>
             </h1>
 
-            <p className="mt-4 font-anton text-sm sm:text-lg md:text-xl uppercase tracking-[0.25em] text-[#3e5b34] max-w-2xl">
+            <p className="mt-4 font-anton text-sm sm:text-lg md:text-xl uppercase tracking-[0.25em] bg-gradient-to-r from-[#3e5b34] via-[#537a47] to-[#ca8a04] bg-clip-text text-transparent max-w-2xl">
               Cultural Tourism • Small-Group West Africa Journeys
             </p>
 

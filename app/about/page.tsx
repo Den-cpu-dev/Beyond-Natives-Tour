@@ -17,16 +17,6 @@ const specs = [
     ),
   },
   {
-    label: "Official Portal",
-    value: "beyondnativetravels.com",
-    href: "https://beyondnativetravels.com",
-    icon: (
-      <svg className="w-5 h-5 text-[#3e5b34]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
-      </svg>
-    ),
-  },
-  {
     label: "Group Size",
     value: "Small groups (typically 6–15 travellers)",
     icon: (
@@ -149,14 +139,6 @@ export default function AboutPage() {
               Cultural Tourism • Small-Group West Africa Journeys
             </p>
 
-            <a
-              href="https://beyondnativetravels.com"
-              target="_blank"
-              rel="noreferrer"
-              className="mt-2 text-xs sm:text-sm font-semibold tracking-widest text-[#292f16]/60 hover:text-[#3e5b34] transition-colors underline decoration-[#3e5b34]/30 underline-offset-4"
-            >
-              beyondnativetravels.com
-            </a>
           </motion.div>
         </div>
       </section>
@@ -226,21 +208,11 @@ export default function AboutPage() {
                           {item.label}
                         </span>
                       </div>
-                      {item.href ? (
-                        <a
-                          href={item.href}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="font-sans font-medium text-xs sm:text-sm text-[#292f16] hover:text-[#3e5b34] transition-colors break-words block underline decoration-[#3e5b34]/30 underline-offset-4"
-                        >
-                          {item.value} &rarr;
-                        </a>
-                      ) : (
-                        <p className="font-medium text-xs sm:text-sm text-[#292f16] leading-snug">
-                          {item.value}
-                        </p>
-                      )}
+                      <p className="font-medium text-xs sm:text-sm text-[#292f16] leading-snug">
+                        {item.value}
+                      </p>
                     </div>
+
                   ))}
                 </div>
               </div>

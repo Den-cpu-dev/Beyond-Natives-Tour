@@ -25,6 +25,7 @@ function ToursContent() {
 
   const [activeFilter, setActiveFilter] = useState<string>(initialCountry);
   const [searchQuery, setSearchQuery] = useState("");
+  const [selectedFlyer, setSelectedFlyer] = useState<Tour | null>(null);
 
   // Sync state when URL query parameter changes
   useEffect(() => {
@@ -244,13 +245,48 @@ function ToursContent() {
                         {tour.region}
                       </p>
 
-                      <h3 className="font-anton text-xl sm:text-2xl uppercase tracking-normal text-[#292f16] leading-snug mb-3">
+                      <h3 className="font-anton text-xl sm:text-2xl uppercase tracking-normal text-[#292f16] leading-snug mb-2">
                         {tour.title}
                       </h3>
 
-                      <p className="text-xs sm:text-[13px] leading-relaxed text-[#292f16]/75 mb-5">
+                      {/* Tagline */}
+                      {tour.tagline && (
+                        <p className="font-serif italic text-xs text-[#3e5b34] font-medium mb-3">
+                          &ldquo;{tour.tagline}&rdquo;
+                        </p>
+                      )}
+
+                      <p className="text-xs sm:text-[13px] leading-relaxed text-[#292f16]/75 mb-4">
                         {tour.description}
                       </p>
+
+                      {/* Tour Includes Badge Box */}
+                      {tour.includes && tour.includes.length > 0 && (
+                        <div className="mb-4 rounded-2xl bg-[#f7f9f6] border border-[#3e5b34]/20 p-3">
+                          <div className="flex items-center justify-between gap-2 mb-2">
+                            <span className="text-[10px] font-anton uppercase tracking-wider text-[#3e5b34] flex items-center gap-1.5">
+                              <span className="h-1.5 w-1.5 rounded-full bg-[#3e5b34]" />
+                              Tour Includes:
+                            </span>
+                            {tour.motto && (
+                              <span className="text-[9px] font-sans font-bold uppercase tracking-wider text-[#292f16]/60">
+                                {tour.motto}
+                              </span>
+                            )}
+                          </div>
+                          <div className="flex flex-wrap gap-1.5">
+                            {tour.includes.map((inc, i) => (
+                              <span
+                                key={i}
+                                className="inline-flex items-center gap-1 rounded-full bg-white px-2.5 py-0.5 text-[11px] font-medium text-[#292f16] shadow-sm border border-[#292f16]/10"
+                              >
+                                <span className="text-[#3e5b34] font-bold">✓</span>
+                                {inc}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      )}
 
                       {/* Highlights */}
                       <div className="space-y-2 border-t border-[#292f16]/10 pt-4">
@@ -266,17 +302,58 @@ function ToursContent() {
                           ))}
                         </ul>
                       </div>
+
+                      {/* Activities if specified */}
+                      {tour.activities && tour.activities.length > 0 && (
+                        <div className="mt-4 pt-3 border-t border-[#292f16]/10">
+                          <p className="text-[10px] font-semibold uppercase tracking-widest text-[#3e5b34] mb-2 flex items-center gap-1.5">
+                            <span className="h-1.5 w-1.5 rounded-full bg-[#ffbe17]" />
+                            Featured Activities
+                          </p>
+                          <ul className="space-y-1">
+                            {tour.activities.slice(0, 4).map((act, i) => (
+                              <li key={i} className="flex items-start gap-1.5 text-[11px] text-[#292f16]/80">
+                                <span className="text-[#3e5b34] font-bold shrink-0">•</span>
+                                <span>{act}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
                     </div>
 
-                    {/* Book Trip CTA */}
+                    {/* Action CTAs */}
                     <div className="pt-4 border-t border-[#292f16]/10">
-                      <button
-                        type="button"
-                        onClick={() => openTripBookingModal(tour.title)}
-                        className="w-full inline-flex items-center justify-center rounded-full bg-[#3e5b34] py-3.5 px-6 font-anton text-xs uppercase tracking-[0.16em] text-white shadow-[0_0_20px_rgba(62,91,52,0.3)] transition-all hover:bg-[#292f16] hover:scale-[1.02] active:scale-95 cursor-pointer"
-                      >
-                        <span>Book Trip</span>
-                      </button>
+                      {tour.flyerImage ? (
+                        <div className="flex items-center gap-2">
+                          <button
+                            type="button"
+                            onClick={() => openTripBookingModal(tour.title)}
+                            className="flex-1 inline-flex items-center justify-center rounded-full bg-[#3e5b34] py-3.5 px-6 font-anton text-xs uppercase tracking-[0.16em] text-white shadow-[0_0_20px_rgba(62,91,52,0.3)] transition-all hover:bg-[#292f16] hover:scale-[1.02] active:scale-95 cursor-pointer"
+                          >
+                            <span>Book Trip</span>
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => setSelectedFlyer(tour)}
+                            className="inline-flex items-center gap-1.5 rounded-full border border-[#3e5b34]/30 bg-[#f7f9f6] hover:bg-[#3e5b34]/10 hover:border-[#3e5b34] px-4 py-3.5 font-anton text-xs uppercase tracking-wider text-[#3e5b34] transition-all cursor-pointer"
+                          >
+                            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                            </svg>
+                            <span>Flyer</span>
+                          </button>
+                        </div>
+                      ) : (
+                        <button
+                          type="button"
+                          onClick={() => openTripBookingModal(tour.title)}
+                          className="w-full inline-flex items-center justify-center rounded-full bg-[#3e5b34] py-3.5 px-6 font-anton text-xs uppercase tracking-[0.16em] text-white shadow-[0_0_20px_rgba(62,91,52,0.3)] transition-all hover:bg-[#292f16] hover:scale-[1.02] active:scale-95 cursor-pointer"
+                        >
+                          <span>Book Trip</span>
+                        </button>
+                      )}
                     </div>
 
                   </div>
@@ -287,6 +364,76 @@ function ToursContent() {
 
         </div>
       </section>
+
+      {/* ================= FLYER PREVIEW MODAL ================= */}
+      <AnimatePresence>
+        {selectedFlyer && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md p-4"
+            onClick={() => setSelectedFlyer(null)}
+          >
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              className="relative max-w-md w-full bg-white rounded-3xl overflow-hidden shadow-2xl p-5"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="flex items-center justify-between pb-3 mb-3 border-b border-[#292f16]/10">
+                <div>
+                  <h4 className="font-anton text-lg uppercase text-[#292f16]">
+                    {selectedFlyer.title}
+                  </h4>
+                  <p className="text-[11px] font-sans text-[#3e5b34] font-semibold">
+                    Beyond Native Tours • Official Itinerary Flyer
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setSelectedFlyer(null)}
+                  className="h-8 w-8 rounded-full bg-[#292f16]/10 hover:bg-[#292f16]/20 flex items-center justify-center text-[#292f16] font-bold text-sm cursor-pointer"
+                >
+                  ✕
+                </button>
+              </div>
+
+              <div className="relative aspect-square w-full rounded-2xl overflow-hidden shadow-inner border border-[#292f16]/10 bg-neutral-100">
+                <Image
+                  src={selectedFlyer.flyerImage || selectedFlyer.image}
+                  alt={`${selectedFlyer.title} Flyer`}
+                  fill
+                  unoptimized
+                  className="object-contain"
+                />
+              </div>
+
+              <div className="mt-4 flex items-center gap-3">
+                <button
+                  type="button"
+                  onClick={() => {
+                    const title = selectedFlyer.title;
+                    setSelectedFlyer(null);
+                    openTripBookingModal(title);
+                  }}
+                  className="flex-1 rounded-full bg-[#3e5b34] py-3 text-center font-anton text-xs uppercase tracking-wider text-white hover:bg-[#292f16] transition-colors cursor-pointer"
+                >
+                  Book This Tour
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setSelectedFlyer(null)}
+                  className="rounded-full border border-[#292f16]/20 px-5 py-3 text-center font-anton text-xs uppercase tracking-wider text-[#292f16] hover:bg-[#292f16]/5 transition-colors cursor-pointer"
+                >
+                  Close
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <Footer />
     </main>

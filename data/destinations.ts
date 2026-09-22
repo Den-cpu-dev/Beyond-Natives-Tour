@@ -41,9 +41,9 @@ export const heroDestinations: Destination[] = [
     titleLine2: "CITY TOUR",
     region: "Accra City Tour",
     country: "Ghana",
-    subtitle: "Ghana - Accra City Tour",
+    subtitle: "Your Adventure Awaits, Escape into the Beauty of Accra with Us!",
     description:
-      "Immerse yourself in the vibrant energy of Ghana’s capital. Discover the monumental Black Star Square, bustling Makola open-air markets, the historic Jamestown lighthouse, and the colorful contemporary rhythm of Accra.",
+      "Escape into the beauty of Accra with Beyond Native Tours. Discover monumental historical landmarks like Black Star Square and Kwame Nkrumah Memorial Park, fine art at Gallery 1957, Jamestown Lighthouse, and sensory Makola markets.",
     heroImage: "/images/tours/accra-city.jpg",
     thumbnailImage: "/images/tours/accra-city.jpg",
   },
@@ -112,7 +112,7 @@ export const destinations: Destination[] = [
       "A slender coastal gem of profound spirituality, Lake Togo pirogue boat crossings, and renowned Kpalimé mountain artisans.",
     heroImage: "/images/tours/togo.jpg",
     thumbnailImage: "/images/tours/togo.jpg",
-    tourCount: 3,
+    tourCount: 4,
     rank: 2,
   },
   {
@@ -125,7 +125,7 @@ export const destinations: Destination[] = [
       "Behold the monumental Cotonou Amazon warrior, glide through Ganvié stilt city, and discover the ancestral sanctuaries of Ouidah.",
     heroImage: "/images/tours/benin.jpg",
     thumbnailImage: "/images/tours/benin.jpg",
-    tourCount: 4,
+    tourCount: 5,
     rank: 3,
   },
   {
@@ -151,7 +151,7 @@ export const destinations: Destination[] = [
       "Gleaming Abidjan skyline, serene UNESCO colonial Grand-Bassam beach avenues, and the colossal Yamoussoukro Basilica.",
     heroImage: "/images/tours/ivory-coast.jpg",
     thumbnailImage: "/images/tours/ivory-coast.jpg",
-    tourCount: 3,
+    tourCount: 4,
     rank: 5,
   },
   {
@@ -164,7 +164,7 @@ export const destinations: Destination[] = [
       "Pristine white sand coves at River No. 2, historic Freetown Krio heritage, and profound ancestral memory on Bunce Island.",
     heroImage: "/images/tours/sierra-leone.jpg",
     thumbnailImage: "/images/tours/sierra-leone.jpg",
-    tourCount: 3,
+    tourCount: 4,
     rank: 6,
   },
 ];

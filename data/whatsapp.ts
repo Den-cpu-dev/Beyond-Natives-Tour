@@ -3,7 +3,7 @@
 // =========================================================================
 // Replace this with your exact WhatsApp business phone number
 // (Include country code, without '+' or spaces, e.g. "233241234567" for Ghana)
-export const WHATSAPP_NUMBER = "233000000000";
+export const WHATSAPP_NUMBER = "233539691802";
 
 export interface TripBookingDetails {
   fullName: string;

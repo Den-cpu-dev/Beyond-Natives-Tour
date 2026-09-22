@@ -3,18 +3,10 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { getTripBookingWhatsAppUrl, type TripBookingDetails } from "@/data/whatsapp";
+import { allTours } from "@/data/tours";
 
 const availableTours = [
-  "Ancestral Naming Ceremony (Cape Coast)",
-  "Cape Coast and Elmina Slave Dungeons Tours (Central Region)",
-  "Ghanaian Cooking Class (Cape Coast)",
-  "Traditional Drumming and Twi Lesson (Accra)",
-  "Kakum Rainforest and Canopy walkway (Cape Coast)",
-  "Accra City Tour & Cultural Discovery",
-  "2 Days 3 Nights Northern Adventure Tour (Mole & Larabanga)",
-  "Kwame Nkrumah Memorial Park & Cultural Sanctuaries",
-  "Togo Cultural Odyssey (Lomé & Beyond)",
-  "Benin Kingdom & Dahomey Heritage Tour",
+  ...allTours.map((t) => `${t.title} (${t.country})`),
   "Custom Bespoke Journey (Tailored Itinerary)",
 ];
 

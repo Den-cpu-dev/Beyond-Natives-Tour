@@ -190,7 +190,9 @@ export default function Header() {
         {/* Right Action Icons (Socials, Search & CTA) */}
         <div className="hidden sm:flex items-center gap-3">
           <a
-            href="#"
+            href="https://www.instagram.com/beyondnative_tours"
+            target="_blank"
+            rel="noreferrer"
             aria-label="Beyond Native Tours Instagram"
             className={`flex h-9 w-9 items-center justify-center rounded-full border transition-all duration-200 hover:scale-105 ${
               isLightHeader
@@ -316,7 +318,9 @@ export default function Header() {
 
                 <div className="flex items-center justify-center gap-3 pt-1">
                   <a
-                    href="#"
+                    href="https://www.instagram.com/beyondnative_tours"
+                    target="_blank"
+                    rel="noreferrer"
                     aria-label="Beyond Native Tours Instagram"
                     className="flex h-9 w-9 items-center justify-center rounded-full border border-[#292f16]/15 bg-[#292f16]/5 text-[#292f16]/80 transition-all hover:bg-[#3e5b34] hover:text-white"
                   >

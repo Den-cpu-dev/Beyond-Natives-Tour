@@ -44,7 +44,9 @@ export default function Footer() {
         <div className="flex flex-col sm:flex-row items-center gap-4">
           <div className="flex items-center gap-2.5">
             <a
-              href="#"
+              href="https://www.instagram.com/beyondnative_tours"
+              target="_blank"
+              rel="noreferrer"
               aria-label="Beyond Native Tours Instagram"
               className="flex h-8 w-8 items-center justify-center rounded-full bg-[#292f16]/10 text-[#292f16] transition-all hover:bg-[#292f16] hover:text-[#ffbe17] hover:scale-110"
             >

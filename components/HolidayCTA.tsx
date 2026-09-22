@@ -10,43 +10,33 @@ interface TourVideo {
   id: string;
   number: string;
   title: string;
-  subtitle: string;
   src: string;
-  highlight: string;
 }
 
 const tourVideos: TourVideo[] = [
   {
     id: "tour-moment-1",
     number: "01",
-    title: "Coastal Rhythms & Atlantic Shores",
-    subtitle: "Cape Coast & Busua Coastline",
+    title: "Moment 01",
     src: "/videos/tour-moment-1.mp4",
-    highlight: "Ocean Waves & Beach Vibe",
   },
   {
     id: "tour-moment-2",
     number: "02",
-    title: "Cultural Vibrance & Local Rhythm",
-    subtitle: "Immersive Dance & Community Energy",
+    title: "Moment 02",
     src: "/videos/tour-moment-2.mp4",
-    highlight: "Heritage In Motion",
   },
   {
     id: "tour-moment-3",
     number: "03",
-    title: "Canopy Walkways & Sacred Trails",
-    subtitle: "Kakum Rainforest & Shai Hills",
+    title: "Moment 03",
     src: "/videos/tour-moment-3.mp4",
-    highlight: "Lush Tropical Nature",
   },
   {
     id: "tour-moment-4",
     number: "04",
-    title: "Golden Sunsets & Native Hospitality",
-    subtitle: "Evening Gatherings & Good Times",
+    title: "Moment 04",
     src: "/videos/tour-moment-4.mp4",
-    highlight: "Warm West African Welcome",
   },
 ];
 
@@ -194,9 +184,8 @@ export default function HolidayCTA({ onPlay }: { onPlay: (src: string, title: st
 
                 {/* Top Bar: Number Tag & Fullscreen trigger */}
                 <div className="relative z-10 flex items-center justify-between p-3.5 sm:p-4">
-                  <div className="flex items-center gap-1.5 rounded-full bg-black/60 px-2.5 py-1 backdrop-blur-md border border-white/15">
-                    <span className="font-anton text-[10px] tracking-wider text-[#ffbe17]">{video.number}</span>
-                    <span className="text-[10px] text-white/70 font-sans">• {video.highlight}</span>
+                  <div className="flex items-center gap-1.5 rounded-full bg-black/60 px-3 py-1 backdrop-blur-md border border-white/15">
+                    <span className="font-anton text-[11px] tracking-wider text-[#ffbe17]">Moment {video.number}</span>
                   </div>
 
                   <button
@@ -226,54 +215,43 @@ export default function HolidayCTA({ onPlay }: { onPlay: (src: string, title: st
                   )}
                 </div>
 
-                {/* Bottom Bar: Title, Subtitle, and Sound Toggle Button */}
-                <div className="relative z-10 p-3.5 sm:p-4 space-y-2">
-                  <div>
-                    <h3 className="font-anton text-sm sm:text-base uppercase tracking-normal text-white leading-tight drop-shadow-md">
-                      {video.title}
-                    </h3>
-                    <p className="text-[11px] text-white/70 mt-0.5 line-clamp-1">
-                      {video.subtitle}
-                    </p>
-                  </div>
+                {/* Bottom Bar: Sound Toggle Button & Expand */}
+                <div className="relative z-10 p-3.5 sm:p-4 flex items-center justify-between gap-2">
+                  {/* Primary Sound Toggle Button */}
+                  <button
+                    type="button"
+                    onClick={(e) => toggleSound(video.id, e)}
+                    className={`inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-bold uppercase tracking-wider transition-all duration-200 cursor-pointer ${
+                      isAudioActive
+                        ? "bg-[#3e5b34] text-white shadow-[0_0_20px_rgba(62,91,52,0.8)] border border-emerald-300/40"
+                        : "bg-black/75 text-white/90 backdrop-blur-md border border-white/25 hover:border-[#ffbe17] hover:bg-[#ffbe17] hover:text-black hover:scale-105"
+                    }`}
+                  >
+                    {isAudioActive ? (
+                      <>
+                        {/* Animated equalizer waves */}
+                        <span className="flex items-end gap-0.5 h-3">
+                          <span className="inline-block w-1 bg-white animate-pulse" style={{ height: "60%" }} />
+                          <span className="inline-block w-1 bg-white animate-pulse" style={{ height: "100%", animationDelay: "150ms" }} />
+                          <span className="inline-block w-1 bg-white animate-pulse" style={{ height: "40%", animationDelay: "300ms" }} />
+                        </span>
+                        <span>Sound On</span>
+                      </>
+                    ) : (
+                      <>
+                        <span className="text-amber-400 text-xs">🔇</span>
+                        <span>Click for Sound</span>
+                      </>
+                    )}
+                  </button>
 
-                  <div className="pt-1 flex items-center justify-between gap-2">
-                    {/* Primary Sound Toggle Button */}
-                    <button
-                      type="button"
-                      onClick={(e) => toggleSound(video.id, e)}
-                      className={`inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-bold uppercase tracking-wider transition-all duration-200 cursor-pointer ${
-                        isAudioActive
-                          ? "bg-[#3e5b34] text-white shadow-[0_0_20px_rgba(62,91,52,0.8)] border border-emerald-300/40"
-                          : "bg-black/75 text-white/90 backdrop-blur-md border border-white/25 hover:border-[#ffbe17] hover:bg-[#ffbe17] hover:text-black hover:scale-105"
-                      }`}
-                    >
-                      {isAudioActive ? (
-                        <>
-                          {/* Animated equalizer waves */}
-                          <span className="flex items-end gap-0.5 h-3">
-                            <span className="inline-block w-1 bg-white animate-pulse" style={{ height: "60%" }} />
-                            <span className="inline-block w-1 bg-white animate-pulse" style={{ height: "100%", animationDelay: "150ms" }} />
-                            <span className="inline-block w-1 bg-white animate-pulse" style={{ height: "40%", animationDelay: "300ms" }} />
-                          </span>
-                          <span>Sound On</span>
-                        </>
-                      ) : (
-                        <>
-                          <span className="text-amber-400 text-xs">🔇</span>
-                          <span>Click for Sound</span>
-                        </>
-                      )}
-                    </button>
-
-                    <button
-                      type="button"
-                      onClick={(e) => handleOpenFullscreen(video, e)}
-                      className="text-[10px] font-bold uppercase tracking-widest text-white/60 hover:text-white transition-colors"
-                    >
-                      Expand &rarr;
-                    </button>
-                  </div>
+                  <button
+                    type="button"
+                    onClick={(e) => handleOpenFullscreen(video, e)}
+                    className="text-[10px] font-bold uppercase tracking-widest text-white/60 hover:text-white transition-colors"
+                  >
+                    Expand &rarr;
+                  </button>
                 </div>
               </motion.div>
             );

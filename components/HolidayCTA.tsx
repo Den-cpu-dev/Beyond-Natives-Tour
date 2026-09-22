@@ -1,28 +1,99 @@
 "use client";
 
+import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 
 import { openTripBookingModal } from "@/components/BookTripModal";
 
-const videos = [
+interface TourVideo {
+  id: string;
+  number: string;
+  title: string;
+  subtitle: string;
+  src: string;
+  highlight: string;
+}
+
+const tourVideos: TourVideo[] = [
   {
-    title: "A morning on the water",
-    src: "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
-    image: "https://images.unsplash.com/photo-1531219572328-a0171b4448a3?auto=format&fit=crop&w=1100&q=84",
-    size: "aspect-[16/10]",
+    id: "tour-moment-1",
+    number: "01",
+    title: "Coastal Rhythms & Atlantic Shores",
+    subtitle: "Cape Coast & Busua Coastline",
+    src: "/videos/tour-moment-1.mp4",
+    highlight: "Ocean Waves & Beach Vibe",
   },
   {
-    title: "Between the dunes",
-    src: "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
-    image: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1100&q=84",
-    size: "aspect-[4/5] sm:-mt-16",
+    id: "tour-moment-2",
+    number: "02",
+    title: "Cultural Vibrance & Local Rhythm",
+    subtitle: "Immersive Dance & Community Energy",
+    src: "/videos/tour-moment-2.mp4",
+    highlight: "Heritage In Motion",
+  },
+  {
+    id: "tour-moment-3",
+    number: "03",
+    title: "Canopy Walkways & Sacred Trails",
+    subtitle: "Kakum Rainforest & Shai Hills",
+    src: "/videos/tour-moment-3.mp4",
+    highlight: "Lush Tropical Nature",
+  },
+  {
+    id: "tour-moment-4",
+    number: "04",
+    title: "Golden Sunsets & Native Hospitality",
+    subtitle: "Evening Gatherings & Good Times",
+    src: "/videos/tour-moment-4.mp4",
+    highlight: "Warm West African Welcome",
   },
 ];
 
 export default function HolidayCTA({ onPlay }: { onPlay: (src: string, title: string) => void }) {
+  // Keeps track of which video currently has audio unmuted (null if all are muted)
+  const [activeAudioId, setActiveAudioId] = useState<string | null>(null);
+  const videoRefs = useRef<{ [key: string]: HTMLVideoElement | null }>({});
+
+  // Synchronize audio state across video elements
+  useEffect(() => {
+    Object.entries(videoRefs.current).forEach(([id, el]) => {
+      if (!el) return;
+      if (id === activeAudioId) {
+        el.muted = false;
+        el.volume = 1.0;
+        // Make sure it is playing if unmuted
+        el.play().catch(() => {});
+      } else {
+        el.muted = true;
+      }
+    });
+  }, [activeAudioId]);
+
+  const toggleSound = (id: string, e?: React.MouseEvent) => {
+    if (e) {
+      e.stopPropagation();
+    }
+    setActiveAudioId((current) => (current === id ? null : id));
+  };
+
+  const handleOpenFullscreen = (video: TourVideo, e: React.MouseEvent) => {
+    e.stopPropagation();
+    // Mute inline videos when opening modal
+    setActiveAudioId(null);
+    onPlay(video.src, video.title);
+  };
+
+  const scrollToVideos = () => {
+    const el = document.getElementById("tour-moments-grid");
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
-    <section id="holiday" className="relative isolate overflow-hidden px-4 py-16 sm:px-8 sm:py-32 lg:px-14 lg:py-40">
+    <section id="holiday" className="relative isolate overflow-hidden px-4 py-16 sm:px-8 sm:py-28 lg:px-14 lg:py-36">
+      {/* Background Image & Gradient */}
       <Image
         src="https://images.unsplash.com/photo-1512100356356-de1b84283e18?auto=format&fit=crop&w=2200&q=88"
         alt="A boat travelling across turquoise water"
@@ -30,61 +101,183 @@ export default function HolidayCTA({ onPlay }: { onPlay: (src: string, title: st
         sizes="100vw"
         className="-z-20 object-cover"
       />
-      <div className="absolute inset-0 -z-10 bg-gradient-to-r from-black/90 via-black/65 to-black/40" />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-r from-black/95 via-black/80 to-black/60" />
+
       <div className="mx-auto max-w-[1600px]">
+        {/* Section Header */}
         <div className="max-w-4xl">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.23em] text-[#ffbe17]">
-            Immersive Cultural Tourism • Small Groups
+          <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-[#ffbe17]">
+            Immersive Cultural Tourism • Authentic Tour Moments
           </p>
-          <h2 className="mt-4 font-anton text-[clamp(2.4rem,7.5vw,8.5rem)] uppercase leading-[0.98] tracking-normal text-white space-y-1 sm:space-y-2">
+          <h2 className="mt-4 font-anton text-[clamp(2.4rem,7.5vw,8.5rem)] uppercase leading-[0.96] tracking-normal text-white space-y-1 sm:space-y-2">
             <span className="block">Travel and enjoy</span>
-            <span className="block">your holiday</span>
+            <span className="block text-[#ffbe17]">your holiday</span>
           </h2>
-          
+
           <div className="mt-6 flex flex-wrap items-center gap-3.5 sm:gap-5">
             <button
               type="button"
               onClick={() => openTripBookingModal()}
-              className="inline-flex items-center justify-center rounded-full bg-[#3e5b34] px-7 py-3 font-anton text-xs sm:text-sm uppercase tracking-[0.16em] text-white shadow-[0_0_25px_rgba(62,91,52,0.45)] transition-all hover:bg-[#292f16] hover:scale-105 active:scale-95 cursor-pointer"
+              className="inline-flex items-center justify-center rounded-full bg-[#3e5b34] px-7 py-3 font-anton text-xs sm:text-sm uppercase tracking-[0.16em] text-white shadow-[0_0_25px_rgba(62,91,52,0.55)] transition-all hover:bg-[#292f16] hover:scale-105 active:scale-95 cursor-pointer"
             >
               <span>Book Trip</span>
             </button>
 
             <button
               type="button"
-              onClick={() => onPlay(videos[0].src, videos[0].title)}
-              className="inline-flex items-center gap-2.5 rounded-full border border-white/30 bg-black/40 px-5 py-3 font-anton text-xs sm:text-sm uppercase tracking-[0.14em] text-white backdrop-blur-md transition hover:bg-white hover:text-black"
-              aria-label="Play video"
+              onClick={scrollToVideos}
+              className="inline-flex items-center gap-2.5 rounded-full border border-white/30 bg-black/50 px-5 py-3 font-anton text-xs sm:text-sm uppercase tracking-[0.14em] text-white backdrop-blur-md transition-all hover:bg-white hover:text-black hover:scale-105 active:scale-95 cursor-pointer"
+              aria-label="Watch tour videos"
             >
-              <span className="grid h-6 w-6 place-items-center rounded-full bg-white text-black text-[10px]">&#9654;</span>
+              <span className="grid h-6 w-6 place-items-center rounded-full bg-[#ffbe17] text-black text-[10px]">&#9654;</span>
               <span>Watch Moments</span>
             </button>
           </div>
 
-          <p className="mt-5 sm:mt-7 max-w-md text-xs sm:text-sm leading-relaxed text-white/75">
+          <p className="mt-5 sm:mt-7 max-w-xl text-xs sm:text-sm leading-relaxed text-white/80">
             Spend a few days close to the ocean, then follow the red-earth roads inland. Our small-group journeys connect Ghana&apos;s Atlantic shores, vibrant canopy rainforests, historic castles, and tranquil savanna quiet.
           </p>
+
+          <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3.5 py-1.5 backdrop-blur-md">
+            <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+            <span className="text-[11px] font-medium text-white/90">
+              Videos autoplay silently • <strong className="text-[#ffbe17]">Click any video or audio button to hear sound</strong>
+            </span>
+          </div>
         </div>
 
-        <div className="mt-10 grid max-w-4xl grid-cols-2 items-end gap-3 sm:mt-20 sm:gap-8">
-          {videos.map((video) => (
-            <motion.button
-              type="button"
-              key={video.title}
-              onClick={() => onPlay(video.src, video.title)}
-              whileHover={{ y: -6 }}
-              whileTap={{ scale: 0.98 }}
-              className={`group relative block overflow-hidden text-left rounded-xl sm:rounded-none ${video.size}`}
-              aria-label={`Play ${video.title}`}
-            >
-              <Image src={video.image} alt="" fill sizes="(max-width: 640px) 50vw, 360px" className="object-cover transition duration-700 group-hover:scale-105" />
-              <span className="absolute inset-0 bg-black/25" />
-              <span className="absolute inset-0 grid place-items-center">
-                <span className="grid h-10 w-10 sm:h-12 sm:w-12 place-items-center rounded-full border border-white/80 bg-black/25 text-xs sm:text-sm text-white backdrop-blur transition group-hover:bg-ember">&#9654;</span>
-              </span>
-              <span className="absolute inset-x-0 bottom-0 p-2.5 sm:p-3 text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.12em] text-white drop-shadow">{video.title}</span>
-            </motion.button>
-          ))}
+        {/* 4 Videos Grid */}
+        <div
+          id="tour-moments-grid"
+          className="mt-12 sm:mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6"
+        >
+          {tourVideos.map((video) => {
+            const isAudioActive = activeAudioId === video.id;
+
+            return (
+              <motion.div
+                key={video.id}
+                whileHover={{ y: -6 }}
+                transition={{ duration: 0.25 }}
+                onClick={() => toggleSound(video.id)}
+                className={`group relative flex flex-col justify-between overflow-hidden rounded-2xl sm:rounded-3xl border transition-all duration-300 shadow-2xl cursor-pointer aspect-[9/14] sm:aspect-[9/15] ${
+                  isAudioActive
+                    ? "border-[#ffbe17] ring-2 ring-[#ffbe17]/50 shadow-[0_0_35px_rgba(255,190,23,0.35)]"
+                    : "border-white/15 hover:border-white/40"
+                }`}
+                role="button"
+                tabIndex={0}
+                aria-label={`${video.title} - ${isAudioActive ? "Click to mute" : "Click to hear sound"}`}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    toggleSound(video.id);
+                  }
+                }}
+              >
+                {/* HTML5 Autoplaying Video */}
+                <video
+                  ref={(el) => {
+                    videoRefs.current[video.id] = el;
+                  }}
+                  src={video.src}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  preload="metadata"
+                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+
+                {/* Shading Gradients for clean text & button contrast */}
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-black/50" />
+
+                {/* Top Bar: Number Tag & Fullscreen trigger */}
+                <div className="relative z-10 flex items-center justify-between p-3.5 sm:p-4">
+                  <div className="flex items-center gap-1.5 rounded-full bg-black/60 px-2.5 py-1 backdrop-blur-md border border-white/15">
+                    <span className="font-anton text-[10px] tracking-wider text-[#ffbe17]">{video.number}</span>
+                    <span className="text-[10px] text-white/70 font-sans">• {video.highlight}</span>
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={(e) => handleOpenFullscreen(video, e)}
+                    className="grid h-8 w-8 place-items-center rounded-full bg-black/60 text-white/80 backdrop-blur-md border border-white/15 transition-all hover:bg-white hover:text-black hover:scale-110"
+                    title="Open Fullscreen"
+                    aria-label="Open Fullscreen"
+                  >
+                    <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+                      <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z" />
+                    </svg>
+                  </button>
+                </div>
+
+                {/* Center Hover / Sound State Hint */}
+                <div className="relative z-10 flex flex-1 items-center justify-center p-4">
+                  {isAudioActive ? (
+                    <div className="flex items-center gap-2 rounded-full bg-[#3e5b34]/90 px-4 py-2 text-xs font-anton tracking-wider uppercase text-white shadow-2xl backdrop-blur-md border border-white/30">
+                      <span className="h-2 w-2 rounded-full bg-emerald-300 animate-ping" />
+                      <span>Audio Playing</span>
+                    </div>
+                  ) : (
+                    <div className="flex items-center gap-2 rounded-full bg-black/75 px-3.5 py-1.5 text-[11px] font-anton tracking-wider uppercase text-white/90 shadow-xl backdrop-blur-md border border-white/20 opacity-90 transition-all group-hover:scale-105 group-hover:bg-[#ffbe17] group-hover:text-black group-hover:border-transparent">
+                      <span>🔊 Tap for Sound</span>
+                    </div>
+                  )}
+                </div>
+
+                {/* Bottom Bar: Title, Subtitle, and Sound Toggle Button */}
+                <div className="relative z-10 p-3.5 sm:p-4 space-y-2">
+                  <div>
+                    <h3 className="font-anton text-sm sm:text-base uppercase tracking-normal text-white leading-tight drop-shadow-md">
+                      {video.title}
+                    </h3>
+                    <p className="text-[11px] text-white/70 mt-0.5 line-clamp-1">
+                      {video.subtitle}
+                    </p>
+                  </div>
+
+                  <div className="pt-1 flex items-center justify-between gap-2">
+                    {/* Primary Sound Toggle Button */}
+                    <button
+                      type="button"
+                      onClick={(e) => toggleSound(video.id, e)}
+                      className={`inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-bold uppercase tracking-wider transition-all duration-200 cursor-pointer ${
+                        isAudioActive
+                          ? "bg-[#3e5b34] text-white shadow-[0_0_20px_rgba(62,91,52,0.8)] border border-emerald-300/40"
+                          : "bg-black/75 text-white/90 backdrop-blur-md border border-white/25 hover:border-[#ffbe17] hover:bg-[#ffbe17] hover:text-black hover:scale-105"
+                      }`}
+                    >
+                      {isAudioActive ? (
+                        <>
+                          {/* Animated equalizer waves */}
+                          <span className="flex items-end gap-0.5 h-3">
+                            <span className="inline-block w-1 bg-white animate-pulse" style={{ height: "60%" }} />
+                            <span className="inline-block w-1 bg-white animate-pulse" style={{ height: "100%", animationDelay: "150ms" }} />
+                            <span className="inline-block w-1 bg-white animate-pulse" style={{ height: "40%", animationDelay: "300ms" }} />
+                          </span>
+                          <span>Sound On</span>
+                        </>
+                      ) : (
+                        <>
+                          <span className="text-amber-400 text-xs">🔇</span>
+                          <span>Click for Sound</span>
+                        </>
+                      )}
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={(e) => handleOpenFullscreen(video, e)}
+                      className="text-[10px] font-bold uppercase tracking-widest text-white/60 hover:text-white transition-colors"
+                    >
+                      Expand &rarr;
+                    </button>
+                  </div>
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>

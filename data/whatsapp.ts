@@ -92,7 +92,7 @@ export interface StoreOrderDetails {
 export function formatStoreOrderMessage(details: StoreOrderDetails): string {
   return (
     `🛍️ *NEW ARTISAN CURATION ORDER* 🛍️\n` +
-    `*Beyond Native Travel Store*\n` +
+    `*Beyond Native Tours Store*\n` +
     `━━━━━━━━━━━━━━━━━━━━━━\n` +
     `👤 *Customer Name:* ${details.customerName.trim()}\n` +
     `📱 *WhatsApp / Phone:* ${details.customerContact.trim()}\n` +
@@ -103,7 +103,7 @@ export function formatStoreOrderMessage(details: StoreOrderDetails): string {
     (details.notes ? `📝 *Custom Request / Sizing / Notes:* ${details.notes.trim()}\n` : "") +
     `━━━━━━━━━━━━━━━━━━━━━━\n` +
     `_Please advise on delivery timeframe and payment instructions. Thank you!_\n` +
-    `_Sent via Beyond Native Travel Store_`
+    `_Sent via Beyond Native Tours Store_`
   );
 }
 
@@ -200,7 +200,7 @@ export interface ConsolidatedStoreOrderDetails {
 export function formatConsolidatedStoreOrderMessage(details: ConsolidatedStoreOrderDetails): string {
   const totalItemCount = details.items.reduce((acc, i) => acc + i.quantity, 0);
   let msg = `🛍️ *CONSOLIDATED ARTISAN CURATION ORDER (${totalItemCount} ITEMS)* 🛍️\n`;
-  msg += `*Beyond Native Travel Store*\n`;
+  msg += `*Beyond Native Tours Store*\n`;
   msg += `━━━━━━━━━━━━━━━━━━━━━━\n`;
   msg += `👤 *Customer Name:* ${details.customerName.trim()}\n`;
   msg += `📱 *WhatsApp / Phone:* ${details.customerContact.trim()}\n`;
@@ -228,7 +228,7 @@ export function formatConsolidatedStoreOrderMessage(details: ConsolidatedStoreOr
 
   msg += `━━━━━━━━━━━━━━━━━━━━━━\n`;
   msg += `_Please advise on availability, delivery timeframe & payment details. Thank you!_\n`;
-  msg += `_Sent via Beyond Native Travel Store Multi-Item Bag_`;
+  msg += `_Sent via Beyond Native Tours Store Multi-Item Bag_`;
 
   return msg;
 }

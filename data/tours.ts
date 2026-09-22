@@ -247,7 +247,7 @@ export const allTours: Tour[] = [
       "3-5 star Hotels",
       "Food Plans",
       "Activities Included",
-      "Tour & Travels",
+      "Tour & Travel",
     ],
     activities: [
       "2-3 handpicked premier coastal & lakeside resort stays",

@@ -30,7 +30,7 @@ export const heroDestinations: Destination[] = [
     country: "Cultural Tourism",
     subtitle: "Cultural Tourism • Small-Group West Africa Journeys",
     description:
-      "Beyond Native Travel is a boutique cultural tourism company specialising in small-group, immersive journeys across West Africa. It is designed for travellers who want to go beyond the surface — to experience Africa through the eyes of people who live it, love it, and call it home.",
+      "Beyond Native Tours is a boutique cultural tourism company specialising in small-group, immersive journeys across West Africa. It is designed for travellers who want to go beyond the surface — to experience Africa through the eyes of people who live it, love it, and call it home.",
     heroImage: "/images/tours/beyond-native.jpg",
     thumbnailImage: "/images/tours/beyond-native.jpg",
   },

@@ -194,7 +194,7 @@ export default function AboutPage() {
               </h2>
 
               <p className="text-base sm:text-lg md:text-xl leading-relaxed text-[#292f16]/90 font-light border-l-2 border-[#cc25a9] pl-6 my-2">
-                &ldquo;Beyond Native Travel is a boutique cultural tourism company specialising in small-group, immersive journeys across West Africa. It is designed for travellers who want to go beyond the surface — to experience Africa through the eyes of people who live it, love it, and call it home.&rdquo;
+                &ldquo;Beyond Native Tours is a boutique cultural tourism company specialising in small-group, immersive journeys across West Africa. It is designed for travellers who want to go beyond the surface — to experience Africa through the eyes of people who live it, love it, and call it home.&rdquo;
               </p>
 
               <p className="text-sm sm:text-base leading-relaxed text-[#292f16]/75">
@@ -520,7 +520,7 @@ export default function AboutPage() {
                 </Link>
                 <a
                   href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
-                    "Hello Ayishetu & Beyond Native Travel! 🌿 I would like to inquire about booking an authentic West African journey."
+                    "Hello Ayishetu & Beyond Native Tours! 🌿 I would like to inquire about booking an authentic West African journey."
                   )}`}
                   target="_blank"
                   rel="noreferrer"

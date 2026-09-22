@@ -559,7 +559,7 @@ export default function StorePage() {
             <div className="shrink-0">
               <a
                 href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
-                  "Hello Beyond Native Travel! 🌟 I have a custom artisan / store inquiry and would love to discuss options."
+                  "Hello Beyond Native Tours! 🌟 I have a custom artisan / store inquiry and would love to discuss options."
                 )}`}
                 target="_blank"
                 rel="noreferrer"

@@ -11,7 +11,7 @@ import { useCart } from "@/context/CartContext";
 interface Product {
   id: string;
   name: string;
-  category: "textiles" | "wellness" | "jewelry" | "lifestyle";
+  category: "teas" | "shea-butter" | "honey";
   categoryLabel: string;
   priceUSD: string;
   priceGHS: string;
@@ -24,96 +24,263 @@ interface Product {
 
 const categories = [
   { id: "all", label: "All Curations" },
-  { id: "textiles", label: "Handwoven Textiles" },
-  { id: "wellness", label: "Native Wellness" },
-  { id: "jewelry", label: "Artisan Jewelry" },
-  { id: "lifestyle", label: "Travel & Lifestyle" },
+  { id: "teas", label: "Attitude Herbal Teas" },
+  { id: "shea-butter", label: "Raw Shea Butter" },
+  { id: "honey", label: "Organic Raw Honey" },
 ];
 
-const placeholderProducts: Product[] = [
+const nativeProducts: Product[] = [
+  // ================= ATTITUDE TEAS =================
   {
-    id: "bonwire-kente-stole",
-    name: "Authentic Bonwire Kente Stole",
-    category: "textiles",
-    categoryLabel: "Handwoven Textiles",
-    priceUSD: "$65",
-    priceGHS: "GH₵ 950",
-    badge: "Master Weaver Edition",
-    origin: "Kumasi, Ashanti Region",
+    id: "native-habits-hibiscus",
+    name: "Native Habits Hibiscus Pure Flower Tea",
+    category: "teas",
+    categoryLabel: "Attitude Herbal Teas",
+    priceUSD: "$4.50",
+    priceGHS: "GH₵ 60",
+    badge: "15 Tea Bags • Caffeine Free",
+    origin: "Handcrafted in Ghana with Intention",
     description:
-      "Hand-loomed in the historical weaving village of Bonwire. Each vibrant geometric motif represents traditional Akan proverbs of royalty, heritage, and unity.",
-    image: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=1000&q=85",
-    details: ["100% Cotton & Silk blend", "Hand-woven on double-heddle loom", "Includes certificate of authenticity"],
+      "“She didn't come to play. She came to steep.” 100% pure dried hibiscus flowers rich in natural antioxidants and Vitamin C to support circulation, blood pressure, and liver vitality.",
+    image: "/images/store/hibiscus-flower-tea.jpg",
+    details: [
+      "Ingredients: Dried Hibiscus Flowers",
+      "Key Benefits: Lowers blood pressure, rich in Vitamin C, antioxidant rich, supports liver health",
+      "Net Weight: 35g (15 individual filter tea bags)",
+      "Brew Guide: 95°C for 5–7 mins (Serve hot or iced)",
+    ],
   },
   {
-    id: "raw-shea-botanical-set",
-    name: "Raw Savanna Shea & Botanicals Ritual Set",
-    category: "wellness",
-    categoryLabel: "Native Wellness",
-    priceUSD: "$38",
-    priceGHS: "GH₵ 550",
-    badge: "Ethically Sourced",
-    origin: "Tamale, Northern Ghana",
+    id: "native-habits-ginger",
+    name: "Native Habits Ginger Pure Root Tea",
+    category: "teas",
+    categoryLabel: "Attitude Herbal Teas",
+    priceUSD: "$4.50",
+    priceGHS: "GH₵ 60",
+    badge: "10 Tea Bags • Ancestral Brew",
+    origin: "Handcrafted in Ghana with Intention",
     description:
-      "Unrefined Grade-A ivory shea butter handcrafted by women's cooperatives in Northern Ghana, paired with native cold-pressed baobab seed oil and scented African black soap.",
-    image: "https://images.unsplash.com/photo-1608248597359-2169b4e54867?auto=format&fit=crop&w=1000&q=85",
-    details: ["Unrefined pure shea butter (250g)", "Baobab nourishing oil (60ml)", "Traditional black soap bar"],
+      "“Your ancestors drank this. Be humble.” Robust, sun-cured pure ginger root brew offering comforting warmth, digestive fire, circulation boost, and nausea relief.",
+    image: "/images/store/ginger-root-tea.jpg",
+    details: [
+      "Ingredients: 100% Dried Ginger Root",
+      "Key Benefits: Relieves nausea, anti-inflammatory, boosts circulation, menstrual relief",
+      "Net Weight: 25g (10 individual filter tea bags)",
+      "Brew Guide: 100°C for 7–10 mins (Add raw honey to taste)",
+    ],
   },
   {
-    id: "krobo-recycled-glass-beads",
-    name: "Krobo Recycled Glass Statement Necklace",
-    category: "jewelry",
-    categoryLabel: "Artisan Jewelry",
-    priceUSD: "$48",
-    priceGHS: "GH₵ 700",
-    badge: "One-of-a-Kind",
-    origin: "Somanya, Eastern Region",
+    id: "native-habits-ocean-sunrise",
+    name: "Native Habits Ocean Sunrise Tropical Wellness Blend",
+    category: "teas",
+    categoryLabel: "Attitude Herbal Teas",
+    priceUSD: "$5.00",
+    priceGHS: "GH₵ 70",
+    badge: "Tropical Wellness • 10 Bags",
+    origin: "Handcrafted in Ghana with Intention",
     description:
-      "Sculpted using centuries-old Krobo kiln techniques. Discarded glassware is powdered, poured into cassava-leaf clay molds, and hand-painted with organic mineral pigments.",
-    image: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=1000&q=85",
-    details: ["Eco-friendly recycled powdered glass", "Hand-painted symbolic bands", "Durable adjustable cord"],
+      "“Vacation in a cup. Passport optional.” A revitalizing coastal blend of tropical pineapple, fiery ginger, aromatic cloves, and sacred West African Aiden fruit (Prekese).",
+    image: "/images/store/ocean-sunrise-tea.jpg",
+    details: [
+      "Ingredients: Pineapple, Ginger, Cloves, Aiden Fruit (Prekese)",
+      "Key Benefits: Aids digestion, boosts immunity, anti-inflammatory, natural energy",
+      "Net Weight: 40g (10 individual filter tea bags)",
+      "Brew Guide: 95°C for 6–8 mins (Serve hot or iced)",
+    ],
   },
   {
-    id: "adinkra-heritage-tote",
-    name: "Hand-Stamped Adinkra Canvas Expedition Tote",
-    category: "lifestyle",
-    categoryLabel: "Travel & Lifestyle",
-    priceUSD: "$42",
-    priceGHS: "GH₵ 600",
-    badge: "Best Seller",
-    origin: "Ntonso Artisan Center",
+    id: "native-habits-ember-brew",
+    name: "Native Habits Ember Brew Smoky Wellness Blend",
+    category: "teas",
+    categoryLabel: "Attitude Herbal Teas",
+    priceUSD: "$4.50",
+    priceGHS: "GH₵ 60",
+    badge: "Smoky Wellness • 15 Bags",
+    origin: "Handcrafted in Ghana with Intention",
     description:
-      "Heavyweight 16oz cotton canvas stamped by master artisans in Ntonso using natural Badie tree dye with sacred Adinkra symbols of wisdom, endurance, and strength.",
-    image: "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=1000&q=85",
-    details: ["Heavyweight 100% organic canvas", "Natural calabash-stamped dyes", "Reinforced vegan leather straps"],
+      "“Smoky. Mysterious. Doesn't text back first.” An earthy, calming infusion of sun-dried bay leaves and aromatic cloves to ground nervous energy, boost metabolism, and aid heart health.",
+    image: "/images/store/ember-brew-tea.jpg",
+    details: [
+      "Ingredients: Bay Leaf, Cloves",
+      "Key Benefits: Regulates blood sugar, heart health, boosts metabolism, calms nerves",
+      "Net Weight: 30g (15 individual filter tea bags)",
+      "Brew Guide: 95°C for 7–10 mins ('Sip slow, say less')",
+    ],
   },
   {
-    id: "baobab-carved-keepsake",
-    name: "Hand-Carved Sacred Baobab Sculpture",
-    category: "lifestyle",
-    categoryLabel: "Travel & Lifestyle",
-    priceUSD: "$55",
-    priceGHS: "GH₵ 800",
-    badge: "Artisan Carved",
-    origin: "Accra Arts Center",
+    id: "native-habits-ko-sa-goodness",
+    name: "Native Habits Ko-Sa Goodness Calm & Cleanse Blend",
+    category: "teas",
+    categoryLabel: "Attitude Herbal Teas",
+    priceUSD: "$5.00",
+    priceGHS: "GH₵ 70",
+    badge: "Calm & Cleanse • 15 Bags",
+    origin: "Handcrafted in Ghana with Intention",
     description:
-      "Intricately sculpted from sustainably sourced native mahogany, celebrating the Baobab tree of life — the sacred heart of the Beyond Native emblem.",
-    image: "https://images.unsplash.com/photo-1582582621959-48d27397dc69?auto=format&fit=crop&w=1000&q=85",
-    details: ["Solid sustainable native wood", "Hand-buffed with beeswax finish", "Height: ~22cm"],
+      "“Soft life in a cup.” A deeply restorative, fragrant fusion of native lemongrass, cloves, and cinnamon designed to relieve tension headaches, ease anxiety, and cleanse the gut.",
+    image: "/images/store/ko-sa-goodness-tea.jpg",
+    details: [
+      "Ingredients: Lemongrass, Cloves, Cinnamon",
+      "Key Benefits: Reduces anxiety, natural detox, gut health, relieves headaches",
+      "Net Weight: 35g (15 individual filter tea bags)",
+      "Brew Guide: 90°C for 5–7 mins ('Breathe, Sip, Repeat')",
+    ],
   },
   {
-    id: "single-origin-cocoa-spiced-tea",
-    name: "Single-Origin Ghanaian Cocoa & Spiced Hibiscus",
-    category: "wellness",
-    categoryLabel: "Native Wellness",
-    priceUSD: "$25",
-    priceGHS: "GH₵ 360",
-    badge: "Farm to Cup",
-    origin: "Volta & Ashanti Regions",
+    id: "native-habits-spice-bay",
+    name: "Native Habits Spice Bay Bold Spice Blend",
+    category: "teas",
+    categoryLabel: "Attitude Herbal Teas",
+    priceUSD: "$4.50",
+    priceGHS: "GH₵ 60",
+    badge: "Bold Spice • 15 Bags",
+    origin: "Handcrafted in Ghana with Intention",
     description:
-      "A rich aromatic blend of ceremonial sun-dried Ghanaian cocoa nibs, sun-ripened organic hibiscus petals (Sobolo), wild ginger, and fragrant grains of paradise.",
-    image: "https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=1000&q=85",
-    details: ["150g loose botanical blend", "Naturally caffeine-free antioxidant", "Includes brass reusable tea infuser"],
+      "“Not for the faint-hearted. You're welcome.” A bold, invigorating antiviral blend of pungent star anise and rich native cloves that rapidly clears congestion and supports digestion.",
+    image: "/images/store/spice-bay-tea.jpg",
+    details: [
+      "Ingredients: Star Anise, Cloves",
+      "Key Benefits: Antiviral, clears congestion, rich in antioxidants, aids digestion",
+      "Net Weight: 50g (15 individual filter tea bags)",
+      "Brew Guide: 100°C for 8–10 mins ('Bold choices only')",
+    ],
+  },
+  {
+    id: "native-habits-moringa-rising",
+    name: "Native Habits Moringa Rising Green Vitality Blend",
+    category: "teas",
+    categoryLabel: "Attitude Herbal Teas",
+    priceUSD: "$5.00",
+    priceGHS: "GH₵ 70",
+    badge: "Green Vitality • Superfood",
+    origin: "Handcrafted in Ghana with Intention",
+    description:
+      "“One Habit 7 Attitudes.” Certified Ghanaian nutrient powerhouse rich in bioavailable iron, plant chlorophyll, and essential amino acids for sustained daily stamina and radiant skin.",
+    image: "/images/store/native-habits-flyer.jpg",
+    details: [
+      "Ingredients: 100% Organic Ghanaian Moringa Leaves",
+      "Key Benefits: Iron rich, sustained natural energy, anti-inflammatory, skin health",
+      "Cleanse & Nutrition: 15 Tea Bags | Caffeine Free | No preservatives",
+      "Brew Guide: 90°C for 5–7 mins (Pairs wonderfully with Native Organic Honey)",
+    ],
+  },
+
+  // ================= RAW SHEA BUTTER =================
+  {
+    id: "native-raw-shea-butter-1kg",
+    name: "Native Raw Shea Butter (1KG Eco Kraft Pouch)",
+    category: "shea-butter",
+    categoryLabel: "Raw Shea Butter",
+    priceUSD: "$8.50",
+    priceGHS: "GH₵ 120",
+    badge: "1KG Bulk Pouch • Best Value",
+    origin: "Made in Ghana • Empowering Women One 'Craft' At A Time",
+    description:
+      "100% pure, unrefined Grade-A golden Ghanaian shea butter in an eco-friendly standing kraft pouch with clear window. Hand-harvested and cold-whipped by traditional women's cooperatives in Northern Ghana.",
+    image: "/images/store/native-raw-shea-butter-1kg-pouch.jpg",
+    details: [
+      "Ingredients: 100% Butyrospermum Parkii (Shea) Butter",
+      "Vitamins: Rich in Vitamins A, E & F for cellular renewal and barrier restoration",
+      "Key Benefits: Deep hydration (moisturizing), soothing for hair, skin, and stretch marks",
+      "Storage: Keep in a cool dry place away from direct sunlight | Net Wt. 1KG",
+    ],
+  },
+  {
+    id: "native-raw-shea-butter-jar-250ml",
+    name: "Native Raw Shea Butter (250ml Cosmetic Vanity Jar)",
+    category: "shea-butter",
+    categoryLabel: "Raw Shea Butter",
+    priceUSD: "$4.00",
+    priceGHS: "GH₵ 55",
+    badge: "250ml Black Jar",
+    origin: "Made in Ghana • Empowering Women One 'Craft' At A Time",
+    description:
+      "Sleek black apothecary vanity jar filled with velvety unrefined native Ghanaian shea butter. Melts instantly at skin temperature for intense whole-body moisturizing, barrier repair, and scalp conditioning.",
+    image: "/images/store/native-raw-shea-butter-jar.jpg",
+    details: [
+      "Ingredients: 100% Pure Unrefined Shea Butter",
+      "Texture: Rich, velvety, absorbs naturally without synthetic additives or fragrances",
+      "Key Benefits: Eczema relief, heals cracked heels, deeply hydrates dry skin and curls",
+      "Net Volume: 250ml luxury screw-top jar",
+    ],
+  },
+  {
+    id: "native-shea-butter-travel-100ml",
+    name: "Native Raw Shea Butter (100ml Pocket Travel Pot)",
+    category: "shea-butter",
+    categoryLabel: "Raw Shea Butter",
+    priceUSD: "$2.50",
+    priceGHS: "GH₵ 35",
+    badge: "100ml Travel Size",
+    origin: "Made in Ghana • Empowering Women One 'Craft' At A Time",
+    description:
+      "Pocket-sized 100ml travel tin ideal for purses, backpacks, carry-on flights, and daily commutes. Instant relief for dry hands, chapped lips, and dry flight cabin skin.",
+    image: "/images/store/native-shea-butter-travel-100ml.jpg",
+    details: [
+      "Ingredients: 100% Pure Natural Shea Butter",
+      "Convenience: TSA friendly compact 100ml protective tin",
+      "Multi-Use: Lip balm, cuticle cream, dry hand therapy, flyaway tamer",
+      "Origin: Ethical Northern Ghana women's cooperative",
+    ],
+  },
+
+  // ================= ORGANIC RAW HONEY =================
+  {
+    id: "native-organic-honey-500ml",
+    name: "Native Organic Raw Honey (500ml Classic Bottle)",
+    category: "honey",
+    categoryLabel: "Organic Raw Honey",
+    priceUSD: "$6.00",
+    priceGHS: "GH₵ 85",
+    badge: "500ml Raw & Unfiltered",
+    origin: "Made in Ghana • Empowering Women One 'Craft' At A Time",
+    description:
+      "“Raw. Unfiltered. Unapologetically Sweet.” 100% pure wild Ghanaian forest honey retained in its raw unpasteurized state with natural bee pollen, living enzymes, and deep floral notes.",
+    image: "/images/store/native-organic-honey-500ml.jpg",
+    details: [
+      "Ingredients: 100% Raw Unfiltered Ghanaian Wild Honey",
+      "Key Benefits: Pure natural energy, soothes sore throats & coughs, antioxidant rich",
+      "How to use: Stir into Native Habits Attitude Tea, drizzle over fruit, or enjoy straight",
+      "Volume: 500ml bottle with tamper-evident red seal cap",
+    ],
+  },
+  {
+    id: "native-organic-honey-2l",
+    name: "Native Organic Raw Honey (2L Ergonomic Handle Jug)",
+    category: "honey",
+    categoryLabel: "Organic Raw Honey",
+    priceUSD: "$19.00",
+    priceGHS: "GH₵ 280",
+    badge: "2 Liters • Family Value",
+    origin: "Made in Ghana • Empowering Women One 'Craft' At A Time",
+    description:
+      "Generous 2-Liter container featuring an ergonomic carry and pour handle. The perfect pantry centerpiece for households that drink daily herbal teas, whip wellness elixirs, or bake naturally.",
+    image: "/images/store/native-organic-honey-2l.jpg",
+    details: [
+      "Ingredients: 100% Raw Unfiltered Ghanaian Wild Honey",
+      "Properties: Natural crystallization is normal; gently place in warm water to restore liquid state",
+      "Packaging: 2L food-grade handle container with leakproof seal",
+      "Empowerment: Directly supports Ghanaian women beekeepers and sustainable forest harvests",
+    ],
+  },
+  {
+    id: "native-organic-honey-bulk-4-5l",
+    name: "Native Organic Raw Honey (4.5L Bulk Reserve Jug)",
+    category: "honey",
+    categoryLabel: "Organic Raw Honey",
+    priceUSD: "$40.00",
+    priceGHS: "GH₵ 580",
+    badge: "4.5L Commercial Reserve",
+    origin: "Made in Ghana • Empowering Women One 'Craft' At A Time",
+    description:
+      "Commercial-grade 4.5L bulk jug for holistic practitioners, retreat centers, tea bars, and dedicated raw honey enthusiasts. Guaranteed pure, unadulterated Ghanaian nectar.",
+    image: "/images/store/native-organic-honey-bulk.jpg",
+    details: [
+      "Ingredients: 100% Pure Raw Ghanaian Forest Honey",
+      "Usage: Bulk food service, holistic health elixirs, long-term pantry storage",
+      "Packaging: Heavy-duty 4.5L container with secure tamper-evident top",
+      "Storage: Store at room temperature away from direct sunlight",
+    ],
   },
 ];
 
@@ -129,10 +296,12 @@ export default function StorePage() {
   const [errorMsg, setErrorMsg] = useState("");
   const [orderSent, setOrderSent] = useState(false);
 
+  const [showTeaFlyer, setShowTeaFlyer] = useState(false);
+
   const filteredProducts =
     selectedCategory === "all"
-      ? placeholderProducts
-      : placeholderProducts.filter((p) => p.category === selectedCategory);
+      ? nativeProducts
+      : nativeProducts.filter((p) => p.category === selectedCategory);
 
   const handleOpenOrderModal = (product: Product) => {
     setActiveModalProduct(product);
@@ -232,22 +401,22 @@ export default function StorePage() {
               The Native <span className="text-[#3e5b34]">Store</span>
             </h1>
 
-            <p className="mt-3 sm:mt-4 font-anton text-[11px] sm:text-sm md:text-base uppercase tracking-[0.2em] sm:tracking-[0.25em] text-[#3e5b34] max-w-2xl">
-              Authentic Artisanal Goods • Heritage Keepsakes • Living Culture
+            <p className="mt-3 sm:mt-4 font-anton text-[11px] sm:text-sm md:text-base uppercase tracking-[0.2em] sm:tracking-[0.25em] text-[#3e5b34] max-w-3xl">
+              Attitude Herbal Teas • Raw Unrefined Shea Butter • Pure Organic Wild Honey
             </p>
 
-            <p className="mt-3 sm:mt-4 max-w-xl text-[11px] sm:text-sm text-[#292f16]/75 leading-relaxed">
-              Every item is handcrafted by native West African artisans, weavers, and heritage cooperatives. Select an item below to order directly via our WhatsApp concierge.
+            <p className="mt-3 sm:mt-4 max-w-2xl text-[11px] sm:text-sm text-[#292f16]/75 leading-relaxed">
+              Every creation is 100% natural and handcrafted in Ghana with intention — empowering rural women&apos;s cooperatives and local beekeepers. Build your bag and order all items directly to WhatsApp DM ({WHATSAPP_DISPLAY}).
             </p>
           </motion.div>
 
-          {/* Category Filter Pills */}
+          {/* Category Filter Pills & Flyer Trigger */}
           <div className="mt-6 sm:mt-10 flex flex-wrap items-center justify-center gap-1.5 sm:gap-3">
             {categories.map((cat) => (
               <button
                 key={cat.id}
                 onClick={() => setSelectedCategory(cat.id)}
-                className={`rounded-full px-3 py-1.5 sm:px-4 sm:py-2 text-[10px] sm:text-xs font-anton uppercase tracking-[0.14em] sm:tracking-[0.16em] transition-all duration-200 ${
+                className={`rounded-full px-3.5 py-1.5 sm:px-5 sm:py-2 text-[10px] sm:text-xs font-anton uppercase tracking-[0.14em] sm:tracking-[0.16em] transition-all duration-200 cursor-pointer ${
                   selectedCategory === cat.id
                     ? "bg-[#3e5b34] text-white shadow-md scale-105"
                     : "border border-[#3e5b34]/20 bg-white text-[#292f16]/70 hover:border-[#3e5b34]/50 hover:text-[#292f16] hover:bg-[#f7f9f6]"
@@ -256,6 +425,14 @@ export default function StorePage() {
                 {cat.label}
               </button>
             ))}
+
+            <button
+              type="button"
+              onClick={() => setShowTeaFlyer(true)}
+              className="inline-flex items-center gap-1.5 rounded-full border border-[#ffbe17] bg-[#ffbe17]/15 px-3.5 py-1.5 sm:px-4 sm:py-2 text-[10px] sm:text-xs font-anton uppercase tracking-[0.14em] text-[#292f16] hover:bg-[#ffbe17] transition-all cursor-pointer shadow-sm"
+            >
+              <span>🍵 7 Attitude Teas Guide</span>
+            </button>
           </div>
         </div>
       </section>
@@ -275,19 +452,19 @@ export default function StorePage() {
                 className="group flex flex-col rounded-2xl sm:rounded-3xl overflow-hidden border border-[#3e5b34]/15 bg-white shadow-sm transition-all duration-300 hover:border-[#3e5b34]/50 hover:shadow-xl"
               >
                 {/* Product Photo Container */}
-                <div className="relative aspect-[4/5] sm:aspect-auto sm:h-80 w-full overflow-hidden bg-[#f7f9f6]">
+                <div className="relative aspect-[4/5] sm:aspect-auto sm:h-80 w-full overflow-hidden bg-[#f7f9f6] flex items-center justify-center p-3 sm:p-5">
                   <Image
                     src={product.image}
                     alt={product.name}
                     fill
                     sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 33vw"
-                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                    className="object-contain p-2 sm:p-3 transition-transform duration-700 ease-out group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-60" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-30 pointer-events-none" />
 
                   {/* Top Badges */}
                   <div className="absolute top-2.5 inset-x-2.5 sm:top-4 sm:inset-x-4 flex items-center justify-between pointer-events-none gap-1">
-                    <span className="font-anton text-[7px] sm:text-[10px] uppercase tracking-wider text-[#292f16] bg-white/90 backdrop-blur-md px-1.5 py-0.5 sm:px-3 sm:py-1 rounded-full border border-[#3e5b34]/20 shadow-sm truncate max-w-[65%]">
+                    <span className="font-anton text-[7px] sm:text-[10px] uppercase tracking-wider text-[#292f16] bg-white/95 backdrop-blur-md px-1.5 py-0.5 sm:px-3 sm:py-1 rounded-full border border-[#3e5b34]/20 shadow-sm truncate max-w-[65%]">
                       {product.origin}
                     </span>
                     {product.badge && (
@@ -299,8 +476,8 @@ export default function StorePage() {
 
                   {/* Price Tag Overlay at Bottom of Image */}
                   <div className="absolute bottom-2 right-2 sm:bottom-3 sm:right-4 flex items-baseline gap-1 sm:gap-1.5 bg-white/95 backdrop-blur-md px-2 py-0.5 sm:px-3 sm:py-1.5 rounded-lg sm:rounded-2xl border border-[#3e5b34]/20 shadow-sm">
-                    <span className="font-anton text-xs sm:text-lg text-[#292f16]">{product.priceUSD}</span>
-                    <span className="text-[9px] sm:text-[11px] font-medium text-[#292f16]/60">/ {product.priceGHS}</span>
+                    <span className="font-anton text-xs sm:text-base text-[#3e5b34] font-bold">{product.priceGHS}</span>
+                    <span className="text-[9px] sm:text-[11px] font-medium text-[#292f16]/60">({product.priceUSD})</span>
                   </div>
                 </div>
 
@@ -433,26 +610,41 @@ export default function StorePage() {
                 </span>
               </div>
 
-              <div className="flex gap-4 items-center mb-5">
-                <div className="relative h-20 w-20 shrink-0 rounded-2xl overflow-hidden border border-[#3e5b34]/20 bg-[#f7f9f6]">
+              <div className="flex gap-4 items-center mb-4">
+                <div className="relative h-20 w-20 shrink-0 rounded-2xl overflow-hidden border border-[#3e5b34]/20 bg-white p-1">
                   <Image
                     src={activeModalProduct.image}
                     alt={activeModalProduct.name}
                     fill
-                    className="object-cover"
+                    className="object-contain p-1"
                   />
                 </div>
                 <div>
                   <h3 className="font-anton text-lg sm:text-xl uppercase text-[#292f16] leading-tight">
                     {activeModalProduct.name}
                   </h3>
-                  <p className="font-anton text-base text-[#292f16] mt-0.5">
-                    {activeModalProduct.priceUSD} <span className="text-xs text-[#292f16]/60 font-sans">({activeModalProduct.priceGHS})</span>
+                  <p className="font-anton text-base text-[#3e5b34] mt-0.5 font-bold">
+                    {activeModalProduct.priceGHS} <span className="text-xs text-[#292f16]/60 font-sans font-normal">({activeModalProduct.priceUSD})</span>
                   </p>
                   <p className="text-[11px] text-[#292f16]/70 mt-0.5 font-sans">
-                    Origin: {activeModalProduct.origin}
+                    {activeModalProduct.origin}
                   </p>
                 </div>
+              </div>
+
+              {/* Product Info & Benefits */}
+              <div className="mb-4 rounded-2xl bg-[#f7f9f6] border border-[#3e5b34]/15 p-3.5 space-y-2">
+                <p className="font-serif italic text-xs text-[#292f16]/85">
+                  {activeModalProduct.description}
+                </p>
+                <ul className="space-y-1 text-[11px] text-[#292f16]/75 border-t border-[#3e5b34]/10 pt-2">
+                  {activeModalProduct.details.map((d, i) => (
+                    <li key={i} className="flex items-start gap-1.5">
+                      <span className="text-[#3e5b34] font-bold mt-0.5">•</span>
+                      <span>{d}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
 
               {orderSent ? (
@@ -606,6 +798,75 @@ export default function StorePage() {
                   </div>
                 </form>
               )}
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+      {/* ================= TEA GUIDE FLYER MODAL ================= */}
+      <AnimatePresence>
+        {showTeaFlyer && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setShowTeaFlyer(false)}
+              className="fixed inset-0 bg-black/85 backdrop-blur-md"
+            />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.94, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.94, y: 20 }}
+              className="relative z-10 w-full max-w-lg max-h-[90vh] overflow-y-auto rounded-3xl bg-white p-5 sm:p-6 shadow-2xl my-auto text-[#292f16]"
+            >
+              <div className="flex items-center justify-between pb-3 border-b border-[#292f16]/10 mb-3">
+                <div>
+                  <h3 className="font-anton text-base uppercase text-[#292f16]">
+                    Native Habits — Attitude Teas Guide
+                  </h3>
+                  <p className="text-[10px] text-[#3e5b34] font-semibold uppercase tracking-wider">
+                    7 Unique Blends • One Habit 7 Attitudes
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setShowTeaFlyer(false)}
+                  className="h-8 w-8 rounded-full border border-[#292f16]/15 bg-[#f7f9f6] grid place-items-center text-[#292f16]/70 hover:text-[#292f16] cursor-pointer"
+                >
+                  &times;
+                </button>
+              </div>
+
+              <div className="relative aspect-[9/16] w-full rounded-2xl overflow-hidden shadow-inner border border-[#292f16]/10 bg-neutral-100">
+                <Image
+                  src="/images/store/native-habits-flyer.jpg"
+                  alt="Native Habits 7 Attitude Teas Flyer"
+                  fill
+                  unoptimized
+                  className="object-contain"
+                />
+              </div>
+
+              <div className="mt-4 flex gap-2">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setShowTeaFlyer(false);
+                    setSelectedCategory("teas");
+                  }}
+                  className="flex-1 rounded-full bg-[#3e5b34] py-3 text-center font-anton text-xs uppercase tracking-wider text-white hover:bg-[#292f16] transition-colors cursor-pointer"
+                >
+                  Shop Attitude Teas
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setShowTeaFlyer(false)}
+                  className="rounded-full border border-[#292f16]/20 px-5 py-3 text-center font-anton text-xs uppercase tracking-wider text-[#292f16] hover:bg-[#292f16]/5 transition-colors cursor-pointer"
+                >
+                  Close
+                </button>
+              </div>
             </motion.div>
           </div>
         )}

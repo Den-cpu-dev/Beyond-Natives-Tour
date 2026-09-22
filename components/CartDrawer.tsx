@@ -529,12 +529,12 @@ export default function CartDrawer() {
                               className="group relative flex gap-3.5 rounded-2xl border border-[#292f16]/10 bg-[#f7f9f6]/70 p-3.5 transition-all hover:border-[#3e5b34]/40 hover:bg-white hover:shadow-md"
                             >
                               {item.image && (
-                                <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-xl border border-[#292f16]/10 bg-gray-100">
+                                <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-xl border border-[#292f16]/10 bg-white p-1">
                                   <Image
                                     src={item.image}
                                     alt={item.name}
                                     fill
-                                    className="object-cover"
+                                    className="object-contain p-1"
                                   />
                                 </div>
                               )}
@@ -545,7 +545,7 @@ export default function CartDrawer() {
                                       {item.name}
                                     </h4>
                                     <p className="text-xs font-bold text-[#3e5b34] mt-0.5">
-                                      {item.priceUSD} • <span className="font-normal text-[#292f16]/70">{item.priceGHS}</span>
+                                      {item.priceGHS} • <span className="font-normal text-[#292f16]/70">{item.priceUSD}</span>
                                     </p>
                                   </div>
                                   <button

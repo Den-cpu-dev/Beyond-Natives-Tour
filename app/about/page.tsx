@@ -189,12 +189,12 @@ export default function AboutPage() {
               </div>
 
               <h2 className="font-anton text-3xl sm:text-4xl md:text-5xl uppercase tracking-tight text-[#292f16] leading-tight">
-                Going Beyond <br />
-                <span className="text-[#cc25a9]">The Surface</span>
+                Going <span className="text-[#3d2c5f]">Beyond</span> <br />
+                <span className="text-[#8d3f5c]">The Surface</span>
               </h2>
 
-              <p className="text-base sm:text-lg md:text-xl leading-relaxed text-[#292f16]/90 font-light border-l-2 border-[#cc25a9] pl-6 my-2">
-                &ldquo;Beyond Native Tours is a boutique cultural tourism company specialising in small-group, immersive journeys across West Africa. It is designed for travellers who want to go beyond the surface — to experience Africa through the eyes of people who live it, love it, and call it home.&rdquo;
+              <p className="text-base sm:text-lg md:text-xl leading-relaxed text-[#292f16]/90 font-light border-l-2 border-[#8d3f5c] pl-6 my-2">
+                &ldquo;<span className="text-[#3d2c5f] font-semibold">Beyond</span> Native Tours is a boutique cultural tourism company specialising in small-group, immersive journeys across West Africa. It is designed for travellers who want to go <span className="text-[#3d2c5f] font-medium">beyond</span> the surface — to experience Africa through the eyes of people who live it, love it, and call it home.&rdquo;
               </p>
 
               <p className="text-sm sm:text-base leading-relaxed text-[#292f16]/75">

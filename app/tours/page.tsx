@@ -91,7 +91,7 @@ function ToursContent() {
           <div className="inline-flex items-center gap-2.5 mb-4">
             <span className="h-[2px] w-6 sm:w-8 bg-[#3e5b34]" />
             <span className="font-sans text-[11px] sm:text-xs font-semibold uppercase tracking-[0.24em] text-[#3e5b34]">
-              Beyond Native Tours • West Africa Catalog
+              <span className="text-[#3d2c5f] font-bold">Beyond</span> Native Tours • West Africa Catalog
             </span>
             <span className="h-[2px] w-6 sm:w-8 bg-[#3e5b34]" />
           </div>

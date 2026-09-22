@@ -202,8 +202,8 @@ export default function Header() {
             aria-label="Beyond Native Tours Instagram"
             className={`flex h-9 w-9 items-center justify-center rounded-full border transition-all duration-200 hover:scale-105 ${
               isLightHeader
-                ? "border-[#292f16]/20 bg-[#292f16]/5 text-[#292f16]/80 hover:border-[#3e5b34] hover:text-[#3e5b34] hover:bg-[#3e5b34]/10"
-                : "border-white/20 bg-black/30 text-white/80 backdrop-blur-sm hover:border-white hover:text-white hover:bg-white/10"
+                ? "border-[#023051]/20 bg-[#023051]/10 text-[#023051] hover:border-[#023051] hover:text-white hover:bg-[#023051]"
+                : "border-white/20 bg-black/30 text-white/80 backdrop-blur-sm hover:border-white hover:text-white hover:bg-[#023051]"
             }`}
           >
             <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
@@ -216,8 +216,8 @@ export default function Header() {
             aria-label="Beyond Native Tours Facebook"
             className={`flex h-9 w-9 items-center justify-center rounded-full border transition-all duration-200 hover:scale-105 ${
               isLightHeader
-                ? "border-[#292f16]/20 bg-[#292f16]/5 text-[#292f16]/80 hover:border-[#3e5b34] hover:text-[#3e5b34] hover:bg-[#3e5b34]/10"
-                : "border-white/20 bg-black/30 text-white/80 backdrop-blur-sm hover:border-white hover:text-white hover:bg-white/10"
+                ? "border-[#023051]/20 bg-[#023051]/10 text-[#023051] hover:border-[#023051] hover:text-white hover:bg-[#023051]"
+                : "border-white/20 bg-black/30 text-white/80 backdrop-blur-sm hover:border-white hover:text-white hover:bg-[#023051]"
             }`}
           >
             <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">

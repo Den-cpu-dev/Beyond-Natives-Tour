@@ -22,7 +22,7 @@ export default function RecommendationsGrid({ destinations }: { destinations: De
           </h2>
           
           <p className="mt-4 sm:mt-6 text-xs sm:text-base leading-relaxed text-[#292f16]/80 max-w-xl mx-auto">
-            Choose a country to explore its authentic tour sites, cultural heritage, and curated expeditions with Beyond Native Tours.
+            Choose a country to explore its authentic tour sites, cultural heritage, and curated expeditions with <span className="text-[#3d2c5f] font-semibold">Beyond</span> Native Tours.
           </p>
         </div>
 

@@ -99,7 +99,7 @@ export const destinations: Destination[] = [
       "From Cape Coast Castle to the vibrant energy of Accra and savanna wildlife of Mole, experience Ghana's warm, welcoming heritage.",
     heroImage: "/images/tours/castle.jpg",
     thumbnailImage: "/images/tours/castle.jpg",
-    tourCount: 8,
+    tourCount: 9,
     rank: 1,
   },
   {
@@ -125,7 +125,7 @@ export const destinations: Destination[] = [
       "Behold the monumental Cotonou Amazon warrior, glide through Ganvié stilt city, and discover the ancestral sanctuaries of Ouidah.",
     heroImage: "/images/tours/benin.jpg",
     thumbnailImage: "/images/tours/benin.jpg",
-    tourCount: 5,
+    tourCount: 6,
     rank: 3,
   },
   {

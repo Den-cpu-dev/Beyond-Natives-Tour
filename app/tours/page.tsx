@@ -251,9 +251,16 @@ function ToursContent() {
 
                       {/* Tagline */}
                       {tour.tagline && (
-                        <p className="font-serif italic text-xs text-[#3e5b34] font-medium mb-3">
+                        <p className="font-serif italic text-xs text-[#3e5b34] font-medium mb-2.5">
                           &ldquo;{tour.tagline}&rdquo;
                         </p>
+                      )}
+
+                      {/* Pricing badge if present */}
+                      {tour.pricing && (
+                        <div className="mb-3 inline-flex items-center gap-1.5 rounded-full bg-[#3e5b34]/10 border border-[#3e5b34]/25 px-3 py-1 text-[11px] font-anton uppercase tracking-wider text-[#3e5b34]">
+                          <span>💰 {tour.pricing}</span>
+                        </div>
                       )}
 
                       <p className="text-xs sm:text-[13px] leading-relaxed text-[#292f16]/75 mb-4">

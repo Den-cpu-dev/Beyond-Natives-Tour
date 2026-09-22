@@ -5,7 +5,7 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { WHATSAPP_NUMBER } from "@/data/whatsapp";
+import { WHATSAPP_NUMBER, WHATSAPP_DISPLAY, getStoreOrderWhatsAppUrl, type StoreOrderDetails } from "@/data/whatsapp";
 
 interface Product {
   id: string;
@@ -120,25 +120,57 @@ export default function StorePage() {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [activeModalProduct, setActiveModalProduct] = useState<Product | null>(null);
   const [quantity, setQuantity] = useState(1);
+  const [customerName, setCustomerName] = useState("");
+  const [customerContact, setCustomerContact] = useState("");
+  const [deliveryLocation, setDeliveryLocation] = useState("");
   const [customNote, setCustomNote] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
+  const [orderSent, setOrderSent] = useState(false);
 
   const filteredProducts =
     selectedCategory === "all"
       ? placeholderProducts
       : placeholderProducts.filter((p) => p.category === selectedCategory);
 
-  const getWhatsAppLink = (product: Product, qty = 1, note = "") => {
-    const text = `Hello Beyond Native Travel! 🌟\n\nI would like to order from your Store:\n• Item: ${product.name}\n• Quantity: ${qty}\n• Price: ${product.priceUSD} (${product.priceGHS})\n• Origin: ${product.origin}${
-      note ? `\n• Custom Note: ${note}` : ""
-    }\n\nPlease share delivery details and how to complete my payment. Thank you!`;
-
-    return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
-  };
-
   const handleOpenOrderModal = (product: Product) => {
     setActiveModalProduct(product);
     setQuantity(1);
     setCustomNote("");
+    setErrorMsg("");
+    setOrderSent(false);
+  };
+
+  const handleSubmitOrder = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!activeModalProduct) return;
+    if (!customerName.trim()) {
+      setErrorMsg("Please enter your name.");
+      return;
+    }
+    if (!customerContact.trim()) {
+      setErrorMsg("Please enter your WhatsApp phone or email.");
+      return;
+    }
+    if (!deliveryLocation.trim()) {
+      setErrorMsg("Please specify your delivery location / region.");
+      return;
+    }
+
+    setErrorMsg("");
+    const orderDetails: StoreOrderDetails = {
+      customerName,
+      customerContact,
+      deliveryLocation,
+      productName: activeModalProduct.name,
+      quantity,
+      priceUSD: activeModalProduct.priceUSD,
+      priceGHS: activeModalProduct.priceGHS,
+      notes: customNote,
+    };
+
+    const whatsappUrl = getStoreOrderWhatsAppUrl(orderDetails);
+    window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+    setOrderSent(true);
   };
 
   return (
@@ -270,19 +302,17 @@ export default function StorePage() {
                   <div className="pt-1 sm:pt-2 flex flex-col sm:flex-row gap-1.5 sm:gap-2.5">
                     <button
                       onClick={() => handleOpenOrderModal(product)}
-                      className="w-full sm:flex-1 rounded-full border border-[#3e5b34]/30 bg-white py-1.5 sm:py-2.5 px-2 sm:px-4 font-anton text-[9px] sm:text-xs uppercase tracking-[0.12em] text-[#292f16] transition-all hover:bg-[#f7f9f6] hover:border-[#3e5b34] text-center"
+                      className="w-full sm:flex-1 rounded-full border border-[#3e5b34]/30 bg-white py-1.5 sm:py-2.5 px-2 sm:px-4 font-anton text-[9px] sm:text-xs uppercase tracking-[0.12em] text-[#292f16] transition-all hover:bg-[#f7f9f6] hover:border-[#3e5b34] text-center cursor-pointer"
                     >
                       Details
                     </button>
 
-                    <a
-                      href={getWhatsAppLink(product)}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="w-full sm:flex-1 inline-flex items-center justify-center gap-1 sm:gap-2 rounded-full bg-[#3e5b34] py-1.5 sm:py-2.5 px-2 sm:px-4 font-anton text-[9px] sm:text-xs uppercase tracking-[0.12em] text-white shadow-md transition-all hover:bg-[#292f16] hover:scale-[1.02] active:scale-95"
+                    <button
+                      onClick={() => handleOpenOrderModal(product)}
+                      className="w-full sm:flex-1 inline-flex items-center justify-center gap-1 sm:gap-2 rounded-full bg-[#3e5b34] py-1.5 sm:py-2.5 px-2 sm:px-4 font-anton text-[9px] sm:text-xs uppercase tracking-[0.12em] text-white shadow-md transition-all hover:bg-[#292f16] hover:scale-[1.02] active:scale-95 cursor-pointer"
                     >
                       <span className="truncate">Order</span>
-                    </a>
+                    </button>
                   </div>
                 </div>
               </motion.div>
@@ -297,30 +327,33 @@ export default function StorePage() {
         <div className="mx-auto max-w-[1200px]">
           <div className="rounded-3xl border border-[#3e5b34]/20 bg-white p-8 sm:p-14 shadow-lg relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8">
             <div className="max-w-xl">
-              <div className="flex items-center gap-2.5 mb-3">
+              <div className="flex items-center gap-2.5 mb-3 flex-wrap">
                 <span className="h-2 w-2 rounded-full bg-[#3e5b34]" />
                 <span className="font-anton text-xs uppercase tracking-[0.22em] text-[#3e5b34]">
                   Custom Orders & Artisan Commissions
+                </span>
+                <span className="text-[11px] font-sans font-semibold text-[#3e5b34] bg-[#3e5b34]/10 px-2.5 py-0.5 rounded-full">
+                  WhatsApp: {WHATSAPP_DISPLAY}
                 </span>
               </div>
               <h2 className="font-anton text-2xl sm:text-4xl uppercase tracking-tight text-[#292f16] leading-tight">
                 Seeking Custom Pieces or Bulk Inquiries?
               </h2>
               <p className="mt-3 text-xs sm:text-sm text-[#292f16]/75 leading-relaxed">
-                Connect directly with our curator on WhatsApp to request custom Kente patterns, bespoke brass castings, artisan wholesale gifts, or specialized expedition provisions.
+                Connect directly with our curator on WhatsApp ({WHATSAPP_DISPLAY}) to request custom Kente patterns, bespoke brass castings, artisan wholesale gifts, or specialized expedition provisions.
               </p>
             </div>
 
             <div className="shrink-0">
               <a
                 href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
-                  "Hello Beyond Native Travel! I have a custom artisan / store inquiry and would love to discuss options."
+                  "Hello Beyond Native Travel! 🌟 I have a custom artisan / store inquiry and would love to discuss options."
                 )}`}
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center gap-3 rounded-full bg-[#3e5b34] px-8 py-3.5 font-anton text-xs sm:text-sm uppercase tracking-[0.16em] text-white shadow-md transition-transform hover:bg-[#292f16] hover:scale-105 active:scale-95"
               >
-                Chat on WhatsApp
+                Chat on WhatsApp ({WHATSAPP_DISPLAY})
               </a>
             </div>
           </div>
@@ -349,10 +382,21 @@ export default function StorePage() {
             >
               <button
                 onClick={() => setActiveModalProduct(null)}
-                className="absolute top-5 right-5 h-8 w-8 rounded-full border border-[#3e5b34]/20 bg-[#f7f9f6] grid place-items-center text-[#292f16]/70 hover:text-[#292f16] hover:bg-[#3e5b34]/10"
+                className="absolute top-5 right-5 h-8 w-8 rounded-full border border-[#3e5b34]/20 bg-[#f7f9f6] grid place-items-center text-[#292f16]/70 hover:text-[#292f16] hover:bg-[#3e5b34]/10 cursor-pointer"
+                aria-label="Close product modal"
               >
                 &times;
               </button>
+
+              {/* Header Badge */}
+              <div className="flex items-center justify-between gap-2 mb-4 flex-wrap">
+                <span className="text-[10px] font-anton uppercase tracking-widest text-[#3e5b34]">
+                  {activeModalProduct.categoryLabel}
+                </span>
+                <span className="inline-flex items-center gap-1.5 text-[11px] font-sans font-semibold text-[#3e5b34] bg-[#3e5b34]/10 px-2.5 py-0.5 rounded-full">
+                  WhatsApp: {WHATSAPP_DISPLAY}
+                </span>
+              </div>
 
               <div className="flex gap-4 items-center mb-5">
                 <div className="relative h-20 w-20 shrink-0 rounded-2xl overflow-hidden border border-[#3e5b34]/20 bg-[#f7f9f6]">
@@ -364,67 +408,145 @@ export default function StorePage() {
                   />
                 </div>
                 <div>
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-[#3e5b34]">
-                    {activeModalProduct.categoryLabel}
-                  </span>
                   <h3 className="font-anton text-lg sm:text-xl uppercase text-[#292f16] leading-tight">
                     {activeModalProduct.name}
                   </h3>
                   <p className="font-anton text-base text-[#292f16] mt-0.5">
                     {activeModalProduct.priceUSD} <span className="text-xs text-[#292f16]/60 font-sans">({activeModalProduct.priceGHS})</span>
                   </p>
+                  <p className="text-[11px] text-[#292f16]/70 mt-0.5 font-sans">
+                    Origin: {activeModalProduct.origin}
+                  </p>
                 </div>
               </div>
 
-              {/* Quantity selector */}
-              <div className="mb-4">
-                <label className="block text-xs font-anton uppercase tracking-wider text-[#292f16]/70 mb-2">
-                  Quantity
-                </label>
-                <div className="flex items-center gap-3">
+              {orderSent ? (
+                <div className="rounded-2xl border border-[#3e5b34]/30 bg-[#3e5b34]/10 p-5 text-center">
+                  <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-[#3e5b34] text-white">
+                    <svg className="h-6 w-6 fill-current" viewBox="0 0 24 24">
+                      <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+                    </svg>
+                  </div>
+                  <h4 className="font-anton text-lg uppercase text-[#292f16]">WhatsApp Order Opened!</h4>
+                  <p className="mt-1 text-xs text-[#292f16]/80 leading-relaxed">
+                    Your order details with your delivery preferences have been pre-filled for our curator&apos;s WhatsApp DM ({WHATSAPP_DISPLAY}). Send the message in WhatsApp to confirm stock & delivery!
+                  </p>
                   <button
                     type="button"
-                    onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-                    className="h-9 w-9 rounded-full border border-[#3e5b34]/20 bg-[#f7f9f6] font-bold text-[#292f16] hover:bg-[#3e5b34]/10"
+                    onClick={() => setActiveModalProduct(null)}
+                    className="mt-4 rounded-full bg-[#3e5b34] px-6 py-2 text-xs font-anton uppercase tracking-wider text-white hover:bg-[#292f16] transition-colors"
                   >
-                    -
-                  </button>
-                  <span className="font-anton text-base text-[#292f16] min-w-[2ch] text-center">
-                    {quantity}
-                  </span>
-                  <button
-                    type="button"
-                    onClick={() => setQuantity((q) => q + 1)}
-                    className="h-9 w-9 rounded-full border border-[#3e5b34]/20 bg-[#f7f9f6] font-bold text-[#292f16] hover:bg-[#3e5b34]/10"
-                  >
-                    +
+                    Done
                   </button>
                 </div>
-              </div>
+              ) : (
+                <form onSubmit={handleSubmitOrder} className="space-y-3.5 text-left">
+                  {errorMsg && (
+                    <div className="rounded-xl border border-red-500/40 bg-red-50 px-3.5 py-2 text-xs text-red-600 font-medium">
+                      {errorMsg}
+                    </div>
+                  )}
 
-              {/* Custom Order Notes */}
-              <div className="mb-6">
-                <label className="block text-xs font-anton uppercase tracking-wider text-[#292f16]/70 mb-2">
-                  Preferences / Specific Requests (Optional)
-                </label>
-                <input
-                  type="text"
-                  value={customNote}
-                  onChange={(e) => setCustomNote(e.target.value)}
-                  placeholder="e.g., specific color, size, or gift wrapping"
-                  className="w-full rounded-2xl border border-[#3e5b34]/20 bg-[#f7f9f6] px-4 py-2.5 text-xs text-[#292f16] placeholder-[#292f16]/40 focus:border-[#3e5b34] focus:outline-none"
-                />
-              </div>
+                  {/* Quantity selector */}
+                  <div>
+                    <label className="block text-[11px] font-sans font-semibold uppercase tracking-wider text-[#292f16]/80 mb-1.5">
+                      Quantity
+                    </label>
+                    <div className="flex items-center gap-3">
+                      <button
+                        type="button"
+                        onClick={() => setQuantity((q) => Math.max(1, q - 1))}
+                        className="h-8 w-8 rounded-full border border-[#3e5b34]/20 bg-[#f7f9f6] font-bold text-[#292f16] hover:bg-[#3e5b34]/10"
+                      >
+                        -
+                      </button>
+                      <span className="font-anton text-base text-[#292f16] min-w-[2ch] text-center">
+                        {quantity}
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => setQuantity((q) => q + 1)}
+                        className="h-8 w-8 rounded-full border border-[#3e5b34]/20 bg-[#f7f9f6] font-bold text-[#292f16] hover:bg-[#3e5b34]/10"
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
 
-              {/* Send to WhatsApp button */}
-              <a
-                href={getWhatsAppLink(activeModalProduct, quantity, customNote)}
-                target="_blank"
-                rel="noreferrer"
-                className="w-full flex items-center justify-center gap-2.5 rounded-full bg-[#3e5b34] py-3.5 px-6 font-anton text-xs uppercase tracking-[0.16em] text-white shadow-md transition-all hover:bg-[#292f16]"
-              >
-                Send Order to WhatsApp DM
-              </a>
+                  {/* Customer Contact */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-[11px] font-sans font-semibold uppercase tracking-wider text-[#292f16]/80 mb-1">
+                        Your Full Name <span className="text-[#3e5b34]">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        placeholder="e.g. Akua Mensah"
+                        value={customerName}
+                        onChange={(e) => setCustomerName(e.target.value)}
+                        className="w-full rounded-xl border border-[#292f16]/20 bg-[#f7f9f6] px-3.5 py-2 text-xs text-[#292f16] placeholder-[#292f16]/40 focus:border-[#3e5b34] focus:outline-none font-sans"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-[11px] font-sans font-semibold uppercase tracking-wider text-[#292f16]/80 mb-1">
+                        WhatsApp Phone or Email <span className="text-[#3e5b34]">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        placeholder="+233 55 000 0000"
+                        value={customerContact}
+                        onChange={(e) => setCustomerContact(e.target.value)}
+                        className="w-full rounded-xl border border-[#292f16]/20 bg-[#f7f9f6] px-3.5 py-2 text-xs text-[#292f16] placeholder-[#292f16]/40 focus:border-[#3e5b34] focus:outline-none font-sans"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Delivery Location */}
+                  <div>
+                    <label className="block text-[11px] font-sans font-semibold uppercase tracking-wider text-[#292f16]/80 mb-1">
+                      Delivery Location / City <span className="text-[#3e5b34]">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="e.g. Accra, Tema, Kumasi, or International"
+                      value={deliveryLocation}
+                      onChange={(e) => setDeliveryLocation(e.target.value)}
+                      className="w-full rounded-xl border border-[#292f16]/20 bg-[#f7f9f6] px-3.5 py-2 text-xs text-[#292f16] placeholder-[#292f16]/40 focus:border-[#3e5b34] focus:outline-none font-sans"
+                    />
+                  </div>
+
+                  {/* Custom Order Notes */}
+                  <div>
+                    <label className="block text-[11px] font-sans font-semibold uppercase tracking-wider text-[#292f16]/80 mb-1">
+                      Preferences, Size or Custom Notes (Optional)
+                    </label>
+                    <input
+                      type="text"
+                      value={customNote}
+                      onChange={(e) => setCustomNote(e.target.value)}
+                      placeholder="e.g., gift packaging, preferred motifs, size"
+                      className="w-full rounded-xl border border-[#292f16]/20 bg-[#f7f9f6] px-3.5 py-2 text-xs text-[#292f16] placeholder-[#292f16]/40 focus:border-[#3e5b34] focus:outline-none font-sans"
+                    />
+                  </div>
+
+                  {/* Submit Order button */}
+                  <div className="pt-2">
+                    <button
+                      type="submit"
+                      className="w-full inline-flex items-center justify-center gap-2.5 rounded-full bg-[#3e5b34] py-3.5 px-6 font-anton text-xs uppercase tracking-[0.16em] text-white shadow-md transition-all hover:bg-[#292f16] hover:scale-[1.01] active:scale-95 cursor-pointer"
+                    >
+                      <span>Send Order to WhatsApp DM</span>
+                    </button>
+                    <p className="mt-1.5 text-center text-[10px] text-[#292f16]/60 font-sans">
+                      Opens directly in our WhatsApp DM ({WHATSAPP_DISPLAY}) with your order pre-formatted
+                    </p>
+                  </div>
+                </form>
+              )}
             </motion.div>
           </div>
         )}

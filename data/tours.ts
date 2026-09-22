@@ -12,6 +12,7 @@ export interface Tour {
   badge?: string;
   tagline?: string;
   motto?: string;
+  pricing?: string;
   includes?: string[];
   activities?: string[];
   flyerImage?: string;
@@ -36,7 +37,7 @@ export const countryList: CountryInfo[] = [
       "From the historic coastal ramparts of Cape Coast Castle to the pulsating markets of Accra and wild savanna elephants of Mole, Ghana is the welcoming cultural heartbeat of West Africa.",
     capital: "Accra",
     image: "/images/tours/cape-coast.jpg",
-    tourCount: 8,
+    tourCount: 9,
   },
   {
     id: "togo",
@@ -56,7 +57,7 @@ export const countryList: CountryInfo[] = [
       "Home to the heroic Dahomey Amazons, the floating stilt marvel of Ganvié, ancient royal palaces in Abomey, and the profound ancestral memory of Ouidah.",
     capital: "Porto-Novo / Cotonou",
     image: "/images/tours/benin.jpg",
-    tourCount: 5,
+    tourCount: 6,
   },
   {
     id: "liberia",
@@ -230,6 +231,42 @@ export const allTours: Tour[] = [
     badge: "Official Flyer Itinerary",
   },
   {
+    id: "ghana-resorts-hopping-tour",
+    title: "Resorts Hopping Tour",
+    countryId: "ghana",
+    country: "Ghana",
+    region: "Coastal & Lakeside Ghana",
+    duration: "3 Nights / 4 Days",
+    tagline: "Move between Ghana's best resorts, one seamless escape.",
+    motto: "Don't Just Visit. Belong",
+    pricing: "From GHC 7,000 Single / GHC 6,000 Shared",
+    description:
+      "Move between Ghana's finest luxury resorts in one seamless, curated escape. Relax across 2-3 handpicked premier coastal or lakeside resorts, complete with 3-5 star luxury hotel accommodations, full gourmet food plans, tailored activities, and private chauffeured travel.",
+    includes: [
+      "3-5 star Hotels",
+      "Food Plans",
+      "Activities Included",
+      "Tour & Travels",
+    ],
+    activities: [
+      "2-3 handpicked premier coastal & lakeside resort stays",
+      "Curated gourmet dining with fresh Atlantic seafood & native specialties",
+      "Beachfront leisure, water sports & sunset poolside moments",
+      "Private chauffeured transfers and luggage coordination between resort properties",
+    ],
+    highlights: [
+      "Starting from GHC 7,000 (Single) / GHC 6,000 (Shared)",
+      "Seamless hopping between 2-3 handpicked 3-5 star Ghanaian luxury resorts",
+      "Comprehensive food plans including authentic local and continental gourmet dining",
+      "Private chauffeured transportation and inter-resort luggage handling",
+      "Curated leisure: coastal walks, pool relaxation, and pristine nature trails",
+    ],
+    image: "/images/tours/cape-coast.jpg",
+    flyerImage: "/images/tours/resorts-hopping-flyer.jpg",
+    tags: ["Resorts Hopping", "Luxury", "Beaches", "Food Plans", "Ghana", "Relaxation"],
+    badge: "Official Flyer • 3N/4D",
+  },
+  {
     id: "northern-adventure-mole",
     title: "2 Days 3 Nights Northern Adventure Tour",
     countryId: "ghana",
@@ -355,6 +392,42 @@ export const allTours: Tour[] = [
   },
 
   // ================= BENIN TOURS =================
+  {
+    id: "beyond-the-tides-benin-togo",
+    title: "Beyond the Tides: Benin & Togo Trip",
+    countryId: "benin",
+    country: "Benin & Togo",
+    region: "Cotonou • Ouidah • Togoville • Lomé",
+    duration: "5 Nights / 6 Days",
+    tagline: "Where the past meets the tide.",
+    motto: "Don't Just Visit. Belong",
+    pricing: "Standard & Luxury Tiers Available",
+    description:
+      "Two countries, one current. Sacred temples, floating villages, storied shores — small groups, handpicked stays, moments that outlast the trip itself. Journey seamlessly from the stilted marvel of Ganvié and ancestral memory of Ouidah into the sacred animist waters of Lake Togoville and coastal rhythm of Lomé.",
+    includes: [
+      "Comfortable Stays (3-Star Standard or 4-5 Star Luxury)",
+      "Shared or Private Transport",
+      "Guided Tours & Entry Fees",
+      "Gourmet Dining Included",
+    ],
+    activities: [
+      "Ganvié — glide across Lake Nokoué into Africa's floating village",
+      "Ouidah — the sacred Python Temple & the Door of No Return",
+      "Togoville — voodoo shrines & a canoe crossing on Lake Togo",
+      "Lomé — Akodessewa Fetish Market & the Grand Marché",
+    ],
+    highlights: [
+      "Ganvié: scenic boat glide into Africa's legendary 300-year-old floating stilt village",
+      "Ouidah: sacred Python Temple, Kpassè sacred forest, and Door of No Return oceanfront memorial",
+      "Togoville: traditional wooden canoe crossing on Lake Togo & sacred ancestral shrines",
+      "Lomé: world-renowned Akodessewa fetish market and bustling Grand Marché cloth trade",
+      "Choose Your Journey: Standard (comfortable 3-star stays) or Luxury (4-5 star resorts & private guide)",
+    ],
+    image: "/images/tours/togo.jpg",
+    flyerImage: "/images/tours/benin-togo-trip-flyer.png",
+    tags: ["Benin", "Togo", "Multi-Country", "Ganvié", "Ouidah", "Lomé", "Tides"],
+    badge: "Official Flyer • 5N/6D",
+  },
   {
     id: "cotonou-city-dantokpa-amazon",
     title: "Cotonou City Tour, Dantokpa Market & Amazon Monument",

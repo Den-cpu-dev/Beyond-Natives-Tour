@@ -2,7 +2,7 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { getTripBookingWhatsAppUrl, type TripBookingDetails } from "@/data/whatsapp";
+import { getTripBookingWhatsAppUrl, WHATSAPP_DISPLAY, type TripBookingDetails } from "@/data/whatsapp";
 import { allTours } from "@/data/tours";
 
 const availableTours = [
@@ -18,7 +18,26 @@ const groupSizes = [
   "10+ Large Group",
 ];
 
-const durationOptions = ["1 Day Excursion", "2–3 Days", "4–7 Days", "1–2 Weeks", "Custom Duration"];
+const journeyTiers = [
+  "Standard (3-Star / Group)",
+  "Luxury (4-5 Star Resorts)",
+  "Single Occupancy (From GHC 7,000)",
+  "Shared Occupancy (From GHC 6,000)",
+  "Flexible / Custom Tier",
+];
+
+const tripStyles = [
+  "Cultural & Heritage",
+  "Luxury Escapes & Gourmet",
+  "Weekend Getaway",
+  "Resorts Hopping",
+  "Adventure Tour",
+  "Family-Friendly",
+  "Private Group / Custom",
+  "Event Coordination",
+];
+
+const durationOptions = ["1 Day Excursion", "2–3 Days", "3N / 4D (Resort Hopping)", "5N / 6D (Benin & Togo)", "1–2 Weeks", "Custom Duration"];
 
 export default function BookTripModal() {
   const [isOpen, setIsOpen] = useState(false);
@@ -28,6 +47,9 @@ export default function BookTripModal() {
   const [travelDate, setTravelDate] = useState("");
   const [groupSize, setGroupSize] = useState(groupSizes[1]);
   const [duration, setDuration] = useState(durationOptions[1]);
+  const [journeyTier, setJourneyTier] = useState(journeyTiers[0]);
+  const [tripStyle, setTripStyle] = useState(tripStyles[0]);
+  const [dietaryOrPreferences, setDietaryOrPreferences] = useState("");
   const [notes, setNotes] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
   const [sentSuccess, setSentSuccess] = useState(false);
@@ -71,6 +93,9 @@ export default function BookTripModal() {
       travelDate,
       duration,
       groupSize,
+      journeyTier,
+      tripStyle,
+      dietaryOrPreferences,
       notes,
     };
 
@@ -112,10 +137,15 @@ export default function BookTripModal() {
             </button>
 
             {/* Header Badge */}
-            <div className="flex items-center gap-2 mb-2">
-              <span className="h-2 w-2 rounded-full bg-[#3e5b34] shadow-[0_0_8px_rgba(62,91,52,0.8)] animate-pulse" />
-              <span className="font-anton text-[10px] uppercase tracking-[0.2em] text-[#3e5b34]">
-                Direct Expedition Booking
+            <div className="flex items-center justify-between gap-2 mb-2 flex-wrap">
+              <div className="flex items-center gap-2">
+                <span className="h-2 w-2 rounded-full bg-[#3e5b34] shadow-[0_0_8px_rgba(62,91,52,0.8)] animate-pulse" />
+                <span className="font-anton text-[10px] uppercase tracking-[0.2em] text-[#3e5b34]">
+                  Direct Expedition Booking
+                </span>
+              </div>
+              <span className="inline-flex items-center gap-1.5 text-[11px] font-sans font-semibold text-[#3e5b34] bg-[#3e5b34]/10 px-2.5 py-1 rounded-full">
+                WhatsApp: {WHATSAPP_DISPLAY}
               </span>
             </div>
 
@@ -123,7 +153,7 @@ export default function BookTripModal() {
               Reserve Your Expedition
             </h2>
             <p className="mt-1 text-xs sm:text-sm text-[#292f16]/75 leading-relaxed">
-              Fill out your trip details below. When you submit, your full itinerary inquiry will open directly in our curator&apos;s WhatsApp DM.
+              Fill out your trip preferences below. When you submit, your full customized itinerary inquiry will open directly in our host&apos;s WhatsApp DM ({WHATSAPP_DISPLAY}).
             </p>
 
             {sentSuccess ? (
@@ -135,7 +165,7 @@ export default function BookTripModal() {
                 </div>
                 <h3 className="font-anton text-lg uppercase text-[#292f16]">WhatsApp Chat Opened!</h3>
                 <p className="mt-1 text-xs text-[#292f16]/80 leading-relaxed">
-                  Your booking details have been prepared for WhatsApp. Send the message in your chat to finalize your dates and questions with our host!
+                  Your trip details & preferences have been prepared for WhatsApp DM. Send the message in WhatsApp to finalize dates and questions with our host!
                 </p>
                 <button
                   type="button"
@@ -202,7 +232,44 @@ export default function BookTripModal() {
                   </select>
                 </div>
 
-                {/* 3. Dates & Duration */}
+                {/* 3. Package Tier & Trip Style */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-[11px] font-sans font-semibold uppercase tracking-wider text-[#292f16]/80 mb-1.5">
+                      Package / Accommodation Tier
+                    </label>
+                    <select
+                      value={journeyTier}
+                      onChange={(e) => setJourneyTier(e.target.value)}
+                      className="w-full rounded-xl border border-[#292f16]/20 bg-[#f7f9f6] px-3.5 py-2.5 text-xs text-[#292f16] focus:border-[#3e5b34] focus:outline-none transition-colors font-sans"
+                    >
+                      {journeyTiers.map((tier) => (
+                        <option key={tier} value={tier} className="bg-white text-[#292f16]">
+                          {tier}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-[11px] font-sans font-semibold uppercase tracking-wider text-[#292f16]/80 mb-1.5">
+                      Trip Style / Experience
+                    </label>
+                    <select
+                      value={tripStyle}
+                      onChange={(e) => setTripStyle(e.target.value)}
+                      className="w-full rounded-xl border border-[#292f16]/20 bg-[#f7f9f6] px-3.5 py-2.5 text-xs text-[#292f16] focus:border-[#3e5b34] focus:outline-none transition-colors font-sans"
+                    >
+                      {tripStyles.map((style) => (
+                        <option key={style} value={style} className="bg-white text-[#292f16]">
+                          {style}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+
+                {/* 4. Dates & Duration */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
                     <label className="block text-[11px] font-sans font-semibold uppercase tracking-wider text-[#292f16]/80 mb-1.5">
@@ -235,7 +302,7 @@ export default function BookTripModal() {
                   </div>
                 </div>
 
-                {/* 4. Group Size */}
+                {/* 5. Group Size */}
                 <div>
                   <label className="block text-[11px] font-sans font-semibold uppercase tracking-wider text-[#292f16]/80 mb-1.5">
                     Group Size
@@ -258,14 +325,28 @@ export default function BookTripModal() {
                   </div>
                 </div>
 
-                {/* 5. Custom Notes */}
+                {/* 6. Dietary & Room Preferences */}
+                <div>
+                  <label className="block text-[11px] font-sans font-semibold uppercase tracking-wider text-[#292f16]/80 mb-1.5">
+                    Dietary & Room Preferences (Optional)
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="e.g. Vegetarian, Pescatarian, Ocean view, King bed"
+                    value={dietaryOrPreferences}
+                    onChange={(e) => setDietaryOrPreferences(e.target.value)}
+                    className="w-full rounded-xl border border-[#292f16]/20 bg-[#f7f9f6] px-3.5 py-2.5 text-xs text-[#292f16] placeholder-[#292f16]/40 focus:border-[#3e5b34] focus:outline-none transition-colors font-sans"
+                  />
+                </div>
+
+                {/* 7. Custom Notes */}
                 <div>
                   <label className="block text-[11px] font-sans font-semibold uppercase tracking-wider text-[#292f16]/80 mb-1.5">
                     Special Requests or Questions (Optional)
                   </label>
                   <textarea
                     rows={2}
-                    placeholder="e.g. Dietary preferences, flight arrival details, celebration, etc."
+                    placeholder="e.g. Flight arrival details, celebration, specific sites, etc."
                     value={notes}
                     onChange={(e) => setNotes(e.target.value)}
                     className="w-full rounded-xl border border-[#292f16]/20 bg-[#f7f9f6] px-3.5 py-2 text-xs text-[#292f16] placeholder-[#292f16]/40 focus:border-[#3e5b34] focus:outline-none resize-none transition-colors font-sans"
@@ -278,10 +359,10 @@ export default function BookTripModal() {
                     type="submit"
                     className="w-full inline-flex items-center justify-center rounded-full bg-[#3e5b34] py-3.5 px-6 font-anton text-xs sm:text-sm uppercase tracking-[0.16em] text-white shadow-[0_0_20px_rgba(62,91,52,0.35)] transition-all hover:bg-[#292f16] hover:scale-[1.01] active:scale-95 cursor-pointer"
                   >
-                    <span>Book Trip</span>
+                    <span>Book Trip via WhatsApp</span>
                   </button>
                   <p className="mt-2 text-center text-[10px] text-[#292f16]/60">
-                    Connects directly to our curator&apos;s WhatsApp DM with your details pre-formatted
+                    Connects directly to our curator&apos;s WhatsApp DM ({WHATSAPP_DISPLAY}) with your preferences pre-filled
                   </p>
                 </div>
               </form>

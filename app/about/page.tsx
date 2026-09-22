@@ -5,6 +5,8 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { WHATSAPP_DISPLAY, WHATSAPP_NUMBER } from "@/data/whatsapp";
+import { openTripBookingModal } from "@/components/BookTripModal";
 
 const specs = [
   {
@@ -367,16 +369,135 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* ================= WHAT WE OFFER (FROM OFFICIAL BRAND FLYER) ================= */}
+      <section className="py-20 sm:py-28 px-5 sm:px-10 lg:px-16 bg-[#faf6f8]/70 border-t border-[#8d3e5b]/15">
+        <div className="mx-auto max-w-[1400px]">
+          
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <div className="inline-flex items-center gap-2 mb-3">
+              <span className="h-[2px] w-6 bg-[#cc25a9]" />
+              <span className="font-anton text-xs sm:text-sm uppercase tracking-[0.22em] text-[#8d3e5b]">
+                Explore • Discover • Connect • With Us
+              </span>
+              <span className="h-[2px] w-6 bg-[#cc25a9]" />
+            </div>
+
+            <h2 className="font-anton text-3xl sm:text-5xl uppercase tracking-tight text-[#292f16] leading-tight">
+              What We Offer
+            </h2>
+
+            <p className="mt-3 text-sm sm:text-base text-[#292f16]/75 max-w-2xl mx-auto font-light leading-relaxed">
+              Embark on a transformative journey and explore the beauty of diverse cultures, landscapes, and communities across West Africa.
+            </p>
+
+            <p className="mt-2 font-anton text-xs sm:text-sm uppercase tracking-[0.25em] text-[#8d3e5b]">
+              Don&apos;t Just Visit. Belong
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {[
+              {
+                title: "Weekend Getaways",
+                desc: "Short trips for busy travelers seeking quick, high-impact cultural refreshment.",
+                icon: "🌅",
+                badge: "Popular",
+              },
+              {
+                title: "Luxury Escapes",
+                desc: "Experience 3-5 star luxury hotels, seaside resorts, and gourmet culinary dining.",
+                icon: "✨",
+                badge: "Premium",
+              },
+              {
+                title: "Adventure Tours",
+                desc: "Canopy rainforest walks, wildlife tracking in Mole, and inland waterfall hikes.",
+                icon: "🌿",
+                badge: "Active",
+              },
+              {
+                title: "Cultural / Heritage Tours",
+                desc: "Sacred ancestral naming ceremonies, historic forts & dungeons, and diaspora roots.",
+                icon: "🏛️",
+                badge: "Signature",
+              },
+              {
+                title: "Custom / Private Groups",
+                desc: "Bespoke small-group expeditions tailored for families, friends, and organizations.",
+                icon: "👥",
+                badge: "Tailored",
+              },
+              {
+                title: "Event Coordination",
+                desc: "Comprehensive on-ground logistics, festival hosting, and private cultural celebrations.",
+                icon: "🎉",
+                badge: "Logistics",
+              },
+              {
+                title: "Family-Friendly Vacations",
+                desc: "Fun, enriching, and safe activities designed for travelers of all ages.",
+                icon: "💛",
+                badge: "All Ages",
+              },
+              {
+                title: "Resorts Hopping",
+                desc: "Seamless hopping between Ghana's finest 3-5 star beach & lake resorts.",
+                icon: "🏖️",
+                badge: "3N / 4D",
+              },
+            ].map((offering, i) => (
+              <motion.div
+                key={offering.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: i * 0.05 }}
+                className="rounded-3xl border border-[#8d3e5b]/20 bg-white p-6 shadow-sm hover:border-[#cc25a9] hover:shadow-lg transition-all duration-300 flex flex-col justify-between"
+              >
+                <div>
+                  <div className="flex items-center justify-between gap-2 mb-3">
+                    <span className="text-2xl">{offering.icon}</span>
+                    <span className="text-[10px] font-anton uppercase tracking-wider text-[#8d3e5b] bg-[#faf6f8] px-2.5 py-0.5 rounded-full border border-[#8d3e5b]/20">
+                      {offering.badge}
+                    </span>
+                  </div>
+                  <h3 className="font-anton text-lg uppercase text-[#292f16] mb-2 leading-snug">
+                    {offering.title}
+                  </h3>
+                  <p className="text-xs text-[#292f16]/75 leading-relaxed">
+                    {offering.desc}
+                  </p>
+                </div>
+
+                <div className="pt-4 mt-4 border-t border-[#8d3e5b]/15 flex items-center justify-between">
+                  <button
+                    type="button"
+                    onClick={() => openTripBookingModal(offering.title)}
+                    className="text-xs font-anton uppercase tracking-wider text-[#8d3e5b] hover:text-[#cc25a9] transition-colors cursor-pointer"
+                  >
+                    Inquire Trip →
+                  </button>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+        </div>
+      </section>
+
       {/* ================= LEADERSHIP & VISION ================= */}
-      <section className="py-20 px-5 sm:px-10 lg:px-16 border-t border-[#8d3e5b]/15 bg-[#faf6f8]/70">
+      <section className="py-20 px-5 sm:px-10 lg:px-16 border-t border-[#8d3e5b]/15 bg-white">
         <div className="mx-auto max-w-[1200px]">
-          <div className="rounded-3xl border border-[#8d3e5b]/20 bg-white p-8 sm:p-14 shadow-lg relative overflow-hidden">
+          <div className="rounded-3xl border border-[#8d3e5b]/20 bg-[#faf6f8]/70 p-8 sm:p-14 shadow-lg relative overflow-hidden">
             <div className="flex flex-col md:flex-row items-center justify-between gap-8">
               <div>
-                <div className="flex items-center gap-2.5 mb-3">
+                <div className="flex items-center gap-2.5 mb-3 flex-wrap">
                   <span className="h-2 w-2 rounded-full bg-[#cc25a9]" />
                   <span className="font-anton text-xs uppercase tracking-[0.22em] text-[#8d3e5b]">
                     Founder & Creative Direction
+                  </span>
+                  <span className="text-[11px] font-sans font-semibold text-[#8d3e5b] bg-[#8d3e5b]/10 px-2.5 py-0.5 rounded-full">
+                    WhatsApp: {WHATSAPP_DISPLAY}
                   </span>
                 </div>
                 <h3 className="font-anton text-2xl sm:text-4xl uppercase tracking-tight text-[#292f16]">
@@ -398,10 +519,14 @@ export default function AboutPage() {
                   Explore Tours
                 </Link>
                 <a
-                  href="#footer"
-                  className="rounded-full border border-[#8d3e5b]/30 bg-white px-7 py-3 font-anton text-xs sm:text-sm uppercase tracking-[0.18em] text-[#292f16] transition-all hover:border-[#8d3e5b] hover:bg-[#faf6f8] text-center"
+                  href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
+                    "Hello Ayishetu & Beyond Native Travel! 🌿 I would like to inquire about booking an authentic West African journey."
+                  )}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="rounded-full border border-[#8d3e5b]/30 bg-white px-7 py-3 font-anton text-xs sm:text-sm uppercase tracking-[0.18em] text-[#8d3e5b] transition-all hover:border-[#8d3e5b] hover:bg-[#faf6f8] text-center"
                 >
-                  Contact Team
+                  Chat on WhatsApp ({WHATSAPP_DISPLAY})
                 </a>
               </div>
             </div>

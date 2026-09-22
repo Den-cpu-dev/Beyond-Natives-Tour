@@ -113,11 +113,7 @@ export default function AboutPage() {
       <Header />
 
       {/* ================= HERO SECTION ================= */}
-      <section className="relative pt-36 pb-20 sm:pt-44 sm:pb-28 overflow-hidden border-b border-[#3e5b34]/15 bg-[#f7f9f6]/40">
-        <div className="absolute inset-0 z-0 opacity-25 pointer-events-none">
-          <div className="absolute -top-40 left-1/2 -translate-x-1/2 h-[600px] w-[900px] rounded-full bg-gradient-to-b from-[#8d3e5b]/20 via-[#cc25a9]/15 to-transparent blur-3xl" />
-        </div>
-
+      <section className="relative pt-36 pb-20 sm:pt-44 sm:pb-28 overflow-hidden border-b border-[#8d3f5c]/15 bg-[#fbfbf9]">
         <div className="relative z-10 mx-auto max-w-[1400px] px-5 sm:px-10 lg:px-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -126,17 +122,16 @@ export default function AboutPage() {
             className="flex flex-col items-center text-center"
           >
             {/* Portfolio Header Badge */}
-            <div className="inline-flex items-center gap-2 rounded-full border border-[#8d3e5b]/25 bg-white px-4 py-1.5 shadow-sm mb-6">
-              <span className="h-2 w-2 rounded-full bg-[#cc25a9] shadow-[0_0_8px_rgba(204,37,169,0.8)] animate-pulse" />
-              <span className="font-anton text-[11px] uppercase tracking-[0.22em] text-[#39295a]">
+            <div className="inline-flex items-center gap-2 rounded-full border border-[#8d3f5c]/25 bg-white px-4 py-1.5 shadow-sm mb-6">
+              <span className="h-2 w-2 rounded-full bg-[#8d3f5c] animate-pulse" />
+              <span className="font-anton text-[11px] uppercase tracking-[0.22em] text-[#3d2c5f]">
                 Native Brands Portfolio • Venture 2
               </span>
             </div>
 
-            {/* Original Authentic Logo Mark with Ambient Glow */}
+            {/* Original Authentic Logo Mark */}
             <div className="relative mb-6 group">
-              <div className="absolute -inset-2 rounded-full bg-gradient-to-tr from-[#8d3e5b]/30 via-[#cc25a9]/35 to-[#39295a]/20 blur-xl transition-all duration-700 group-hover:scale-110" />
-              <div className="relative h-20 w-20 sm:h-24 sm:w-24 rounded-3xl p-3 bg-white/95 backdrop-blur-md border border-[#8d3e5b]/25 shadow-xl flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
+              <div className="relative h-20 w-20 sm:h-24 sm:w-24 rounded-3xl p-3 bg-white border border-[#8d3f5c]/25 shadow-xl flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
                 <div className="relative h-full w-full">
                   <Image
                     src="/logo.png"
@@ -151,15 +146,15 @@ export default function AboutPage() {
             </div>
 
             <h1 className="font-anton text-4xl sm:text-6xl md:text-7xl lg:text-8xl uppercase tracking-tight max-w-4xl leading-[0.92]">
-              <span className="bg-gradient-to-r from-[#39295a] via-[#8d3e5b] to-[#cc25a9] bg-clip-text text-transparent">
-                Beyond Native
+              <span className="text-[#3d2c5f]">
+                Beyond
               </span>{" "}
-              <span className="bg-gradient-to-r from-[#8d3e5b] via-[#cc25a9] to-[#e0529d] bg-clip-text text-transparent">
-                Travel
+              <span className="text-[#8d3f5c]">
+                Native Tours
               </span>
             </h1>
 
-            <p className="mt-4 font-anton text-sm sm:text-lg md:text-xl uppercase tracking-[0.25em] bg-gradient-to-r from-[#8d3e5b] via-[#a8446c] to-[#cc25a9] bg-clip-text text-transparent max-w-2xl">
+            <p className="mt-4 font-anton text-sm sm:text-lg md:text-xl uppercase tracking-[0.22em] text-[#8d3f5c] max-w-2xl">
               Cultural Tourism • Small-Group West Africa Journeys
             </p>
 
@@ -492,19 +487,19 @@ export default function AboutPage() {
             <div className="flex flex-col md:flex-row items-center justify-between gap-8">
               <div>
                 <div className="flex items-center gap-2.5 mb-3 flex-wrap">
-                  <span className="h-2 w-2 rounded-full bg-[#cc25a9]" />
-                  <span className="font-anton text-xs uppercase tracking-[0.22em] text-[#8d3e5b]">
-                    Founder & Creative Direction
+                  <span className="h-2 w-2 rounded-full bg-[#8d3f5c]" />
+                  <span className="font-anton text-xs uppercase tracking-[0.22em] text-[#8d3f5c]">
+                    CEO and Director
                   </span>
-                  <span className="text-[11px] font-sans font-semibold text-[#8d3e5b] bg-[#8d3e5b]/10 px-2.5 py-0.5 rounded-full">
+                  <span className="text-[11px] font-sans font-semibold text-[#8d3f5c] bg-[#8d3f5c]/10 px-2.5 py-0.5 rounded-full">
                     WhatsApp: {WHATSAPP_DISPLAY}
                   </span>
                 </div>
                 <h3 className="font-anton text-2xl sm:text-4xl uppercase tracking-tight text-[#292f16]">
                   Ayishetu Alhassan
                 </h3>
-                <p className="font-anton text-sm uppercase tracking-[0.2em] text-[#8d3e5b] mt-1">
-                  Queen Extraordinaire
+                <p className="font-anton text-sm uppercase tracking-[0.2em] text-[#8d3f5c] mt-1">
+                  CEO and Director
                 </p>
                 <p className="mt-4 text-xs sm:text-sm text-[#292f16]/75 max-w-xl leading-relaxed">
                   Leading Native Brands Portfolio with a vision to preserve African heritage, share authentic living culture with the global diaspora, and build sustainable, high-impact cultural expeditions.

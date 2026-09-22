@@ -85,13 +85,14 @@ export default function HolidayCTA({ onPlay }: { onPlay: (src: string, title: st
     <section id="holiday" className="relative isolate overflow-hidden px-4 py-16 sm:px-8 sm:py-28 lg:px-14 lg:py-36">
       {/* Background Image & Gradient */}
       <Image
-        src="https://images.unsplash.com/photo-1512100356356-de1b84283e18?auto=format&fit=crop&w=2200&q=88"
-        alt="A boat travelling across turquoise water"
+        src="/images/independence-square.jpg"
+        alt="Independence Square and Black Star Gate in Accra, Ghana"
         fill
         sizes="100vw"
         className="-z-20 object-cover"
+        priority
       />
-      <div className="absolute inset-0 -z-10 bg-gradient-to-r from-black/95 via-black/80 to-black/60" />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-r from-black/90 via-black/80 to-black/60 backdrop-blur-[1px]" />
 
       <div className="mx-auto max-w-[1600px]">
         {/* Section Header */}

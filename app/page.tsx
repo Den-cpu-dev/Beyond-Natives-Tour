@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import CookieConsent from "@/components/CookieConsent";
+import CustomerReviews from "@/components/CustomerReviews";
 import ExpandingHeroCarousel from "@/components/ExpandingHeroCarousel";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
@@ -21,6 +22,7 @@ export default function Home() {
         <ExpandingHeroCarousel destinations={heroDestinations} />
         <RecommendationsGrid destinations={rankedDestinations} />
         <HolidayCTA onPlay={(src, title) => setVideo({ src, title })} />
+        <CustomerReviews />
         <Footer />
       </main>
       <VideoModal video={video} onClose={() => setVideo(null)} />

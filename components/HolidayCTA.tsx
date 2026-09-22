@@ -137,10 +137,10 @@ export default function HolidayCTA({ onPlay }: { onPlay: (src: string, title: st
           </div>
         </div>
 
-        {/* 4 Videos Grid */}
+        {/* 4 Videos Grid - 2 columns on mobile, 4 on desktop */}
         <div
           id="tour-moments-grid"
-          className="mt-12 sm:mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6"
+          className="mt-10 sm:mt-16 grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-6"
         >
           {tourVideos.map((video) => {
             const isAudioActive = activeAudioId === video.id;
@@ -151,7 +151,7 @@ export default function HolidayCTA({ onPlay }: { onPlay: (src: string, title: st
                 whileHover={{ y: -6 }}
                 transition={{ duration: 0.25 }}
                 onClick={() => toggleSound(video.id)}
-                className={`group relative flex flex-col justify-between overflow-hidden rounded-2xl sm:rounded-3xl border transition-all duration-300 shadow-2xl cursor-pointer aspect-[9/14] sm:aspect-[9/15] ${
+                className={`group relative flex flex-col justify-between overflow-hidden rounded-xl sm:rounded-3xl border transition-all duration-300 shadow-xl cursor-pointer aspect-[9/13] sm:aspect-[9/14] ${
                   isAudioActive
                     ? "border-[#ffbe17] ring-2 ring-[#ffbe17]/50 shadow-[0_0_35px_rgba(255,190,23,0.35)]"
                     : "border-white/15 hover:border-white/40"
@@ -184,46 +184,48 @@ export default function HolidayCTA({ onPlay }: { onPlay: (src: string, title: st
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-black/50" />
 
                 {/* Top Bar: Number Tag & Fullscreen trigger */}
-                <div className="relative z-10 flex items-center justify-between p-3.5 sm:p-4">
-                  <div className="flex items-center gap-1.5 rounded-full bg-black/60 px-3 py-1 backdrop-blur-md border border-white/15">
-                    <span className="font-anton text-[11px] tracking-wider text-[#ffbe17]">Moment {video.number}</span>
+                <div className="relative z-10 flex items-center justify-between p-2.5 sm:p-4">
+                  <div className="flex items-center gap-1 rounded-full bg-black/60 px-2 sm:px-3 py-0.5 sm:py-1 backdrop-blur-md border border-white/15">
+                    <span className="font-anton text-[9px] sm:text-[11px] tracking-wider text-[#ffbe17]">
+                      Moment {video.number}
+                    </span>
                   </div>
 
                   <button
                     type="button"
                     onClick={(e) => handleOpenFullscreen(video, e)}
-                    className="grid h-8 w-8 place-items-center rounded-full bg-black/60 text-white/80 backdrop-blur-md border border-white/15 transition-all hover:bg-white hover:text-black hover:scale-110"
+                    className="grid h-6 w-6 sm:h-8 sm:w-8 place-items-center rounded-full bg-black/60 text-white/80 backdrop-blur-md border border-white/15 transition-all hover:bg-white hover:text-black hover:scale-110"
                     title="Open Fullscreen"
                     aria-label="Open Fullscreen"
                   >
-                    <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+                    <svg className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 fill-current" viewBox="0 0 24 24">
                       <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z" />
                     </svg>
                   </button>
                 </div>
 
                 {/* Center Hover / Sound State Hint */}
-                <div className="relative z-10 flex flex-1 items-center justify-center p-4">
+                <div className="relative z-10 flex flex-1 items-center justify-center p-2 sm:p-4">
                   {isAudioActive ? (
-                    <div className="flex items-center gap-2 rounded-full bg-[#3e5b34]/90 px-4 py-2 text-xs font-anton tracking-wider uppercase text-white shadow-2xl backdrop-blur-md border border-white/30">
-                      <span className="h-2 w-2 rounded-full bg-emerald-300 animate-ping" />
+                    <div className="flex items-center gap-1.5 sm:gap-2 rounded-full bg-[#3e5b34]/90 px-2.5 sm:px-4 py-1 sm:py-2 text-[10px] sm:text-xs font-anton tracking-wider uppercase text-white shadow-2xl backdrop-blur-md border border-white/30">
+                      <span className="h-1.5 w-1.5 sm:h-2 sm:w-2 rounded-full bg-emerald-300 animate-ping" />
                       <span>Audio Playing</span>
                     </div>
                   ) : (
-                    <div className="flex items-center gap-2 rounded-full bg-black/75 px-3.5 py-1.5 text-[11px] font-anton tracking-wider uppercase text-white/90 shadow-xl backdrop-blur-md border border-white/20 opacity-90 transition-all group-hover:scale-105 group-hover:bg-[#ffbe17] group-hover:text-black group-hover:border-transparent">
-                      <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77zm-2.5 9.77l-4.5-4.5H3v7h4l4.5 4.5v-7z"/></svg>
-                      <span>Tap for Sound</span>
+                    <div className="flex items-center gap-1.5 sm:gap-2 rounded-full bg-black/75 px-2 sm:px-3.5 py-1 sm:py-1.5 text-[9px] sm:text-[11px] font-anton tracking-wider uppercase text-white/90 shadow-xl backdrop-blur-md border border-white/20 opacity-90 transition-all group-hover:scale-105 group-hover:bg-[#ffbe17] group-hover:text-black group-hover:border-transparent">
+                      <svg className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 fill-current" viewBox="0 0 24 24"><path d="M14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77zm-2.5 9.77l-4.5-4.5H3v7h4l4.5 4.5v-7z"/></svg>
+                      <span>Tap Sound</span>
                     </div>
                   )}
                 </div>
 
                 {/* Bottom Bar: Sound Toggle Button & Expand */}
-                <div className="relative z-10 p-3.5 sm:p-4 flex items-center justify-between gap-2">
+                <div className="relative z-10 p-2 sm:p-4 flex items-center justify-between gap-1.5 sm:gap-2">
                   {/* Primary Sound Toggle Button */}
                   <button
                     type="button"
                     onClick={(e) => toggleSound(video.id, e)}
-                    className={`inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-bold uppercase tracking-wider transition-all duration-200 cursor-pointer ${
+                    className={`inline-flex items-center gap-1.5 sm:gap-2 rounded-full px-2 sm:px-3 py-1 sm:py-1.5 text-[9px] sm:text-xs font-bold uppercase tracking-wider transition-all duration-200 cursor-pointer ${
                       isAudioActive
                         ? "bg-[#3e5b34] text-white shadow-[0_0_20px_rgba(62,91,52,0.8)] border border-emerald-300/40"
                         : "bg-black/75 text-white/90 backdrop-blur-md border border-white/25 hover:border-[#ffbe17] hover:bg-[#ffbe17] hover:text-black hover:scale-105"
@@ -232,17 +234,17 @@ export default function HolidayCTA({ onPlay }: { onPlay: (src: string, title: st
                     {isAudioActive ? (
                       <>
                         {/* Animated equalizer waves */}
-                        <span className="flex items-end gap-0.5 h-3">
-                          <span className="inline-block w-1 bg-white animate-pulse" style={{ height: "60%" }} />
-                          <span className="inline-block w-1 bg-white animate-pulse" style={{ height: "100%", animationDelay: "150ms" }} />
-                          <span className="inline-block w-1 bg-white animate-pulse" style={{ height: "40%", animationDelay: "300ms" }} />
+                        <span className="flex items-end gap-0.5 h-2.5 sm:h-3">
+                          <span className="inline-block w-0.5 sm:w-1 bg-white animate-pulse" style={{ height: "60%" }} />
+                          <span className="inline-block w-0.5 sm:w-1 bg-white animate-pulse" style={{ height: "100%", animationDelay: "150ms" }} />
+                          <span className="inline-block w-0.5 sm:w-1 bg-white animate-pulse" style={{ height: "40%", animationDelay: "300ms" }} />
                         </span>
-                        <span>Sound On</span>
+                        <span>Mute</span>
                       </>
                     ) : (
                       <>
-                        <svg className="w-3.5 h-3.5 fill-current text-amber-400" viewBox="0 0 24 24"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
-                        <span>Click for Sound</span>
+                        <svg className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 fill-current text-amber-400" viewBox="0 0 24 24"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
+                        <span>Sound</span>
                       </>
                     )}
                   </button>
@@ -250,7 +252,7 @@ export default function HolidayCTA({ onPlay }: { onPlay: (src: string, title: st
                   <button
                     type="button"
                     onClick={(e) => handleOpenFullscreen(video, e)}
-                    className="text-[10px] font-bold uppercase tracking-widest text-white/60 hover:text-white transition-colors"
+                    className="text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-white/70 hover:text-white transition-colors"
                   >
                     Expand &rarr;
                   </button>

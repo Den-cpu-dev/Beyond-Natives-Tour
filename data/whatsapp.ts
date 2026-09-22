@@ -251,7 +251,7 @@ export interface CombinedCheckoutDetails {
 
 export function formatCombinedCheckoutMessage(details: CombinedCheckoutDetails): string {
   let msg = `🌿 *BEYOND NATIVE EXPEDITIONS & CURATIONS INQUIRY* 🛍️\n`;
-  msg += `*Beyond Native Tours & Travel Store*\n`;
+  msg += `*Beyond Native Tours Store*\n`;
   msg += `━━━━━━━━━━━━━━━━━━━━━━\n`;
   msg += `👤 *Guest / Customer:* ${details.customerName.trim()}\n`;
   msg += `📱 *Contact:* ${details.customerContact.trim()}\n`;

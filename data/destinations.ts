@@ -43,7 +43,7 @@ export const heroDestinations: Destination[] = [
     country: "Ghana",
     subtitle: "Your Adventure Awaits, Escape into the Beauty of Accra with Us!",
     description:
-      "Escape into the beauty of Accra with Beyond Native Tours. Discover monumental historical landmarks like Black Star Square and Kwame Nkrumah Memorial Park, fine art at Gallery 1957, Jamestown Lighthouse, and sensory Makola markets.",
+      "Escape into the beauty of Accra with Beyond Native Tours. Discover monumental historical landmarks like Black Star Square and Kwame Nkrumah Memorial park and Museum, fine art at Gallery 1957, Jamestown Lighthouse, and sensory Makola markets.",
     heroImage: "/images/tours/accra-city.jpg",
     thumbnailImage: "/images/tours/accra-city.jpg",
   },

@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { getTripBookingWhatsAppUrl, WHATSAPP_DISPLAY, type TripBookingDetails } from "@/data/whatsapp";
 import { allTours } from "@/data/tours";
+import { useCart } from "@/context/CartContext";
 
 const availableTours = [
   ...allTours.map((t) => `${t.title} (${t.country})`),
@@ -40,6 +41,7 @@ const tripStyles = [
 const durationOptions = ["1 Day Excursion", "2–3 Days", "3N / 4D (Resort Hopping)", "5N / 6D (Benin & Togo)", "1–2 Weeks", "Custom Duration"];
 
 export default function BookTripModal() {
+  const { addTour, openCart, totalCount } = useCart();
   const [isOpen, setIsOpen] = useState(false);
   const [fullName, setFullName] = useState("");
   const [emailOrPhone, setEmailOrPhone] = useState("");
@@ -53,6 +55,29 @@ export default function BookTripModal() {
   const [notes, setNotes] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
   const [sentSuccess, setSentSuccess] = useState(false);
+
+  const handleAddToCart = (e?: React.MouseEvent) => {
+    if (e) e.preventDefault();
+    const matchedTour = allTours.find(
+      (t) =>
+        `${t.title} (${t.country})`.toLowerCase() === tourName.toLowerCase() ||
+        t.title.toLowerCase() === tourName.toLowerCase()
+    );
+    addTour({
+      tourTitle: matchedTour ? matchedTour.title : tourName,
+      country: matchedTour?.country || "West Africa",
+      duration,
+      pricing: matchedTour?.pricing,
+      image: matchedTour?.image || "/images/tours/accra-city-flyer.jpg",
+      travelDate,
+      groupSize,
+      journeyTier,
+      tripStyle,
+      dietaryOrPreferences,
+      notes,
+    });
+    setIsOpen(false);
+  };
 
   // Global listener so any button on the site can open the booking modal
   useEffect(() => {
@@ -353,17 +378,41 @@ export default function BookTripModal() {
                   />
                 </div>
 
-                {/* Submit Booking Button */}
-                <div className="pt-2">
-                  <button
-                    type="submit"
-                    className="w-full inline-flex items-center justify-center rounded-full bg-[#3e5b34] py-3.5 px-6 font-anton text-xs sm:text-sm uppercase tracking-[0.16em] text-white shadow-[0_0_20px_rgba(62,91,52,0.35)] transition-all hover:bg-[#292f16] hover:scale-[1.01] active:scale-95 cursor-pointer"
-                  >
-                    <span>Book Trip via WhatsApp</span>
-                  </button>
-                  <p className="mt-2 text-center text-[10px] text-[#292f16]/60">
-                    Connects directly to our curator&apos;s WhatsApp DM ({WHATSAPP_DISPLAY}) with your preferences pre-filled
-                  </p>
+                {/* Submit / Add to Cart Actions */}
+                <div className="pt-3 space-y-2.5">
+                  <div className="flex flex-col sm:flex-row items-center gap-2.5">
+                    <button
+                      type="button"
+                      onClick={handleAddToCart}
+                      className="w-full sm:flex-1 inline-flex items-center justify-center gap-2 rounded-full border-2 border-[#3e5b34] bg-white py-3.5 px-5 font-anton text-xs uppercase tracking-wider text-[#3e5b34] hover:bg-[#3e5b34]/10 transition-all active:scale-95 cursor-pointer shadow-sm"
+                    >
+                      <svg className="w-4 h-4 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                      </svg>
+                      <span>Add to Expedition Cart</span>
+                    </button>
+                    <button
+                      type="submit"
+                      className="w-full sm:flex-1 inline-flex items-center justify-center gap-2 rounded-full bg-[#3e5b34] py-3.5 px-5 font-anton text-xs uppercase tracking-wider text-white shadow-md hover:bg-[#292f16] transition-all active:scale-95 cursor-pointer"
+                    >
+                      <span>Book Direct via WhatsApp</span>
+                    </button>
+                  </div>
+                  <div className="flex items-center justify-between text-[10px] text-[#292f16]/70 px-1 pt-1">
+                    <span>💡 Add multiple tours to book all in one single WhatsApp inquiry</span>
+                    {totalCount > 0 && (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setIsOpen(false);
+                          openCart("tours");
+                        }}
+                        className="text-[#3e5b34] font-bold hover:underline cursor-pointer"
+                      >
+                        View Cart ({totalCount}) →
+                      </button>
+                    )}
+                  </div>
                 </div>
               </form>
             )}

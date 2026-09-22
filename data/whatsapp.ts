@@ -85,3 +85,187 @@ export function getDirectChatWhatsAppUrl(contextMessage?: string): string {
   const text = contextMessage || defaultMsg;
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
 }
+
+// =========================================================================
+// CONSOLIDATED MULTI-ITEM BOOKINGS & ORDERS
+// =========================================================================
+
+export interface ConsolidatedTourItem {
+  tourName: string;
+  country: string;
+  duration?: string;
+  journeyTier?: string;
+  tripStyle?: string;
+  travelDate?: string;
+  groupSize?: string;
+  dietaryOrPreferences?: string;
+  notes?: string;
+}
+
+export interface ConsolidatedToursBookingDetails {
+  fullName: string;
+  emailOrPhone: string;
+  tours: ConsolidatedTourItem[];
+  generalNotes?: string;
+}
+
+export function formatConsolidatedToursBookingMessage(details: ConsolidatedToursBookingDetails): string {
+  let msg = `✨ *CONSOLIDATED EXPEDITION BOOKINGS (${details.tours.length})* ✨\n`;
+  msg += `*Beyond Native Tours*\n`;
+  msg += `━━━━━━━━━━━━━━━━━━━━━━\n`;
+  msg += `👤 *Guest Name:* ${details.fullName.trim()}\n`;
+  msg += `📱 *Contact:* ${details.emailOrPhone.trim()}\n`;
+  msg += `🗓️ *Total Tours Selected:* ${details.tours.length}\n`;
+  msg += `━━━━━━━━━━━━━━━━━━━━━━\n\n`;
+
+  details.tours.forEach((tour, idx) => {
+    msg += `📍 *TOUR ${idx + 1}: ${tour.tourName}* (${tour.country})\n`;
+    if (tour.duration) msg += `   • ⏳ *Duration:* ${tour.duration}\n`;
+    if (tour.journeyTier) msg += `   • 🌟 *Tier:* ${tour.journeyTier}\n`;
+    if (tour.tripStyle) msg += `   • 🧭 *Style:* ${tour.tripStyle}\n`;
+    if (tour.groupSize) msg += `   • 👥 *Travelers:* ${tour.groupSize}\n`;
+    if (tour.travelDate) msg += `   • 📅 *Preferred Date:* ${tour.travelDate}\n`;
+    if (tour.dietaryOrPreferences) msg += `   • 🥗 *Preferences:* ${tour.dietaryOrPreferences.trim()}\n`;
+    if (tour.notes) msg += `   • 📝 *Specific Notes:* ${tour.notes.trim()}\n`;
+    msg += `\n`;
+  });
+
+  if (details.generalNotes && details.generalNotes.trim()) {
+    msg += `━━━━━━━━━━━━━━━━━━━━━━\n`;
+    msg += `📝 *Overall Inquiries / Requests:* ${details.generalNotes.trim()}\n`;
+  }
+
+  msg += `━━━━━━━━━━━━━━━━━━━━━━\n`;
+  msg += `_DON'T JUST VISIT. BELONG_\n`;
+  msg += `_Sent via Beyond Native Tours Multi-Booking Cart_`;
+
+  return msg;
+}
+
+export function getConsolidatedToursWhatsAppUrl(details: ConsolidatedToursBookingDetails): string {
+  const message = formatConsolidatedToursBookingMessage(details);
+  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+}
+
+export interface ConsolidatedStoreOrderItem {
+  productName: string;
+  quantity: number;
+  priceUSD: string;
+  priceGHS: string;
+  notes?: string;
+}
+
+export interface ConsolidatedStoreOrderDetails {
+  customerName: string;
+  customerContact: string;
+  deliveryLocation: string;
+  items: ConsolidatedStoreOrderItem[];
+  totalUSD?: string;
+  totalGHS?: string;
+  generalNotes?: string;
+}
+
+export function formatConsolidatedStoreOrderMessage(details: ConsolidatedStoreOrderDetails): string {
+  const totalItemCount = details.items.reduce((acc, i) => acc + i.quantity, 0);
+  let msg = `🛍️ *CONSOLIDATED ARTISAN CURATION ORDER (${totalItemCount} ITEMS)* 🛍️\n`;
+  msg += `*Beyond Native Travel Store*\n`;
+  msg += `━━━━━━━━━━━━━━━━━━━━━━\n`;
+  msg += `👤 *Customer Name:* ${details.customerName.trim()}\n`;
+  msg += `📱 *WhatsApp / Phone:* ${details.customerContact.trim()}\n`;
+  msg += `📍 *Delivery Location / Region:* ${details.deliveryLocation.trim()}\n`;
+  msg += `━━━━━━━━━━━━━━━━━━━━━━\n\n`;
+
+  details.items.forEach((item, idx) => {
+    msg += `📦 *ITEM ${idx + 1}: ${item.productName}*\n`;
+    msg += `   • 🔢 *Qty:* ${item.quantity}\n`;
+    msg += `   • 💰 *Price:* ${item.priceUSD} (${item.priceGHS}) each\n`;
+    if (item.notes && item.notes.trim()) {
+      msg += `   • 📝 *Note:* ${item.notes.trim()}\n`;
+    }
+    msg += `\n`;
+  });
+
+  if (details.totalUSD || details.totalGHS) {
+    msg += `━━━━━━━━━━━━━━━━━━━━━━\n`;
+    msg += `💵 *Estimated Total:* ${details.totalUSD || ""} ${details.totalGHS ? `(${details.totalGHS})` : ""}\n`;
+  }
+
+  if (details.generalNotes && details.generalNotes.trim()) {
+    msg += `📝 *General Order Notes:* ${details.generalNotes.trim()}\n`;
+  }
+
+  msg += `━━━━━━━━━━━━━━━━━━━━━━\n`;
+  msg += `_Please advise on availability, delivery timeframe & payment details. Thank you!_\n`;
+  msg += `_Sent via Beyond Native Travel Store Multi-Item Bag_`;
+
+  return msg;
+}
+
+export function getConsolidatedStoreWhatsAppUrl(details: ConsolidatedStoreOrderDetails): string {
+  const message = formatConsolidatedStoreOrderMessage(details);
+  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+}
+
+export interface CombinedCheckoutDetails {
+  customerName: string;
+  customerContact: string;
+  deliveryLocation?: string;
+  tours: ConsolidatedTourItem[];
+  storeItems: ConsolidatedStoreOrderItem[];
+  totalStoreUSD?: string;
+  totalStoreGHS?: string;
+  generalNotes?: string;
+}
+
+export function formatCombinedCheckoutMessage(details: CombinedCheckoutDetails): string {
+  let msg = `🌿 *BEYOND NATIVE EXPEDITIONS & CURATIONS INQUIRY* 🛍️\n`;
+  msg += `*Beyond Native Tours & Travel Store*\n`;
+  msg += `━━━━━━━━━━━━━━━━━━━━━━\n`;
+  msg += `👤 *Guest / Customer:* ${details.customerName.trim()}\n`;
+  msg += `📱 *Contact:* ${details.customerContact.trim()}\n`;
+  if (details.deliveryLocation && details.deliveryLocation.trim()) {
+    msg += `📍 *Delivery Location / Region:* ${details.deliveryLocation.trim()}\n`;
+  }
+  msg += `━━━━━━━━━━━━━━━━━━━━━━\n\n`;
+
+  if (details.tours.length > 0) {
+    msg += `🗺️ *SELECTED EXPEDITIONS (${details.tours.length}):*\n`;
+    details.tours.forEach((tour, idx) => {
+      msg += `${idx + 1}. *${tour.tourName}* (${tour.country})\n`;
+      if (tour.duration) msg += `   • Duration: ${tour.duration}\n`;
+      if (tour.journeyTier) msg += `   • Tier: ${tour.journeyTier}\n`;
+      if (tour.travelDate) msg += `   • Date: ${tour.travelDate}\n`;
+      if (tour.groupSize) msg += `   • Travelers: ${tour.groupSize}\n`;
+      if (tour.dietaryOrPreferences) msg += `   • Note: ${tour.dietaryOrPreferences}\n`;
+    });
+    msg += `\n`;
+  }
+
+  if (details.storeItems.length > 0) {
+    msg += `📦 *ARTISAN CURATIONS (${details.storeItems.length}):*\n`;
+    details.storeItems.forEach((item, idx) => {
+      msg += `${idx + 1}. *${item.productName}* × ${item.quantity} [${item.priceUSD} / ${item.priceGHS}]\n`;
+      if (item.notes) msg += `   • Note: ${item.notes}\n`;
+    });
+    if (details.totalStoreUSD || details.totalStoreGHS) {
+      msg += `💰 *Store Est. Total:* ${details.totalStoreUSD || ""} ${details.totalStoreGHS ? `(${details.totalStoreGHS})` : ""}\n`;
+    }
+    msg += `\n`;
+  }
+
+  if (details.generalNotes && details.generalNotes.trim()) {
+    msg += `━━━━━━━━━━━━━━━━━━━━━━\n`;
+    msg += `📝 *Notes:* ${details.generalNotes.trim()}\n`;
+  }
+
+  msg += `━━━━━━━━━━━━━━━━━━━━━━\n`;
+  msg += `_DON'T JUST VISIT. BELONG_\n`;
+  msg += `_Sent via Beyond Native Unified Cart Portal_`;
+
+  return msg;
+}
+
+export function getCombinedCheckoutWhatsAppUrl(details: CombinedCheckoutDetails): string {
+  const message = formatCombinedCheckoutMessage(details);
+  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+}

@@ -29,13 +29,18 @@ export const metadata: Metadata = {
 };
 
 import BookTripModal from "@/components/BookTripModal";
+import CartDrawer from "@/components/CartDrawer";
+import { CartProvider } from "@/context/CartContext";
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${anton.variable} ${inter.variable}`}>
       <body>
-        {children}
-        <BookTripModal />
+        <CartProvider>
+          {children}
+          <BookTripModal />
+          <CartDrawer />
+        </CartProvider>
       </body>
     </html>
   );

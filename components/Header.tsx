@@ -6,6 +6,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { openTripBookingModal } from "@/components/BookTripModal";
+import { useCart } from "@/context/CartContext";
 
 const navLinks = [
   { label: "Home", href: "/#top", id: "home" },
@@ -21,6 +22,7 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
   const [activeTab, setActiveTab] = useState<string>("home");
+  const { openCart, totalCount } = useCart();
 
   useEffect(() => {
     let ticking = false;
@@ -233,6 +235,34 @@ export default function Header() {
             </svg>
           </Link>
 
+          {/* Cart Drawer Trigger */}
+          <button
+            type="button"
+            onClick={() => openCart()}
+            className={`relative flex h-9 items-center gap-1.5 rounded-full border px-3 transition-all duration-200 hover:scale-105 cursor-pointer ${
+              isLightHeader
+                ? totalCount > 0
+                  ? "border-[#3e5b34] bg-[#3e5b34]/10 text-[#3e5b34] font-bold shadow-sm"
+                  : "border-[#292f16]/20 bg-[#292f16]/5 text-[#292f16]/80 hover:border-[#3e5b34] hover:text-[#3e5b34]"
+                : totalCount > 0
+                  ? "border-[#ffbe17] bg-[#ffbe17]/20 text-[#ffbe17] backdrop-blur-sm font-bold shadow-sm"
+                  : "border-white/20 bg-black/30 text-white/80 backdrop-blur-sm hover:border-white hover:text-white hover:bg-white/10"
+            }`}
+            aria-label={`View Cart (${totalCount} items)`}
+          >
+            <svg className="w-3.5 h-3.5 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+            </svg>
+            <span className="font-anton text-[10px] uppercase tracking-wider">
+              Cart
+            </span>
+            {totalCount > 0 && (
+              <span className="flex h-4 min-w-4 items-center justify-center rounded-full bg-[#3e5b34] px-1 text-[9px] font-bold text-white shadow-sm">
+                {totalCount}
+              </span>
+            )}
+          </button>
+
           <button
             type="button"
             onClick={() => openTripBookingModal()}
@@ -246,26 +276,52 @@ export default function Header() {
           </button>
         </div>
 
-        {/* Mobile Menu Button */}
-        <button
-          type="button"
-          className={`grid h-9 w-9 place-items-center rounded-full border md:hidden backdrop-blur-sm ${
-            isLightHeader
-              ? "border-[#292f16]/25 bg-white/80 text-[#292f16]"
-              : "border-white/25 bg-black/40 text-white"
-          }`}
-          onClick={() => setOpen((value) => !value)}
-          aria-expanded={open}
-          aria-controls="mobile-navigation"
-          aria-label={open ? "Close menu" : "Open menu"}
-        >
-          <span className="sr-only">Menu</span>
-          <span className="grid gap-1.5">
-            <span className={`block h-px w-4 ${isLightHeader ? "bg-[#292f16]" : "bg-white"} transition-transform ${open ? "rotate-45 translate-y-1" : ""}`} />
-            <span className={`block h-px w-4 ${isLightHeader ? "bg-[#292f16]" : "bg-white"} transition-opacity ${open ? "opacity-0" : ""}`} />
-            <span className={`block h-px w-4 ${isLightHeader ? "bg-[#292f16]" : "bg-white"} transition-transform ${open ? "-rotate-45 -translate-y-1" : ""}`} />
-          </span>
-        </button>
+        {/* Mobile Header Actions: Cart + Menu Toggle */}
+        <div className="flex items-center gap-2 md:hidden">
+          <button
+            type="button"
+            onClick={() => openCart()}
+            className={`relative grid h-9 w-9 place-items-center rounded-full border backdrop-blur-sm transition-all cursor-pointer ${
+              isLightHeader
+                ? totalCount > 0
+                  ? "border-[#3e5b34] bg-[#3e5b34]/15 text-[#3e5b34] shadow-sm"
+                  : "border-[#292f16]/25 bg-white/80 text-[#292f16]"
+                : totalCount > 0
+                  ? "border-[#ffbe17] bg-[#ffbe17]/25 text-[#ffbe17] shadow-sm"
+                  : "border-white/25 bg-black/40 text-white"
+            }`}
+            aria-label={`Open Cart (${totalCount} items)`}
+          >
+            <svg className="w-4 h-4 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+            </svg>
+            {totalCount > 0 && (
+              <span className="absolute -top-1 -right-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-[#3e5b34] px-1 text-[9px] font-bold text-white shadow-sm">
+                {totalCount}
+              </span>
+            )}
+          </button>
+
+          <button
+            type="button"
+            className={`grid h-9 w-9 place-items-center rounded-full border backdrop-blur-sm ${
+              isLightHeader
+                ? "border-[#292f16]/25 bg-white/80 text-[#292f16]"
+                : "border-white/25 bg-black/40 text-white"
+            }`}
+            onClick={() => setOpen((value) => !value)}
+            aria-expanded={open}
+            aria-controls="mobile-navigation"
+            aria-label={open ? "Close menu" : "Open menu"}
+          >
+            <span className="sr-only">Menu</span>
+            <span className="grid gap-1.5">
+              <span className={`block h-px w-4 ${isLightHeader ? "bg-[#292f16]" : "bg-white"} transition-transform ${open ? "rotate-45 translate-y-1" : ""}`} />
+              <span className={`block h-px w-4 ${isLightHeader ? "bg-[#292f16]" : "bg-white"} transition-opacity ${open ? "opacity-0" : ""}`} />
+              <span className={`block h-px w-4 ${isLightHeader ? "bg-[#292f16]" : "bg-white"} transition-transform ${open ? "-rotate-45 -translate-y-1" : ""}`} />
+            </span>
+          </button>
+        </div>
       </div>
 
       {/* Mobile Drawer */}
@@ -304,14 +360,33 @@ export default function Header() {
                   </Link>
                 );
               })}
-              <div className="pt-4 border-t border-[#292f16]/15 space-y-3">
+              <div className="pt-4 border-t border-[#292f16]/15 space-y-2.5">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setOpen(false);
+                    openCart();
+                  }}
+                  className="w-full flex items-center justify-center gap-2 rounded-full border border-[#3e5b34]/30 bg-[#f7f9f6] py-2.5 text-xs font-anton uppercase tracking-wider text-[#3e5b34] hover:bg-[#3e5b34]/10 transition-colors cursor-pointer"
+                >
+                  <svg className="w-3.5 h-3.5 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                  </svg>
+                  <span>View Cart & Bag</span>
+                  {totalCount > 0 && (
+                    <span className="rounded-full bg-[#3e5b34] px-2 py-0.5 text-[10px] text-white font-bold">
+                      {totalCount}
+                    </span>
+                  )}
+                </button>
+
                 <button
                   type="button"
                   onClick={() => {
                     setOpen(false);
                     openTripBookingModal();
                   }}
-                  className="w-full block text-center rounded-full bg-[#3e5b34] py-3 text-xs font-bold uppercase tracking-[0.18em] text-white shadow-[0_0_20px_rgba(62,91,52,0.3)] hover:bg-[#292f16] active:scale-95 transition-all"
+                  className="w-full block text-center rounded-full bg-[#3e5b34] py-3 text-xs font-bold uppercase tracking-[0.18em] text-white shadow-[0_0_20px_rgba(62,91,52,0.3)] hover:bg-[#292f16] active:scale-95 transition-all cursor-pointer"
                 >
                   Book Trip
                 </button>

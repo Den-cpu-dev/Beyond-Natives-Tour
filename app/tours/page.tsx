@@ -8,6 +8,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { openTripBookingModal } from "@/components/BookTripModal";
 import { allTours, countryList, type Tour, type CountryInfo } from "@/data/tours";
+import { useCart } from "@/context/CartContext";
 
 const filterTabs = [
   { id: "all", label: "All Tours" },
@@ -26,6 +27,20 @@ function ToursContent() {
   const [activeFilter, setActiveFilter] = useState<string>(initialCountry);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedFlyer, setSelectedFlyer] = useState<Tour | null>(null);
+  const { addTour, openCart, tourItems } = useCart();
+
+  const handleQuickAddToCart = (tour: Tour) => {
+    addTour({
+      tourTitle: tour.title,
+      country: tour.country,
+      duration: tour.duration,
+      pricing: tour.pricing,
+      image: tour.image,
+      groupSize: "2 Travellers (Duo / Couple)",
+      journeyTier: tour.pricing ? tour.pricing : "Standard (3-Star / Group)",
+      tripStyle: "Cultural & Heritage",
+    });
+  };
 
   // Sync state when URL query parameter changes
   useEffect(() => {
@@ -331,36 +346,39 @@ function ToursContent() {
 
                     {/* Action CTAs */}
                     <div className="pt-4 border-t border-[#292f16]/10">
-                      {tour.flyerImage ? (
-                        <div className="flex items-center gap-2">
-                          <button
-                            type="button"
-                            onClick={() => openTripBookingModal(tour.title)}
-                            className="flex-1 inline-flex items-center justify-center rounded-full bg-[#3e5b34] py-3.5 px-6 font-anton text-xs uppercase tracking-[0.16em] text-white shadow-[0_0_20px_rgba(62,91,52,0.3)] transition-all hover:bg-[#292f16] hover:scale-[1.02] active:scale-95 cursor-pointer"
-                          >
-                            <span>Book Trip</span>
-                          </button>
-                          <button
-                            type="button"
-                            onClick={() => setSelectedFlyer(tour)}
-                            className="inline-flex items-center gap-1.5 rounded-full border border-[#3e5b34]/30 bg-[#f7f9f6] hover:bg-[#3e5b34]/10 hover:border-[#3e5b34] px-4 py-3.5 font-anton text-xs uppercase tracking-wider text-[#3e5b34] transition-all cursor-pointer"
-                          >
-                            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                            </svg>
-                            <span>Flyer</span>
-                          </button>
-                        </div>
-                      ) : (
+                      <div className="flex items-center gap-2">
                         <button
                           type="button"
                           onClick={() => openTripBookingModal(tour.title)}
-                          className="w-full inline-flex items-center justify-center rounded-full bg-[#3e5b34] py-3.5 px-6 font-anton text-xs uppercase tracking-[0.16em] text-white shadow-[0_0_20px_rgba(62,91,52,0.3)] transition-all hover:bg-[#292f16] hover:scale-[1.02] active:scale-95 cursor-pointer"
+                          className="flex-1 inline-flex items-center justify-center rounded-full bg-[#3e5b34] py-3.5 px-4 font-anton text-xs uppercase tracking-[0.14em] text-white shadow-md transition-all hover:bg-[#292f16] hover:scale-[1.01] active:scale-95 cursor-pointer"
                         >
-                          <span>Book Trip</span>
+                          <span>Configure & Book</span>
                         </button>
-                      )}
+                        <button
+                          type="button"
+                          onClick={() => handleQuickAddToCart(tour)}
+                          className="inline-flex items-center gap-1.5 rounded-full border-2 border-[#3e5b34] bg-white hover:bg-[#3e5b34]/10 px-3.5 py-3 font-anton text-xs uppercase tracking-wider text-[#3e5b34] transition-all cursor-pointer"
+                          title="Add directly to Expedition Cart"
+                        >
+                          <svg className="w-3.5 h-3.5 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                          </svg>
+                          <span>+ Cart</span>
+                        </button>
+                        {tour.flyerImage && (
+                          <button
+                            type="button"
+                            onClick={() => setSelectedFlyer(tour)}
+                            className="inline-flex items-center justify-center rounded-full border border-[#292f16]/20 bg-[#f7f9f6] hover:bg-[#292f16]/10 h-10 w-10 text-[#292f16] transition-all cursor-pointer shrink-0"
+                            title="View Official Flyer"
+                          >
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                            </svg>
+                          </button>
+                        )}
+                      </div>
                     </div>
 
                   </div>
@@ -417,7 +435,7 @@ function ToursContent() {
                 />
               </div>
 
-              <div className="mt-4 flex items-center gap-3">
+              <div className="mt-4 flex flex-wrap items-center gap-2.5">
                 <button
                   type="button"
                   onClick={() => {
@@ -427,12 +445,22 @@ function ToursContent() {
                   }}
                   className="flex-1 rounded-full bg-[#3e5b34] py-3 text-center font-anton text-xs uppercase tracking-wider text-white hover:bg-[#292f16] transition-colors cursor-pointer"
                 >
-                  Book This Tour
+                  Configure & Book
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    handleQuickAddToCart(selectedFlyer);
+                    setSelectedFlyer(null);
+                  }}
+                  className="rounded-full border-2 border-[#3e5b34] bg-white px-4 py-2.5 text-center font-anton text-xs uppercase tracking-wider text-[#3e5b34] hover:bg-[#3e5b34]/10 transition-colors cursor-pointer"
+                >
+                  + Add to Cart
                 </button>
                 <button
                   type="button"
                   onClick={() => setSelectedFlyer(null)}
-                  className="rounded-full border border-[#292f16]/20 px-5 py-3 text-center font-anton text-xs uppercase tracking-wider text-[#292f16] hover:bg-[#292f16]/5 transition-colors cursor-pointer"
+                  className="rounded-full border border-[#292f16]/20 px-4 py-2.5 text-center font-anton text-xs uppercase tracking-wider text-[#292f16] hover:bg-[#292f16]/5 transition-colors cursor-pointer"
                 >
                   Close
                 </button>

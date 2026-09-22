@@ -6,6 +6,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { WHATSAPP_NUMBER, WHATSAPP_DISPLAY, getStoreOrderWhatsAppUrl, type StoreOrderDetails } from "@/data/whatsapp";
+import { useCart } from "@/context/CartContext";
 
 interface Product {
   id: string;
@@ -117,6 +118,7 @@ const placeholderProducts: Product[] = [
 ];
 
 export default function StorePage() {
+  const { addStoreItem, openCart, storeItems } = useCart();
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [activeModalProduct, setActiveModalProduct] = useState<Product | null>(null);
   const [quantity, setQuantity] = useState(1);
@@ -138,6 +140,34 @@ export default function StorePage() {
     setCustomNote("");
     setErrorMsg("");
     setOrderSent(false);
+  };
+
+  const handleQuickAddToBag = (product: Product) => {
+    addStoreItem({
+      productId: product.id,
+      name: product.name,
+      categoryLabel: product.categoryLabel,
+      priceUSD: product.priceUSD,
+      priceGHS: product.priceGHS,
+      image: product.image,
+      quantity: 1,
+    });
+  };
+
+  const handleModalAddToBag = (e?: React.MouseEvent) => {
+    if (e) e.preventDefault();
+    if (!activeModalProduct) return;
+    addStoreItem({
+      productId: activeModalProduct.id,
+      name: activeModalProduct.name,
+      categoryLabel: activeModalProduct.categoryLabel,
+      priceUSD: activeModalProduct.priceUSD,
+      priceGHS: activeModalProduct.priceGHS,
+      image: activeModalProduct.image,
+      quantity,
+      customNote,
+    });
+    setActiveModalProduct(null);
   };
 
   const handleSubmitOrder = (e: React.FormEvent) => {
@@ -299,19 +329,24 @@ export default function StorePage() {
                   </div>
 
                   {/* Order Action Buttons */}
-                  <div className="pt-1 sm:pt-2 flex flex-col sm:flex-row gap-1.5 sm:gap-2.5">
+                  <div className="pt-1 sm:pt-2 flex flex-col sm:flex-row gap-1.5 sm:gap-2">
                     <button
+                      type="button"
                       onClick={() => handleOpenOrderModal(product)}
-                      className="w-full sm:flex-1 rounded-full border border-[#3e5b34]/30 bg-white py-1.5 sm:py-2.5 px-2 sm:px-4 font-anton text-[9px] sm:text-xs uppercase tracking-[0.12em] text-[#292f16] transition-all hover:bg-[#f7f9f6] hover:border-[#3e5b34] text-center cursor-pointer"
+                      className="w-full sm:flex-1 rounded-full border border-[#3e5b34]/30 bg-white py-2 px-2 sm:px-3 font-anton text-[10px] sm:text-xs uppercase tracking-wider text-[#292f16] transition-all hover:bg-[#f7f9f6] hover:border-[#3e5b34] text-center cursor-pointer"
                     >
-                      Details
+                      Details & Notes
                     </button>
 
                     <button
-                      onClick={() => handleOpenOrderModal(product)}
-                      className="w-full sm:flex-1 inline-flex items-center justify-center gap-1 sm:gap-2 rounded-full bg-[#3e5b34] py-1.5 sm:py-2.5 px-2 sm:px-4 font-anton text-[9px] sm:text-xs uppercase tracking-[0.12em] text-white shadow-md transition-all hover:bg-[#292f16] hover:scale-[1.02] active:scale-95 cursor-pointer"
+                      type="button"
+                      onClick={() => handleQuickAddToBag(product)}
+                      className="w-full sm:flex-1 inline-flex items-center justify-center gap-1.5 rounded-full bg-[#3e5b34] py-2 px-2 sm:px-3 font-anton text-[10px] sm:text-xs uppercase tracking-wider text-white shadow-md transition-all hover:bg-[#292f16] hover:scale-[1.02] active:scale-95 cursor-pointer"
                     >
-                      <span className="truncate">Order</span>
+                      <svg className="w-3.5 h-3.5 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                      </svg>
+                      <span>+ Add to Bag</span>
                     </button>
                   </div>
                 </div>
@@ -533,17 +568,41 @@ export default function StorePage() {
                     />
                   </div>
 
-                  {/* Submit Order button */}
-                  <div className="pt-2">
-                    <button
-                      type="submit"
-                      className="w-full inline-flex items-center justify-center gap-2.5 rounded-full bg-[#3e5b34] py-3.5 px-6 font-anton text-xs uppercase tracking-[0.16em] text-white shadow-md transition-all hover:bg-[#292f16] hover:scale-[1.01] active:scale-95 cursor-pointer"
-                    >
-                      <span>Send Order to WhatsApp DM</span>
-                    </button>
-                    <p className="mt-1.5 text-center text-[10px] text-[#292f16]/60 font-sans">
-                      Opens directly in our WhatsApp DM ({WHATSAPP_DISPLAY}) with your order pre-formatted
-                    </p>
+                  {/* Submit / Add to Bag Actions */}
+                  <div className="pt-3 space-y-2.5">
+                    <div className="flex flex-col sm:flex-row items-center gap-2.5">
+                      <button
+                        type="button"
+                        onClick={handleModalAddToBag}
+                        className="w-full sm:flex-1 inline-flex items-center justify-center gap-2 rounded-full border-2 border-[#3e5b34] bg-white py-3.5 px-5 font-anton text-xs uppercase tracking-wider text-[#3e5b34] hover:bg-[#3e5b34]/10 transition-all active:scale-95 cursor-pointer shadow-sm"
+                      >
+                        <svg className="w-4 h-4 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                        </svg>
+                        <span>Add to Bag ({quantity})</span>
+                      </button>
+                      <button
+                        type="submit"
+                        className="w-full sm:flex-1 inline-flex items-center justify-center gap-2 rounded-full bg-[#3e5b34] py-3.5 px-5 font-anton text-xs uppercase tracking-wider text-white shadow-md hover:bg-[#292f16] transition-all active:scale-95 cursor-pointer"
+                      >
+                        <span>Order Direct via WhatsApp</span>
+                      </button>
+                    </div>
+                    <div className="flex items-center justify-between text-[10px] text-[#292f16]/70 px-1 pt-0.5">
+                      <span>💡 Add multiple curations to check out all together on WhatsApp</span>
+                      {storeItems.length > 0 && (
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setActiveModalProduct(null);
+                            openCart("store");
+                          }}
+                          className="text-[#3e5b34] font-bold hover:underline cursor-pointer"
+                        >
+                          View Bag ({storeItems.reduce((acc, i) => acc + i.quantity, 0)}) →
+                        </button>
+                      )}
+                    </div>
                   </div>
                 </form>
               )}
@@ -551,6 +610,30 @@ export default function StorePage() {
           </div>
         )}
       </AnimatePresence>
+
+      {/* Floating Store Bag Bar */}
+      {storeItems.length > 0 && (
+        <aside
+          aria-label="Artisan shopping bag status"
+          className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 flex items-center gap-3.5 rounded-full border border-[#3e5b34]/30 bg-[#292f16]/95 px-5 py-3 text-white shadow-2xl backdrop-blur-md"
+        >
+          <div className="flex items-center gap-2">
+            <span className="flex h-6 min-w-6 px-1.5 items-center justify-center rounded-full bg-[#ffbe17] text-black font-anton text-xs">
+              {storeItems.reduce((acc, i) => acc + i.quantity, 0)}
+            </span>
+            <span className="font-anton text-xs uppercase tracking-wider hidden sm:inline">
+              Curations in Bag
+            </span>
+          </div>
+          <button
+            type="button"
+            onClick={() => openCart("store")}
+            className="rounded-full bg-[#3e5b34] px-4 py-1.5 font-anton text-xs uppercase tracking-wider text-white hover:bg-[#ffbe17] hover:text-black transition-colors cursor-pointer"
+          >
+            View Bag & Checkout →
+          </button>
+        </aside>
+      )}
 
       <Footer />
     </main>

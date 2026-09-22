@@ -9,7 +9,7 @@ import { openTripBookingModal } from "@/components/BookTripModal";
 import { useCart } from "@/context/CartContext";
 
 const navLinks = [
-  { label: "Home", href: "/#top", id: "home" },
+  { label: "Home", href: "/", id: "home" },
   { label: "Destinations", href: "/#destinations", id: "destinations" },
   { label: "Tours", href: "/tours", id: "tours" },
   { label: "Store", href: "/store", id: "store" },
@@ -33,7 +33,7 @@ export default function Header() {
       const path = (pathname || (typeof window !== "undefined" ? window.location.pathname : "")).replace(/\/$/, "") || "/";
       const hash = typeof window !== "undefined" ? window.location.hash : "";
 
-      // 1. If on /about, /store, /tours, or /contact, route always takes priority
+      // 1. Dedicated standalone routes
       if (path === "/about" || path.startsWith("/about/")) {
         setActiveTab("about");
         return;
@@ -51,35 +51,20 @@ export default function Header() {
         return;
       }
 
-      // 2. On homepage
+      // 2. Homepage (strictly default to "home", or "destinations" when in section)
       if (path === "/" || path === "") {
         if (hash === "#destinations") {
           setActiveTab("destinations");
           return;
         }
-        if (hash === "#holiday") {
-          setActiveTab("expeditions");
-          return;
-        }
-        if (hash === "#footer") {
-          setActiveTab("contact");
-          return;
-        }
-        if (hash === "#top") {
-          setActiveTab("home");
-          return;
-        }
 
-        const footerEl = document.getElementById("footer");
-        const holidayEl = document.getElementById("holiday");
         const destinationsEl = document.getElementById("destinations");
-
         const vh = window.innerHeight;
-        if (footerEl && footerEl.getBoundingClientRect().top <= vh * 0.85) {
-          setActiveTab("contact");
-        } else if (holidayEl && holidayEl.getBoundingClientRect().top <= vh * 0.5 && holidayEl.getBoundingClientRect().bottom >= vh * 0.2) {
-          setActiveTab("expeditions");
-        } else if (destinationsEl && destinationsEl.getBoundingClientRect().top <= vh * 0.5 && destinationsEl.getBoundingClientRect().bottom >= vh * 0.2) {
+        if (
+          destinationsEl &&
+          destinationsEl.getBoundingClientRect().top <= vh * 0.4 &&
+          destinationsEl.getBoundingClientRect().bottom >= vh * 0.2
+        ) {
           setActiveTab("destinations");
         } else {
           setActiveTab("home");
@@ -109,14 +94,13 @@ export default function Header() {
 
   const isLinkActive = (link: { label: string; href: string; id: string }) => {
     const path = (pathname || "").replace(/\/$/, "") || "/";
-    if (path === "/about" || path.startsWith("/about/")) {
-      return link.id === "about";
-    }
-    if (path === "/store" || path.startsWith("/store/")) {
-      return link.id === "store";
-    }
-    if (path === "/tours" || path.startsWith("/tours/")) {
-      return link.id === "tours";
+    if (path === "/about" || path.startsWith("/about/")) return link.id === "about";
+    if (path === "/store" || path.startsWith("/store/")) return link.id === "store";
+    if (path === "/tours" || path.startsWith("/tours/")) return link.id === "tours";
+    if (path === "/contact" || path.startsWith("/contact/")) return link.id === "contact";
+    if (path === "/" || path === "") {
+      if (link.id === "contact") return false;
+      return activeTab === link.id;
     }
     return activeTab === link.id;
   };

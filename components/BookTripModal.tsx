@@ -399,7 +399,7 @@ export default function BookTripModal() {
                     </button>
                   </div>
                   <div className="flex items-center justify-between text-[10px] text-[#292f16]/70 px-1 pt-1">
-                    <span>💡 Add multiple tours to book all in one single WhatsApp inquiry</span>
+                    <span>Add multiple tours to book all in one single WhatsApp inquiry</span>
                     {totalCount > 0 && (
                       <button
                         type="button"

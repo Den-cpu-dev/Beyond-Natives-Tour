@@ -296,7 +296,7 @@ export default function CartDrawer() {
 
                 {errorMsg && (
                   <div className="rounded-2xl bg-red-50 border border-red-200 p-3 text-red-700 text-xs">
-                    ⚠️ {errorMsg}
+                    <span className="font-semibold text-red-800">Notice: </span>{errorMsg}
                   </div>
                 )}
 
@@ -305,8 +305,10 @@ export default function CartDrawer() {
                   <>
                     {tourItems.length === 0 ? (
                       <div className="py-14 text-center">
-                        <div className="mx-auto h-16 w-16 rounded-full bg-[#f7f9f6] grid place-items-center text-3xl mb-3 text-[#292f16]/30">
-                          🗺️
+                        <div className="mx-auto h-16 w-16 rounded-full bg-[#f7f9f6] grid place-items-center mb-3 text-[#292f16]/40">
+                          <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                          </svg>
                         </div>
                         <h3 className="font-anton text-lg uppercase tracking-wider text-[#292f16]">
                           Your Expedition Cart is Empty
@@ -378,21 +380,21 @@ export default function CartDrawer() {
                                 <div className="mt-2 flex flex-wrap gap-1.5 text-[10px]">
                                   {item.duration && (
                                     <span className="rounded-md bg-white px-2 py-0.5 border border-[#292f16]/10 font-medium text-[#292f16]/80">
-                                      ⏳ {item.duration}
+                                      {item.duration}
                                     </span>
                                   )}
                                   {item.journeyTier && (
                                     <span className="rounded-md bg-[#3e5b34]/10 px-2 py-0.5 font-medium text-[#3e5b34]">
-                                      🌟 {item.journeyTier}
+                                      {item.journeyTier}
                                     </span>
                                   )}
                                   {item.travelDate && (
                                     <span className="rounded-md bg-white px-2 py-0.5 border border-[#292f16]/10 font-medium text-[#292f16]/80">
-                                      📅 {item.travelDate}
+                                      {item.travelDate}
                                     </span>
                                   )}
                                   <span className="rounded-md bg-white px-2 py-0.5 border border-[#292f16]/10 font-medium text-[#292f16]/80">
-                                    👥 {item.groupSize}
+                                    {item.groupSize}
                                   </span>
                                 </div>
 
@@ -489,8 +491,10 @@ export default function CartDrawer() {
                   <>
                     {storeItems.length === 0 ? (
                       <div className="py-14 text-center">
-                        <div className="mx-auto h-16 w-16 rounded-full bg-[#f7f9f6] grid place-items-center text-3xl mb-3 text-[#292f16]/30">
-                          🛍️
+                        <div className="mx-auto h-16 w-16 rounded-full bg-[#f7f9f6] grid place-items-center mb-3 text-[#292f16]/40">
+                          <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                          </svg>
                         </div>
                         <h3 className="font-anton text-lg uppercase tracking-wider text-[#292f16]">
                           Your Artisan Bag is Empty

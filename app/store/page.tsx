@@ -398,7 +398,7 @@ export default function StorePage() {
             </div>
 
             <h1 className="font-anton text-3xl sm:text-6xl md:text-7xl uppercase tracking-tight text-[#292f16] max-w-4xl leading-[0.92]">
-              The Native <span className="text-[#3e5b34]">Store</span>
+              The Native <span className="text-[#3e5b34]">Concept</span>
             </h1>
 
             <p className="mt-3 sm:mt-4 font-anton text-[11px] sm:text-sm md:text-base uppercase tracking-[0.2em] sm:tracking-[0.25em] text-[#3e5b34] max-w-3xl">
@@ -431,7 +431,7 @@ export default function StorePage() {
               onClick={() => setShowTeaFlyer(true)}
               className="inline-flex items-center gap-1.5 rounded-full border border-[#ffbe17] bg-[#ffbe17]/15 px-3.5 py-1.5 sm:px-4 sm:py-2 text-[10px] sm:text-xs font-anton uppercase tracking-[0.14em] text-[#292f16] hover:bg-[#ffbe17] transition-all cursor-pointer shadow-sm"
             >
-              <span>🍵 7 Attitude Teas Guide</span>
+              <span>7 Attitude Teas Guide</span>
             </button>
           </div>
         </div>
@@ -559,7 +559,7 @@ export default function StorePage() {
             <div className="shrink-0">
               <a
                 href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
-                  "Hello Beyond Native Tours! 🌟 I have a custom artisan / store inquiry and would love to discuss options."
+                  "Hello Beyond Native Tours! I have a custom artisan / store inquiry and would love to discuss options."
                 )}`}
                 target="_blank"
                 rel="noreferrer"
@@ -781,7 +781,7 @@ export default function StorePage() {
                       </button>
                     </div>
                     <div className="flex items-center justify-between text-[10px] text-[#292f16]/70 px-1 pt-0.5">
-                      <span>💡 Add multiple curations to check out all together on WhatsApp</span>
+                      <span>Add multiple curations to check out all together on WhatsApp</span>
                       {storeItems.length > 0 && (
                         <button
                           type="button"

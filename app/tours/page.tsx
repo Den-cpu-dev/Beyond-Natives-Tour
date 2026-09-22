@@ -274,7 +274,7 @@ function ToursContent() {
                       {/* Pricing badge if present */}
                       {tour.pricing && (
                         <div className="mb-3 inline-flex items-center gap-1.5 rounded-full bg-[#3e5b34]/10 border border-[#3e5b34]/25 px-3 py-1 text-[11px] font-anton uppercase tracking-wider text-[#3e5b34]">
-                          <span>💰 {tour.pricing}</span>
+                          <span>{tour.pricing}</span>
                         </div>
                       )}
 

@@ -1,6 +1,6 @@
-// =========================================================================
-// WHATSAPP CONFIGURATION & DISPATCHER (BOOKINGS & STORE)
-// =========================================================================
+// Beyond Native Tours Official WhatsApp Integration Helper
+// Official WhatsApp Contact & Message Formatters
+
 // Beyond Native Tours Official WhatsApp Business Contact: +233539691802
 export const WHATSAPP_NUMBER = "233539691802";
 export const WHATSAPP_DISPLAY = "+233 53 969 1802";
@@ -19,15 +19,15 @@ export interface ContactInquiryDetails {
 
 export function formatContactInquiryMessage(details: ContactInquiryDetails): string {
   return (
-    `📩 *NEW INQUIRY VIA CONTACT PORTAL* 📩\n` +
+    `*NEW INQUIRY VIA CONTACT PORTAL*\n` +
     `*Beyond Native Tours*\n` +
     `━━━━━━━━━━━━━━━━━━━━━━\n` +
-    `👤 *Name:* ${details.fullName.trim()}\n` +
-    `📱 *Contact:* ${details.emailOrPhone.trim()}\n` +
-    `🏷️ *Inquiry Type:* ${details.inquiryType}\n` +
-    (details.travelDates ? `📅 *Preferred Travel Dates:* ${details.travelDates.trim()}\n` : "") +
-    (details.numberOfTravelers ? `👥 *Number of Travelers:* ${details.numberOfTravelers.trim()}\n` : "") +
-    `💬 *Message / Dream Plan:*\n${details.message.trim()}\n` +
+    `*Name:* ${details.fullName.trim()}\n` +
+    `*Contact:* ${details.emailOrPhone.trim()}\n` +
+    `*Inquiry Type:* ${details.inquiryType}\n` +
+    (details.travelDates ? `*Preferred Travel Dates:* ${details.travelDates.trim()}\n` : "") +
+    (details.numberOfTravelers ? `*Number of Travelers:* ${details.numberOfTravelers.trim()}\n` : "") +
+    `*Message / Dream Plan:*\n${details.message.trim()}\n` +
     `━━━━━━━━━━━━━━━━━━━━━━\n` +
     `_EXPLORE • DISCOVER • CONNECT_\n` +
     `_Sent via Beyond Native Tours Contact Page_`
@@ -54,19 +54,19 @@ export interface TripBookingDetails {
 
 export function formatTripBookingMessage(details: TripBookingDetails): string {
   return (
-    `✨ *NEW EXPEDITION BOOKING INQUIRY* ✨\n` +
+    `*NEW EXPEDITION BOOKING INQUIRY*\n` +
     `*Beyond Native Tours*\n` +
     `━━━━━━━━━━━━━━━━━━━━━━\n` +
-    `👤 *Name:* ${details.fullName.trim()}\n` +
-    `📱 *Contact:* ${details.emailOrPhone.trim()}\n` +
-    `📍 *Tour / Expedition:* ${details.tourName}\n` +
-    (details.journeyTier ? `🌟 *Package Tier:* ${details.journeyTier}\n` : "") +
-    (details.tripStyle ? `🧭 *Trip Style:* ${details.tripStyle}\n` : "") +
-    `👥 *Group Size:* ${details.groupSize}\n` +
-    `📅 *Preferred Dates:* ${details.travelDate || "Flexible / To be discussed"}\n` +
-    `⏳ *Duration:* ${details.duration || "Standard itinerary"}\n` +
-    (details.dietaryOrPreferences ? `🥗 *Dietary & Room Preferences:* ${details.dietaryOrPreferences.trim()}\n` : "") +
-    (details.notes ? `📝 *Special Requests / Notes:* ${details.notes.trim()}\n` : "") +
+    `*Name:* ${details.fullName.trim()}\n` +
+    `*Contact:* ${details.emailOrPhone.trim()}\n` +
+    `*Tour / Expedition:* ${details.tourName}\n` +
+    (details.journeyTier ? `*Package Tier:* ${details.journeyTier}\n` : "") +
+    (details.tripStyle ? `*Trip Style:* ${details.tripStyle}\n` : "") +
+    `*Group Size:* ${details.groupSize}\n` +
+    `*Preferred Dates:* ${details.travelDate || "Flexible / To be discussed"}\n` +
+    `*Duration:* ${details.duration || "Standard itinerary"}\n` +
+    (details.dietaryOrPreferences ? `*Dietary & Room Preferences:* ${details.dietaryOrPreferences.trim()}\n` : "") +
+    (details.notes ? `*Special Requests / Notes:* ${details.notes.trim()}\n` : "") +
     `━━━━━━━━━━━━━━━━━━━━━━\n` +
     `_DON'T JUST VISIT. BELONG_\n` +
     `_Sent via Beyond Native Tours Booking Portal_`
@@ -91,16 +91,16 @@ export interface StoreOrderDetails {
 
 export function formatStoreOrderMessage(details: StoreOrderDetails): string {
   return (
-    `🛍️ *NEW ARTISAN CURATION ORDER* 🛍️\n` +
+    `*NEW ARTISAN CURATION ORDER*\n` +
     `*Beyond Native Tours Store*\n` +
     `━━━━━━━━━━━━━━━━━━━━━━\n` +
-    `👤 *Customer Name:* ${details.customerName.trim()}\n` +
-    `📱 *WhatsApp / Phone:* ${details.customerContact.trim()}\n` +
-    `📍 *Delivery Location / Region:* ${details.deliveryLocation.trim()}\n` +
-    `📦 *Product:* ${details.productName}\n` +
-    `🔢 *Quantity:* ${details.quantity}\n` +
-    `💰 *Price:* ${details.priceUSD} (${details.priceGHS}) each\n` +
-    (details.notes ? `📝 *Custom Request / Sizing / Notes:* ${details.notes.trim()}\n` : "") +
+    `*Customer Name:* ${details.customerName.trim()}\n` +
+    `*WhatsApp / Phone:* ${details.customerContact.trim()}\n` +
+    `*Delivery Location / Region:* ${details.deliveryLocation.trim()}\n` +
+    `*Product:* ${details.productName}\n` +
+    `*Quantity:* ${details.quantity}\n` +
+    `*Price:* ${details.priceUSD} (${details.priceGHS}) each\n` +
+    (details.notes ? `*Custom Request / Sizing / Notes:* ${details.notes.trim()}\n` : "") +
     `━━━━━━━━━━━━━━━━━━━━━━\n` +
     `_Please advise on delivery timeframe and payment instructions. Thank you!_\n` +
     `_Sent via Beyond Native Tours Store_`
@@ -113,7 +113,7 @@ export function getStoreOrderWhatsAppUrl(details: StoreOrderDetails): string {
 }
 
 export function getDirectChatWhatsAppUrl(contextMessage?: string): string {
-  const defaultMsg = "Hello Beyond Native Tours! 🌿 I am inquiring about your curated West Africa tours and experiences.";
+  const defaultMsg = "Hello Beyond Native Tours! I am inquiring about your curated West Africa tours and experiences.";
   const text = contextMessage || defaultMsg;
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
 }
@@ -142,29 +142,29 @@ export interface ConsolidatedToursBookingDetails {
 }
 
 export function formatConsolidatedToursBookingMessage(details: ConsolidatedToursBookingDetails): string {
-  let msg = `✨ *CONSOLIDATED EXPEDITION BOOKINGS (${details.tours.length})* ✨\n`;
+  let msg = `*CONSOLIDATED EXPEDITION BOOKINGS (${details.tours.length})*\n`;
   msg += `*Beyond Native Tours*\n`;
   msg += `━━━━━━━━━━━━━━━━━━━━━━\n`;
-  msg += `👤 *Guest Name:* ${details.fullName.trim()}\n`;
-  msg += `📱 *Contact:* ${details.emailOrPhone.trim()}\n`;
-  msg += `🗓️ *Total Tours Selected:* ${details.tours.length}\n`;
+  msg += `*Guest Name:* ${details.fullName.trim()}\n`;
+  msg += `*Contact:* ${details.emailOrPhone.trim()}\n`;
+  msg += `*Total Tours Selected:* ${details.tours.length}\n`;
   msg += `━━━━━━━━━━━━━━━━━━━━━━\n\n`;
 
   details.tours.forEach((tour, idx) => {
-    msg += `📍 *TOUR ${idx + 1}: ${tour.tourName}* (${tour.country})\n`;
-    if (tour.duration) msg += `   • ⏳ *Duration:* ${tour.duration}\n`;
-    if (tour.journeyTier) msg += `   • 🌟 *Tier:* ${tour.journeyTier}\n`;
-    if (tour.tripStyle) msg += `   • 🧭 *Style:* ${tour.tripStyle}\n`;
-    if (tour.groupSize) msg += `   • 👥 *Travelers:* ${tour.groupSize}\n`;
-    if (tour.travelDate) msg += `   • 📅 *Preferred Date:* ${tour.travelDate}\n`;
-    if (tour.dietaryOrPreferences) msg += `   • 🥗 *Preferences:* ${tour.dietaryOrPreferences.trim()}\n`;
-    if (tour.notes) msg += `   • 📝 *Specific Notes:* ${tour.notes.trim()}\n`;
+    msg += `*TOUR ${idx + 1}: ${tour.tourName}* (${tour.country})\n`;
+    if (tour.duration) msg += `   • Duration: ${tour.duration}\n`;
+    if (tour.journeyTier) msg += `   • Tier: ${tour.journeyTier}\n`;
+    if (tour.tripStyle) msg += `   • Style: ${tour.tripStyle}\n`;
+    if (tour.groupSize) msg += `   • Travelers: ${tour.groupSize}\n`;
+    if (tour.travelDate) msg += `   • Preferred Date: ${tour.travelDate}\n`;
+    if (tour.dietaryOrPreferences) msg += `   • Preferences: ${tour.dietaryOrPreferences.trim()}\n`;
+    if (tour.notes) msg += `   • Specific Notes: ${tour.notes.trim()}\n`;
     msg += `\n`;
   });
 
   if (details.generalNotes && details.generalNotes.trim()) {
     msg += `━━━━━━━━━━━━━━━━━━━━━━\n`;
-    msg += `📝 *Overall Inquiries / Requests:* ${details.generalNotes.trim()}\n`;
+    msg += `*Overall Inquiries / Requests:* ${details.generalNotes.trim()}\n`;
   }
 
   msg += `━━━━━━━━━━━━━━━━━━━━━━\n`;
@@ -199,31 +199,31 @@ export interface ConsolidatedStoreOrderDetails {
 
 export function formatConsolidatedStoreOrderMessage(details: ConsolidatedStoreOrderDetails): string {
   const totalItemCount = details.items.reduce((acc, i) => acc + i.quantity, 0);
-  let msg = `🛍️ *CONSOLIDATED ARTISAN CURATION ORDER (${totalItemCount} ITEMS)* 🛍️\n`;
+  let msg = `*CONSOLIDATED ARTISAN CURATION ORDER (${totalItemCount} ITEMS)*\n`;
   msg += `*Beyond Native Tours Store*\n`;
   msg += `━━━━━━━━━━━━━━━━━━━━━━\n`;
-  msg += `👤 *Customer Name:* ${details.customerName.trim()}\n`;
-  msg += `📱 *WhatsApp / Phone:* ${details.customerContact.trim()}\n`;
-  msg += `📍 *Delivery Location / Region:* ${details.deliveryLocation.trim()}\n`;
+  msg += `*Customer Name:* ${details.customerName.trim()}\n`;
+  msg += `*WhatsApp / Phone:* ${details.customerContact.trim()}\n`;
+  msg += `*Delivery Location / Region:* ${details.deliveryLocation.trim()}\n`;
   msg += `━━━━━━━━━━━━━━━━━━━━━━\n\n`;
 
   details.items.forEach((item, idx) => {
-    msg += `📦 *ITEM ${idx + 1}: ${item.productName}*\n`;
-    msg += `   • 🔢 *Qty:* ${item.quantity}\n`;
-    msg += `   • 💰 *Price:* ${item.priceUSD} (${item.priceGHS}) each\n`;
+    msg += `*ITEM ${idx + 1}: ${item.productName}*\n`;
+    msg += `   • Qty: ${item.quantity}\n`;
+    msg += `   • Price: ${item.priceUSD} (${item.priceGHS}) each\n`;
     if (item.notes && item.notes.trim()) {
-      msg += `   • 📝 *Note:* ${item.notes.trim()}\n`;
+      msg += `   • Note: ${item.notes.trim()}\n`;
     }
     msg += `\n`;
   });
 
   if (details.totalUSD || details.totalGHS) {
     msg += `━━━━━━━━━━━━━━━━━━━━━━\n`;
-    msg += `💵 *Estimated Total:* ${details.totalUSD || ""} ${details.totalGHS ? `(${details.totalGHS})` : ""}\n`;
+    msg += `*Estimated Total:* ${details.totalUSD || ""} ${details.totalGHS ? `(${details.totalGHS})` : ""}\n`;
   }
 
   if (details.generalNotes && details.generalNotes.trim()) {
-    msg += `📝 *General Order Notes:* ${details.generalNotes.trim()}\n`;
+    msg += `*General Order Notes:* ${details.generalNotes.trim()}\n`;
   }
 
   msg += `━━━━━━━━━━━━━━━━━━━━━━\n`;
@@ -250,18 +250,18 @@ export interface CombinedCheckoutDetails {
 }
 
 export function formatCombinedCheckoutMessage(details: CombinedCheckoutDetails): string {
-  let msg = `🌿 *BEYOND NATIVE EXPEDITIONS & CURATIONS INQUIRY* 🛍️\n`;
+  let msg = `*BEYOND NATIVE EXPEDITIONS & CURATIONS INQUIRY*\n`;
   msg += `*Beyond Native Tours Store*\n`;
   msg += `━━━━━━━━━━━━━━━━━━━━━━\n`;
-  msg += `👤 *Guest / Customer:* ${details.customerName.trim()}\n`;
-  msg += `📱 *Contact:* ${details.customerContact.trim()}\n`;
+  msg += `*Guest / Customer:* ${details.customerName.trim()}\n`;
+  msg += `*Contact:* ${details.customerContact.trim()}\n`;
   if (details.deliveryLocation && details.deliveryLocation.trim()) {
-    msg += `📍 *Delivery Location / Region:* ${details.deliveryLocation.trim()}\n`;
+    msg += `*Delivery Location / Region:* ${details.deliveryLocation.trim()}\n`;
   }
   msg += `━━━━━━━━━━━━━━━━━━━━━━\n\n`;
 
   if (details.tours.length > 0) {
-    msg += `🗺️ *SELECTED EXPEDITIONS (${details.tours.length}):*\n`;
+    msg += `*SELECTED EXPEDITIONS (${details.tours.length}):*\n`;
     details.tours.forEach((tour, idx) => {
       msg += `${idx + 1}. *${tour.tourName}* (${tour.country})\n`;
       if (tour.duration) msg += `   • Duration: ${tour.duration}\n`;
@@ -274,20 +274,20 @@ export function formatCombinedCheckoutMessage(details: CombinedCheckoutDetails):
   }
 
   if (details.storeItems.length > 0) {
-    msg += `📦 *ARTISAN CURATIONS (${details.storeItems.length}):*\n`;
+    msg += `*ARTISAN CURATIONS (${details.storeItems.length}):*\n`;
     details.storeItems.forEach((item, idx) => {
       msg += `${idx + 1}. *${item.productName}* × ${item.quantity} [${item.priceUSD} / ${item.priceGHS}]\n`;
       if (item.notes) msg += `   • Note: ${item.notes}\n`;
     });
     if (details.totalStoreUSD || details.totalStoreGHS) {
-      msg += `💰 *Store Est. Total:* ${details.totalStoreUSD || ""} ${details.totalStoreGHS ? `(${details.totalStoreGHS})` : ""}\n`;
+      msg += `*Store Est. Total:* ${details.totalStoreUSD || ""} ${details.totalStoreGHS ? `(${details.totalStoreGHS})` : ""}\n`;
     }
     msg += `\n`;
   }
 
   if (details.generalNotes && details.generalNotes.trim()) {
     msg += `━━━━━━━━━━━━━━━━━━━━━━\n`;
-    msg += `📝 *Notes:* ${details.generalNotes.trim()}\n`;
+    msg += `*Notes:* ${details.generalNotes.trim()}\n`;
   }
 
   msg += `━━━━━━━━━━━━━━━━━━━━━━\n`;

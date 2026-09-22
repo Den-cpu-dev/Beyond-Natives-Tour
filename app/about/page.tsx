@@ -145,16 +145,11 @@ export default function AboutPage() {
               </div>
             </div>
 
-            <h1 className="font-anton text-4xl sm:text-6xl md:text-7xl lg:text-8xl uppercase tracking-tight max-w-4xl leading-[0.92]">
-              <span className="text-[#3d2c5f]">
-                Beyond
-              </span>{" "}
-              <span className="text-[#8d3f5c]">
-                Native Tours
-              </span>
+            <h1 className="font-anton text-4xl sm:text-6xl md:text-7xl lg:text-8xl uppercase tracking-tight max-w-4xl leading-[0.92] text-[#3d2c5f]">
+              Beyond Native Tours
             </h1>
 
-            <p className="mt-4 font-anton text-sm sm:text-lg md:text-xl uppercase tracking-[0.22em] text-[#8d3f5c] max-w-2xl">
+            <p className="mt-4 font-anton text-sm sm:text-lg md:text-xl uppercase tracking-[0.22em] text-[#3d2c5f] max-w-2xl">
               Cultural Tourism • Small-Group West Africa Journeys
             </p>
 
@@ -177,18 +172,18 @@ export default function AboutPage() {
               className="lg:col-span-6 flex flex-col gap-6"
             >
               <div className="flex items-center gap-3">
-                <span className="h-[2px] w-8 bg-[#cc25a9]" />
-                <span className="font-anton text-xs sm:text-sm uppercase tracking-[0.22em] text-[#8d3e5b]">
+                <span className="h-[2px] w-8 bg-[#3d2c5f]" />
+                <span className="font-anton text-xs sm:text-sm uppercase tracking-[0.22em] text-[#3d2c5f]">
                   Brand Overview
                 </span>
               </div>
 
-              <h2 className="font-anton text-3xl sm:text-4xl md:text-5xl uppercase tracking-tight text-[#292f16] leading-tight">
-                Going <span className="text-[#3d2c5f]">Beyond</span> <br />
-                <span className="text-[#8d3f5c]">The Surface</span>
+              <h2 className="font-anton text-3xl sm:text-4xl md:text-5xl uppercase tracking-tight text-[#3d2c5f] leading-tight">
+                Going Beyond <br />
+                The Surface
               </h2>
 
-              <p className="text-base sm:text-lg md:text-xl leading-relaxed text-[#292f16]/90 font-light border-l-2 border-[#8d3f5c] pl-6 my-2">
+              <p className="text-base sm:text-lg md:text-xl leading-relaxed text-[#292f16]/90 font-light border-l-2 border-[#3d2c5f] pl-6 my-2">
                 &ldquo;<span className="text-[#3d2c5f] font-semibold">Beyond</span> Native Tours is a boutique cultural tourism company specialising in small-group, immersive journeys across West Africa. It is designed for travellers who want to go <span className="text-[#3d2c5f] font-medium">beyond</span> the surface — to experience Africa through the eyes of people who live it, love it, and call it home.&rdquo;
               </p>
 
@@ -395,49 +390,65 @@ export default function AboutPage() {
               {
                 title: "Weekend Getaways",
                 desc: "Short trips for busy travelers seeking quick, high-impact cultural refreshment.",
-                icon: "🌅",
+                icon: (
+                  <svg className="w-5 h-5 text-[#8d3e5b]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
+                ),
                 badge: "Popular",
               },
               {
                 title: "Luxury Escapes",
                 desc: "Experience 3-5 star luxury hotels, seaside resorts, and gourmet culinary dining.",
-                icon: "✨",
+                icon: (
+                  <svg className="w-5 h-5 text-[#8d3e5b]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" /></svg>
+                ),
                 badge: "Premium",
               },
               {
                 title: "Adventure Tours",
                 desc: "Canopy rainforest walks, wildlife tracking in Mole, and inland waterfall hikes.",
-                icon: "🌿",
+                icon: (
+                  <svg className="w-5 h-5 text-[#8d3e5b]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                ),
                 badge: "Active",
               },
               {
                 title: "Cultural / Heritage Tours",
                 desc: "Sacred ancestral naming ceremonies, historic forts & dungeons, and diaspora roots.",
-                icon: "🏛️",
+                icon: (
+                  <svg className="w-5 h-5 text-[#8d3e5b]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z" /></svg>
+                ),
                 badge: "Signature",
               },
               {
                 title: "Custom / Private Groups",
                 desc: "Bespoke small-group expeditions tailored for families, friends, and organizations.",
-                icon: "👥",
+                icon: (
+                  <svg className="w-5 h-5 text-[#8d3e5b]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+                ),
                 badge: "Tailored",
               },
               {
                 title: "Event Coordination",
                 desc: "Comprehensive on-ground logistics, festival hosting, and private cultural celebrations.",
-                icon: "🎉",
+                icon: (
+                  <svg className="w-5 h-5 text-[#8d3e5b]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                ),
                 badge: "Logistics",
               },
               {
                 title: "Family-Friendly Vacations",
                 desc: "Fun, enriching, and safe activities designed for travelers of all ages.",
-                icon: "💛",
+                icon: (
+                  <svg className="w-5 h-5 text-[#8d3e5b]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>
+                ),
                 badge: "All Ages",
               },
               {
                 title: "Resorts Hopping",
                 desc: "Seamless hopping between Ghana's finest 3-5 star beach & lake resorts.",
-                icon: "🏖️",
+                icon: (
+                  <svg className="w-5 h-5 text-[#8d3e5b]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
+                ),
                 badge: "3N / 4D",
               },
             ].map((offering, i) => (
@@ -451,7 +462,9 @@ export default function AboutPage() {
               >
                 <div>
                   <div className="flex items-center justify-between gap-2 mb-3">
-                    <span className="text-2xl">{offering.icon}</span>
+                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#faf6f8] border border-[#8d3e5b]/15">
+                      {offering.icon}
+                    </div>
                     <span className="text-[10px] font-anton uppercase tracking-wider text-[#8d3e5b] bg-[#faf6f8] px-2.5 py-0.5 rounded-full border border-[#8d3e5b]/20">
                       {offering.badge}
                     </span>
@@ -468,10 +481,12 @@ export default function AboutPage() {
                   <button
                     type="button"
                     onClick={() => openTripBookingModal(offering.title)}
-                    className="text-xs font-anton uppercase tracking-wider text-[#8d3e5b] hover:text-[#cc25a9] transition-colors cursor-pointer"
+                    className="text-xs font-anton uppercase tracking-wider text-[#8d3e5b] hover:text-[#cc25a9] transition-colors flex items-center gap-1.5 cursor-pointer"
                   >
-                    Inquire Trip →
+                    <span>Inquire</span>
+                    <span>&rarr;</span>
                   </button>
+                  <span className="text-[10px] font-semibold text-[#292f16]/60">Beyond Native</span>
                 </div>
               </motion.div>
             ))}
@@ -481,49 +496,74 @@ export default function AboutPage() {
       </section>
 
       {/* ================= LEADERSHIP & VISION ================= */}
-      <section className="py-20 px-5 sm:px-10 lg:px-16 border-t border-[#8d3e5b]/15 bg-white">
+      <section className="py-20 sm:py-28 px-5 sm:px-10 lg:px-16 border-t border-[#8d3e5b]/15 bg-white">
         <div className="mx-auto max-w-[1200px]">
-          <div className="rounded-3xl border border-[#8d3e5b]/20 bg-[#faf6f8]/70 p-8 sm:p-14 shadow-lg relative overflow-hidden">
-            <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-              <div>
+          <div className="rounded-3xl border border-[#8d3e5b]/20 bg-[#faf6f8]/70 p-6 sm:p-12 lg:p-14 shadow-xl relative overflow-hidden">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 items-center">
+              
+              {/* Leader Portrait */}
+              <div className="md:col-span-5 flex justify-center">
+                <div className="relative h-[380px] sm:h-[440px] w-full max-w-[320px] rounded-3xl overflow-hidden shadow-2xl border border-[#8d3f5c]/25 group">
+                  <Image
+                    src="/images/about/ayishetu-alhassan.jpg"
+                    alt="Ayishetu Alhassan - CEO and Director of Beyond Native Tours"
+                    fill
+                    priority
+                    sizes="(max-width: 768px) 100vw, 320px"
+                    className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-80" />
+                  <div className="absolute bottom-4 left-4 right-4 text-white">
+                    <p className="font-anton text-lg uppercase tracking-wide">Ayishetu Alhassan</p>
+                    <p className="text-xs uppercase tracking-widest text-[#ffbe17] font-semibold">CEO and Director</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Leader Bio & Vision */}
+              <div className="md:col-span-7 flex flex-col justify-center">
                 <div className="flex items-center gap-2.5 mb-3 flex-wrap">
                   <span className="h-2 w-2 rounded-full bg-[#8d3f5c]" />
                   <span className="font-anton text-xs uppercase tracking-[0.22em] text-[#8d3f5c]">
-                    CEO and Director
+                    Leadership & Vision
                   </span>
                   <span className="text-[11px] font-sans font-semibold text-[#8d3f5c] bg-[#8d3f5c]/10 px-2.5 py-0.5 rounded-full">
-                    WhatsApp: {WHATSAPP_DISPLAY}
+                    Direct WhatsApp: {WHATSAPP_DISPLAY}
                   </span>
                 </div>
-                <h3 className="font-anton text-2xl sm:text-4xl uppercase tracking-tight text-[#292f16]">
+
+                <h3 className="font-anton text-3xl sm:text-4xl lg:text-5xl uppercase tracking-tight text-[#3d2c5f] leading-tight">
                   Ayishetu Alhassan
                 </h3>
-                <p className="font-anton text-sm uppercase tracking-[0.2em] text-[#8d3f5c] mt-1">
+                
+                <p className="font-anton text-sm sm:text-base uppercase tracking-[0.2em] text-[#8d3f5c] mt-1.5">
                   CEO and Director
                 </p>
-                <p className="mt-4 text-xs sm:text-sm text-[#292f16]/75 max-w-xl leading-relaxed">
-                  Leading Native Brands Portfolio with a vision to preserve African heritage, share authentic living culture with the global diaspora, and build sustainable, high-impact cultural expeditions.
+
+                <p className="mt-5 text-sm sm:text-base text-[#292f16]/80 leading-relaxed font-light">
+                  Leading Beyond Native Tours with a dedication to preserving African heritage, celebrating native traditions, and connecting travelers with genuine local communities. Under her leadership, every expedition is designed to be immersive, unhurried, and deeply respectful of West Africa&apos;s living cultures.
                 </p>
+
+                <div className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+                  <Link
+                    href="/tours"
+                    className="rounded-full bg-[#8d3e5b] px-7 py-3.5 font-anton text-xs sm:text-sm uppercase tracking-[0.18em] text-white transition-all hover:bg-[#742b45] shadow-[0_4px_15px_rgba(141,62,91,0.3)] text-center cursor-pointer"
+                  >
+                    Explore Tours
+                  </Link>
+                  <a
+                    href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
+                      "Hello Ayishetu & Beyond Native Tours! I would like to inquire about booking an authentic West African journey."
+                    )}`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="rounded-full border border-[#8d3e5b]/30 bg-white px-7 py-3.5 font-anton text-xs sm:text-sm uppercase tracking-[0.18em] text-[#8d3e5b] transition-all hover:border-[#8d3e5b] hover:bg-[#faf6f8] text-center"
+                  >
+                    Chat on WhatsApp ({WHATSAPP_DISPLAY})
+                  </a>
+                </div>
               </div>
 
-              <div className="shrink-0 flex flex-col sm:flex-row gap-4">
-                <Link
-                  href="/tours"
-                  className="rounded-full bg-[#8d3e5b] px-7 py-3 font-anton text-xs sm:text-sm uppercase tracking-[0.18em] text-white transition-all hover:bg-[#742b45] shadow-[0_4px_15px_rgba(141,62,91,0.3)] text-center"
-                >
-                  Explore Tours
-                </Link>
-                <a
-                  href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
-                    "Hello Ayishetu & Beyond Native Tours! 🌿 I would like to inquire about booking an authentic West African journey."
-                  )}`}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="rounded-full border border-[#8d3e5b]/30 bg-white px-7 py-3 font-anton text-xs sm:text-sm uppercase tracking-[0.18em] text-[#8d3e5b] transition-all hover:border-[#8d3e5b] hover:bg-[#faf6f8] text-center"
-                >
-                  Chat on WhatsApp ({WHATSAPP_DISPLAY})
-                </a>
-              </div>
             </div>
           </div>
         </div>

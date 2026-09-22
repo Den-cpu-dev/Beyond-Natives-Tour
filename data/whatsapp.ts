@@ -3,9 +3,41 @@
 // =========================================================================
 // Beyond Native Tours Official WhatsApp Business Contact: +233539691802
 export const WHATSAPP_NUMBER = "233539691802";
-export const WHATSAPP_DISPLAY = "+233 539 691 802";
+export const WHATSAPP_DISPLAY = "+233 53 969 1802";
+export const EMAIL_ADDRESS = "beyondnativetours@gmail.com";
 export const INSTAGRAM_HANDLE = "@beyondnative_tours";
 export const INSTAGRAM_URL = "https://www.instagram.com/beyondnative_tours";
+
+export interface ContactInquiryDetails {
+  fullName: string;
+  emailOrPhone: string;
+  inquiryType: string;
+  travelDates?: string;
+  numberOfTravelers?: string;
+  message: string;
+}
+
+export function formatContactInquiryMessage(details: ContactInquiryDetails): string {
+  return (
+    `📩 *NEW INQUIRY VIA CONTACT PORTAL* 📩\n` +
+    `*Beyond Native Tours*\n` +
+    `━━━━━━━━━━━━━━━━━━━━━━\n` +
+    `👤 *Name:* ${details.fullName.trim()}\n` +
+    `📱 *Contact:* ${details.emailOrPhone.trim()}\n` +
+    `🏷️ *Inquiry Type:* ${details.inquiryType}\n` +
+    (details.travelDates ? `📅 *Preferred Travel Dates:* ${details.travelDates.trim()}\n` : "") +
+    (details.numberOfTravelers ? `👥 *Number of Travelers:* ${details.numberOfTravelers.trim()}\n` : "") +
+    `💬 *Message / Dream Plan:*\n${details.message.trim()}\n` +
+    `━━━━━━━━━━━━━━━━━━━━━━\n` +
+    `_EXPLORE • DISCOVER • CONNECT_\n` +
+    `_Sent via Beyond Native Tours Contact Page_`
+  );
+}
+
+export function getContactInquiryWhatsAppUrl(details: ContactInquiryDetails): string {
+  const msg = formatContactInquiryMessage(details);
+  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
+}
 
 export interface TripBookingDetails {
   fullName: string;

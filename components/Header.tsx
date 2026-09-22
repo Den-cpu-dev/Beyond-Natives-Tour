@@ -14,7 +14,7 @@ const navLinks = [
   { label: "Tours", href: "/tours", id: "tours" },
   { label: "Store", href: "/store", id: "store" },
   { label: "About", href: "/about", id: "about" },
-  { label: "Contact", href: "/#footer", id: "contact" },
+  { label: "Contact", href: "/contact", id: "contact" },
 ];
 
 export default function Header() {
@@ -33,7 +33,7 @@ export default function Header() {
       const path = (pathname || (typeof window !== "undefined" ? window.location.pathname : "")).replace(/\/$/, "") || "/";
       const hash = typeof window !== "undefined" ? window.location.hash : "";
 
-      // 1. If on /about, /store, or /tours, route always takes priority
+      // 1. If on /about, /store, /tours, or /contact, route always takes priority
       if (path === "/about" || path.startsWith("/about/")) {
         setActiveTab("about");
         return;
@@ -44,6 +44,10 @@ export default function Header() {
       }
       if (path === "/tours" || path.startsWith("/tours/")) {
         setActiveTab("tours");
+        return;
+      }
+      if (path === "/contact" || path.startsWith("/contact/")) {
+        setActiveTab("contact");
         return;
       }
 

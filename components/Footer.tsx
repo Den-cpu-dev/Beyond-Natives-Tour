@@ -38,6 +38,7 @@ export default function Footer() {
           <Link href="/tours" className="hover:text-[#292f16] transition-colors">Tours</Link>
           <Link href="/store" className="hover:text-[#292f16] transition-colors">Store</Link>
           <Link href="/about" className="hover:text-[#292f16] transition-colors">About</Link>
+          <Link href="/contact" className="hover:text-[#292f16] transition-colors">Contact</Link>
         </div>
 
         {/* Social Icons & Copyright */}

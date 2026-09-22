@@ -85,8 +85,8 @@ export default function HolidayCTA({ onPlay }: { onPlay: (src: string, title: st
     <section id="holiday" className="relative isolate overflow-hidden px-4 py-16 sm:px-8 sm:py-28 lg:px-14 lg:py-36">
       {/* Background Image & Gradient */}
       <Image
-        src="/images/independence-square.jpg"
-        alt="Independence Square and Black Star Gate in Accra, Ghana"
+        src="/images/accra-greater-accra.jpg"
+        alt="Accra, Greater Accra, Ghana"
         fill
         sizes="100vw"
         className="-z-20 object-cover"

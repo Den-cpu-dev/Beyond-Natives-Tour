@@ -152,16 +152,16 @@ const nativeProducts: Product[] = [
     categoryLabel: "Attitude Herbal Teas",
     priceUSD: "$5.00",
     priceGHS: "GH₵ 70",
-    badge: "Green Vitality • Superfood",
+    badge: "15 Tea Bags • Green Vitality",
     origin: "Handcrafted in Ghana with Intention",
     description:
-      "“One Habit 7 Attitudes.” Certified Ghanaian nutrient powerhouse rich in bioavailable iron, plant chlorophyll, and essential amino acids for sustained daily stamina and radiant skin.",
-    image: "/images/store/native-habits-flyer.jpg",
+      "“The tree of life called. It said drink up.” Certified Ghanaian nutrient powerhouse rich in bioavailable iron, natural energy, and essential plant antioxidants for stamina and radiant skin.",
+    image: "/images/store/moringa-rising-tea.jpg",
     details: [
-      "Ingredients: 100% Organic Ghanaian Moringa Leaves",
-      "Key Benefits: Iron rich, sustained natural energy, anti-inflammatory, skin health",
-      "Cleanse & Nutrition: 15 Tea Bags | Caffeine Free | No preservatives",
-      "Brew Guide: 90°C for 5–7 mins (Pairs wonderfully with Native Organic Honey)",
+      "Ingredients: Moringa Leaf",
+      "Key Benefits: Iron-rich, natural energy, anti-inflammatory, skin health",
+      "Net Content: 15 individual filter tea bags • Caffeine Free • Handcrafted in Ghana",
+      "Brew Guide: 80°C for 3–5 mins (Sip and glow)",
     ],
   },
 

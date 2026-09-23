@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { openTripBookingModal } from "@/components/BookTripModal";
+import { openReviewModal } from "@/components/ReviewModal";
 import { customerReviews } from "@/data/reviews";
 import { WHATSAPP_NUMBER } from "@/data/whatsapp";
 
@@ -59,17 +60,16 @@ export default function CustomerReviews() {
               </p>
             </div>
 
-            <a
-              href={reviewWhatsAppUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border border-[#25D366] bg-white px-4 py-2.5 font-anton text-xs uppercase tracking-[0.14em] text-[#25D366] shadow-sm transition-all hover:bg-[#25D366] hover:text-white cursor-pointer"
+            <button
+              type="button"
+              onClick={() => openReviewModal()}
+              className="inline-flex items-center gap-2 rounded-full border border-[#8d3f5c] bg-[#8d3f5c] px-5 py-2.5 font-anton text-xs uppercase tracking-[0.14em] text-white shadow-sm transition-all hover:bg-[#3d2c5f] hover:scale-105 active:scale-95 cursor-pointer"
             >
-              <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
-                <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.698c.969.541 1.838.815 2.796.815 3.183 0 5.769-2.586 5.77-5.766.001-3.18-2.585-5.802-5.77-5.802zm0-2.172c4.418 0 8 3.582 8 8 0 4.419-3.582 8.001-8 8.001-1.374 0-2.671-.351-3.805-.968l-4.226 1.107 1.127-4.12c-.689-1.187-1.096-2.56-1.096-4.02 0-4.418 3.582-8 8-8z" />
+              <svg className="w-3.5 h-3.5 fill-[#ffbe17]" viewBox="0 0 20 20">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
               </svg>
-              <span>Submit A Review</span>
-            </a>
+              <span>Write A Review</span>
+            </button>
           </div>
         </div>
 

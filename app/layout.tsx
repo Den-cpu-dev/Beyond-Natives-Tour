@@ -30,6 +30,7 @@ export const metadata: Metadata = {
 
 import BookTripModal from "@/components/BookTripModal";
 import CartDrawer from "@/components/CartDrawer";
+import ReviewModal from "@/components/ReviewModal";
 import { CartProvider } from "@/context/CartContext";
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
@@ -39,6 +40,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <CartProvider>
           {children}
           <BookTripModal />
+          <ReviewModal />
           <CartDrawer />
         </CartProvider>
       </body>

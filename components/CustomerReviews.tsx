@@ -74,7 +74,7 @@ export default function CustomerReviews() {
         </div>
 
         {/* ================= REVIEWS GRID ================= */}
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 max-w-5xl mx-auto gap-6 sm:gap-8">
           {customerReviews.map((review, index) => (
             <motion.div
               key={review.id}
